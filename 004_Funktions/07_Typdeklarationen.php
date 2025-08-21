@@ -42,7 +42,7 @@ Geben Sie einen Fehler aus, wenn der falsche Typ angegeben wird.</p>
         <label>Produkt Rabatt</label>
         <input type="number" name="rabatt" required><br>
 
-        <input type="submit" name="Berechnen"><br>
+        <input type="submit" value="Berechnen"><br>
 
 
 

@@ -17,7 +17,7 @@
             <label>Rabatt</label>
             <input type="number" name="rabatt" required><br>
 
-            <input type="submit" name="Berechen"><br>
+            <input type="submit" value="Berechen"><br>
 
         </form>
     </div>

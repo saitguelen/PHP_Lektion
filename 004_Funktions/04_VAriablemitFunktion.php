@@ -20,8 +20,8 @@
         <label>Produkt Rabatt</label>
         <input type="number" name="rabatt" required><br>
 
-        <input type="submit" name="Berechnen">
-        <input type="reset" name="Zurücksenden">
+        <input type="submit" value="Berechnen">
+        <input type="reset" value="Zurücksenden">
 
 
     </form>
