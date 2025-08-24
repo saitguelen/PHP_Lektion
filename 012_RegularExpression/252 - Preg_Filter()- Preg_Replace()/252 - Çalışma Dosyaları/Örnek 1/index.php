@@ -14,7 +14,7 @@
 	preg_replace()	:	Kendisine parametre olarak verilen düzenli ifadeli değer / değerler doğrultusunda içeriği kontrol eder ve aranan değerin / değerlerin eşleşmesi durumunda, eşleşen değerin / değerlerin değişimini sağlayarak yeni bir içerik veya dizi oluşturarak, oluşturduğu içeriği veya diziyi geriye döndürür.
 	*/
 	
-	$Icerik		=	"Merhaba Benim Adım Volkan Alakent, Ben Bir PHP Yazılımcısıyım. Beni Facebook Üzerinden Volkan Alakent Şeklinde Arayarak Bulabilirsiniz.";
+	$Icerik		=	"Merhaba Benim Adım <b>Volkan Alakent</b>, Ben Bir PHP Yazılımcısıyım. Beni Facebook Üzerinden <b>Volkan Alakent</b> Şeklinde Arayarak Bulabilirsiniz.";
 	$Ara		=	"/Volkan/";
 	$Degistir	=	"Hakan";
 	$Sonuc		=	preg_filter($Ara, $Degistir, $Icerik);
