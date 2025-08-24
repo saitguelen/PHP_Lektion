@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<title>Login</title>
+<meta charset="utf-8">
+<style>
+body{font-family: Verdana, sans-serif;
+font-size: 1.5em;
+color: black;
+background-color: #f4f4f4;
+padding: 20px;
+}
+span{display: block;
+font-weight: 10px;
+    
+}
+    
+div{background-color:lightsteelblue;
+border-radius: 10px;
+padding: 5px;
+width: 700px;    }
+input{font-family: inherit;
+font-size: inherit;
+    
+}
+
+
+</style>
+</head>
+<body>
+<div>
+<form action="uebung-aufgabe3.php" method="post">
+<!--Radio buttons für die anrede-->
+<h4>Login</h4>
+
+<label for="name">
+<span>Ihr Username:</span>
+</label>
+
+<input type="text"
+id="name"
+name="name"
+maxlength="25"
+size="25"
+required
+> 
+
+<label for="passwort">
+<span>Ihr Passwort:</span>
+</label>
+
+<input type="password"
+id="passwort"
+name="passwort"
+maxlength="25"
+size="25"
+required
+> <br>
+<input type="submit" value="Login">
+<input type="reset" value="Löschen">
+</form></div></body></html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<title>Eis-Formular</title>
+<meta charset="utf-8">
+<style>
+body{font-family: Verdana, sans-serif;
+font-size: 1.5em;
+color: white;
+}
+span{display: block;
+font-weight: bold;
+    
+}
+    
+div{background-color: navy;
+border-radius: 10px;
+padding: 15px;
+width: 400px;
+min-height: 160px;
+margin: auto;
+    }
+input{font-family: inherit;
+font-size: inherit;
+    
+}
+
+</style>
+</head>
+<body>
+<div>
+<form action="eis.php" method="post">
+<!--Radio buttons für die anrede-->
+<input type="radio" name="anrede" value="Frau">Frau<br>
+<input type="radio" name="anrede" value="Herr">Mann<br><br>
+<label for="name">
+<span>Ihr Name?</span>
+</label>
+<p>
+<input type="text"
+id="name"
+name="nachname"
+maxlength="25"
+size="25"
+required
+> 
+</p>
+<span>Welches ist Ihr Lieblingseis?</span>
+<p>
+<input type="text"
+id="eissorte"
+name="lieblingseis"
+maxlength="25"
+size="25"
+required
+>
+</p>
+<span>Aus welchem Land stimmen Sie ab?</span>
+<select name="land">
+    <option value="Deutschland">Deutschland</option>
+    <option value="Italien">Italien</option>
+    <option value="Spanien">Spanien</option>
+</select><br><br>
+<input type="submit" value="Abschicken">
+<input type="reset" value="Zurücksetzen">
+</form></div></body></html>

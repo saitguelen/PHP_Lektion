@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<title>Bestellung</title>
+<meta charset="utf-8">
+
+<style>
+
+
+body{font-family: Verdana, sans-serif;
+
+font-size: 1.5em;
+
+color: black;
+
+}
+
+span{display: block;
+
+font-weight: bold;
+
+}
+
+div{background-color:lightsteelblue;
+
+border-radius: 10px;
+width: 500px;
+}
+input{font-family: inherit;
+font-size: inherit;
+
+}
+
+</style>
+
+</head>
+<body>
+<div>
+<form action="bestellung.php" method="post">
+<!--Radio buttons für die anrede-->
+<h4>Bestellung</h4>
+<input type="radio" name="anrede" value="Frau">Frau<br>
+<input type="radio" name="anrede" value="Herr">Mann<br><br>
+<label for="nname">
+
+<span>Nachname<sup>*</sup>)</span>
+</label>
+ 
+<input type="text"
+
+id="name"
+name="nname"
+maxlength="25"
+size="25"
+required 
+>
+ 
+<p>  
+<label for="vname">
+<span>Vorname<sup>*</sup>)</span>
+</label> 
+<input type="text"
+id="vname"
+name="vname"
+maxlength="25"
+size="25"
+required
+> 
+</p> 
+<label for="str">
+<span>Straße <sup>*</sup>)</span>
+</label>
+ 
+<input type="text"
+id="str"
+name="str"
+maxlength="25"
+size="25"
+required
+>
+
+<p>   
+<table>
+<tr>
+<td>
+<label for="plz">
+<span>PLZ <sup>*</sup>)</span>
+</label>
+ 
+<input type="text"
+id="plz"
+name="plz"
+required
+required size="8"
+maxlength="11"
+ 
+> </td>
+<td>
+<label for="ort">
+<span>Ort <sup>*</sup>)</span>
+</label>
+ 
+<input type="text"
+id="ort"
+name="ort"
+required
+required size="11"
+maxlength="11"
+></td></tr></table>
+
+</p>    
+<table>
+<tr>
+<td>
+<label for="gbr">
+<span>Geburtsdatum: </span>
+</label>
+<input type="text"
+id="gbr"
+name="gbr"
+required size="11"
+maxlength="11"
+required
+> 
+</td>
+<td>
+<label for="telefon">
+<span>Telefon </span>
+</label>
+<input type="tel"
+id="telefon"
+name="telefon"
+required size="11"
+maxlength="11"
+required
+>
+</td></tr></table>
+ 
+    
+<p>
+<label for="mail">
+<span>E-Mail</span>
+</label>
+ 
+<input type="mail"
+id="mail"
+name="mail"
+maxlength="25"
+size="25"
+value="abc@gmail.de"
+required
+> 
+</p>   
+<label for="std">
+<span>Staatsangehörigkeit</span>
+</label>
+ 
+<input type="text"
+id="std"
+name="staat"
+maxlength="25"
+size="25"
+required
+> 
+<span>Zahlungsart</span>
+<select name="zahlung">
+<option value="kreditkarte">Kreditkarte</option>
+<option value="ec-karte">EC-Karte</option>
+<option value="bar">Bar</option>    
+</select><br><br>
+<label for="notizen">
+<span>Angaben zur Bestellung:</span>
+</label>
+
+
+<input type="text" 
+id="notizen" 
+name="notizen" 
+maxlength="45" 
+size="25" 
+required 
+style="width: 75%; height: 100px;">
+ 
+ 
+ 
+<p>
+<input type="checkbox" name="news" value="newsletter">Senden Sie mir einen Newsletter</p>
+<p>
+<input type="checkbox" name="ktlg" value="katalog">Senden Sie mir einen Katalog</p>
+<input type="submit" value="Senden">
+<input type="reset" value="Löschen">
+</form></div></body></html>
+ 
