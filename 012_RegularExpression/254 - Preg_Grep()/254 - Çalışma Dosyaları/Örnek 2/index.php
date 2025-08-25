@@ -10,7 +10,8 @@
 <body>
 	<?php
 	/*
-	preg_grep()		:	Kendisine parametre olarak verilen düzenli ifadeli değer doğrultusunda dizi içeriğini kontrol eder ve aranan değer / değerlerin eşleşmesi durumunda, eşleşmeyi sağlayan içeriğin değer / değerlerinden yeni bir dizi oluşturarak, oluşturduğu dizi değerini geriye döndürür.
+	preg_grep()		:	Kendisine parametre olarak verilen düzenli ifadeli değer doğrultusunda dizi içeriğini kontrol eder ve 
+						aranan değer / değerlerin eşleşmesi durumunda, eşleşmeyi sağlayan içeriğin değer / değerlerinden yeni bir dizi oluşturarak, oluşturduğu dizi değerini geriye döndürür.
 	*/
 	
 	$Degerler		=	array(22, "Volkan", 12, "Onur", 143, "Hakan", "Serkan", 252, "Levent", 82, "Ümit", 104);

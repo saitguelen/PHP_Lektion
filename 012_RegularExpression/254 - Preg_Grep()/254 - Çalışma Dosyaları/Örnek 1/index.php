@@ -10,7 +10,8 @@
 <body>
 	<?php
 	/*
-	preg_grep()		:	Kendisine parametre olarak verilen düzenli ifadeli değer doğrultusunda dizi içeriğini kontrol eder ve aranan değer / değerlerin eşleşmesi durumunda, eşleşmeyi sağlayan içeriğin değer / değerlerinden yeni bir dizi oluşturarak, oluşturduğu dizi değerini geriye döndürür.
+	preg_grep()		:	Kendisine parametre olarak verilen düzenli ifadeli değer doğrultusunda dizi içeriğini kontrol eder ve aranan değer / değerlerin eşleşmesi durumunda, 
+	eşleşmeyi sağlayan içeriğin değer / değerlerinden yeni bir dizi oluşturarak, oluşturduğu dizi değerini geriye döndürür.
 	*/
 	
 	$Degerler		=	array(22, 12, 143, 252, 82, 104);
@@ -26,6 +27,8 @@
 	echo "<pre>";
 	print_r($Sonuc);
 	echo "</pre><br /><br />";
+
+	echo "<a href='https://www.w3schools.com/php/php_form_url_email.asp'>Daha fazla öğrenmek için bu linki tıklayın.</a>";
 	
 	?>
 </body>

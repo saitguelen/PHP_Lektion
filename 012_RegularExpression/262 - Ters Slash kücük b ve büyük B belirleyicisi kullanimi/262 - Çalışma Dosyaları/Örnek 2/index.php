@@ -10,17 +10,28 @@
 <body>
 	<?php
 	/*
-	\b	:	Düzenli ifade dahilinde kontrol edilecek olan içeriğin düzenli ifadeye uygun olabilecek metin parçalarını, karakter dizilimi içerisindeki kelimelerin başında yada sonunda aramak için kullanılır.
-	\B	:	Düzenli ifade dahilinde kontrol edilecek olan içeriğin düzenli ifadeye uygun olabilecek metin parçalarını, karakter dizilimi içerisindeki kelimelerin içerisinde aramak için kullanılır.
+	\b	:	Düzenli ifade dahilinde kontrol edilecek olan içeriğin düzenli ifadeye uygun olabilecek metin parçalarını, 
+	karakter dizilimi içerisindeki kelimelerin başında yada sonunda aramak için kullanılır.
+	\B	:	Düzenli ifade dahilinde kontrol edilecek olan içeriğin düzenli ifadeye uygun olabilecek metin parçalarını, 
+	karakter dizilimi içerisindeki kelimelerin içerisinde aramak için kullanılır.
 	*/
 	
 	$Icerik		=	"Türkiye'nin en meşhur yoğurtlarından birisi kanlıca yoğurdudur.";
 	$Desen		=	"/\bkan/";
 	$Sonuc		=	preg_match($Desen, $Icerik);
-	
+	preg_match($Desen,$Icerik,$Sonuc1);
 	echo "Orjinal İçerik : " . $Icerik . "<br />";
 	echo "Desen : " . $Desen . "<br />";
 	echo "Sonuç : " . $Sonuc;
+	echo "<pre>";
+	print_r($Sonuc1);
+	echo "</pre>";
+	echo "<p> <pre>/*
+	\b	:	Düzenli ifade dahilinde kontrol edilecek olan içeriğin düzenli ifadeye uygun olabilecek metin parçalarını, 
+	karakter dizilimi içerisindeki kelimelerin başında yada sonunda aramak için kullanılır.
+	\B	:	Düzenli ifade dahilinde kontrol edilecek olan içeriğin düzenli ifadeye uygun olabilecek metin parçalarını, 
+	karakter dizilimi içerisindeki kelimelerin içerisinde aramak için kullanılır.
+	*/"
 	
 	?>
 </body>

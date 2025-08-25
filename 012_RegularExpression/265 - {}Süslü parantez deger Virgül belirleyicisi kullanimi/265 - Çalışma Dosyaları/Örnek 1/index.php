@@ -10,7 +10,8 @@
 <body>
 	<?php
 	/*
-	{x,}	:	Düzenli ifade dahilinde kontrol edilecek olan içeriğin karakter diziliminde bulunan değerin x defa yada daha fazla tekrarlanmış olması gerektiğini belirtmek için kullanılır.
+	{x,}	:	Düzenli ifade dahilinde kontrol edilecek olan içeriğin karakter diziliminde bulunan değerin x defa yada daha fazla tekrarlanmış olması
+	 gerektiğini belirtmek için kullanılır.
 	*/
 	
 	$Icerik		=	"Volkan Alakent - Extra Eğitim -- A'dan Z'ye PHP7 Görsel Eğitim Seti --- 2018";

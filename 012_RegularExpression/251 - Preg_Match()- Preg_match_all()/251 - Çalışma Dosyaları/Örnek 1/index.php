@@ -21,6 +21,7 @@
 	echo "<pre>";
 	print_r($Sonuc);
 	echo "</pre>";
+	echo "<a href='https://www.w3schools.com/php/php_form_url_email.asp'>Daha fazla öğrenmek için bu linki tıklayın.</a>";
 	
 	?>
 </body>

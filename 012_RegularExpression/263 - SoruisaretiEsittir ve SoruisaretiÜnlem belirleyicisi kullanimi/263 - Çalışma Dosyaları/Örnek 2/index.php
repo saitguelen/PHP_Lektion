@@ -10,8 +10,10 @@
 <body>
 	<?php
 	/*
-	?=	:	Düzenli ifade dahilinde kontrol edilecek olan içeriğin karakter dizilimi içerisindeki belirtilen bir referas değerin önünde düzenli ifade ile eşleşebilecek değer / değerleri aramak için kullanılır.
-	?!	:	Düzenli ifade dahilinde kontrol edilecek olan içeriğin karakter dizilimi içerisindeki belirtilen bir referas değer ile takip edilmeyen düzenli ifade ile eşleşebilecek değer / değerleri aramak için kullanılır.
+	?=	:	Düzenli ifade dahilinde kontrol edilecek olan içeriğin karakter dizilimi içerisindeki belirtilen bir 
+	referas değerin önünde düzenli ifade ile eşleşebilecek değer / değerleri aramak için kullanılır.
+	?!	:	Düzenli ifade dahilinde kontrol edilecek olan içeriğin karakter dizilimi içerisindeki belirtilen bir 
+	referas değer ile takip edilmeyen düzenli ifade ile eşleşebilecek değer / değerleri aramak için kullanılır.
 	*/
 	
 	$Icerik		=	"PHP dünya üzerinde en yayın olarak kullanılan bir web programlama dilidir ve php'yi öğrenmesi çok kolaydır.";

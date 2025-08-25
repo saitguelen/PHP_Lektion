@@ -10,7 +10,8 @@
 <body>
 	<?php
 	/*
-	preg_quote()		:	Kendisine parametre olarakv erilen içeriği kontrol eder ve içerik dahilinde özel karakter / karakterlerin bulunması durumunda, bulunan özel karakter / karakterlerin önüne \ (ters slash) ekleyerek yeni bir içerik oluşturur ve oluşturduğu içeriği geriye döndürür.
+	preg_quote()		:	Kendisine parametre olarakv erilen içeriği kontrol eder ve içerik dahilinde özel karakter / karakterlerin bulunması durumunda, 
+							bulunan özel karakter / karakterlerin önüne \ (ters slash) ekleyerek yeni bir içerik oluşturur ve oluşturduğu içeriği geriye döndürür.
 	Özel Karkterler		:	. \ + * ^ $ = ? ! | : - [ ] ( ) { } < >
 	*/
 	

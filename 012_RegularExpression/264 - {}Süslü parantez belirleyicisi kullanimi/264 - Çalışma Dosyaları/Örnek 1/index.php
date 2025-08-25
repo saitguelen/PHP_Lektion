@@ -10,11 +10,12 @@
 <body>
 	<?php
 	/*
-	{x}		:	Düzenli ifade dahilinde kontrol edilecek olan içeriğin karakter diziliminde bulunan değerin x defa tekrarlanmış olması gerektiğini belirtmek için kullanılır.
+	{x}		:	Düzenli ifade dahilinde kontrol edilecek olan içeriğin karakter diziliminde bulunan değerin x defa 
+	tekrarlanmış olması gerektiğini belirtmek için kullanılır.
 	*/
 	
 	$Icerik		=	"Volkan Alakent - Extra Eğitim -- A'dan Z'ye Görsel Eğitim Seti --- 2018";
-	$Desen		=	"/-{3}/";
+	$Desen		=	"/-{3}/"; //-> burada 3 tane - olan degeri bulur ama böyle yazarsak:->//  "/-/"; -> kac tane - varsa o kadar bulur.
 	preg_match_all($Desen, $Icerik, $Sonuc);
 	
 	echo "Orjinal İçerik : " . $Icerik . "<br />";
