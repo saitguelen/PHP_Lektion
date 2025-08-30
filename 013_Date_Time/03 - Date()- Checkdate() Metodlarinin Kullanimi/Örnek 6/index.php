@@ -14,7 +14,7 @@
 	checkdate()		:	Belirtilecek olan zamani Gregoryen (Miladi) takvimine göre doğrulamasını yaparak, doğrulama sonucunu boolean (mantıksal) veri türünde döndürmek için kullanılır.
 	*/
 	
-	$ZamanDamgasi	=	1527682326;
+	$ZamanDamgasi	=	1756201828 ;//1527682326;-->30.05.2018 14.12.06 1 Ocak 1970' den itibaren gecen saniyeyi sayar
 	$Zaman			=	date("d.m.Y H.i.s", $ZamanDamgasi);
 	
 	echo "Zaman ( " . $ZamanDamgasi . " ) : " . $Zaman;

@@ -37,6 +37,12 @@
 	print_r($ZamanDilimleri);
 	echo "</pre>";
 	
+	$ZamanDilimleri2		=	timezone_identifiers_list(128);
+	echo "<hr>";
+	echo "Für Europe<br/>";
+	echo "<pre>";
+	print_r($ZamanDilimleri2);
+	echo "</pre>";
 	?>
 </body>
 </html>

@@ -16,7 +16,7 @@
 	
 	$Zaman			=	date_create(); // Yıl-Ay-Gün
 	
-	date_timestamp_set($Zaman, 345070800);
+	date_timestamp_set($Zaman, 3545090900);
 	
 	echo "<pre>";
 	print_r($Zaman);

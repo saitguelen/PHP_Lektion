@@ -16,6 +16,7 @@
 	*/
 	
 	$Zaman			=	date_create("1980-12-08"); // Yıl-Ay-Gün
+	$Zaman1			=date_create();
 	
 	echo "<pre>";
 	print_r($Zaman);
@@ -31,7 +32,17 @@
 	echo "<pre>";
 	print_r($Zaman);
 	echo "<pre>";
-
+	echo "<hr>";
+	echo "<pre>";
+	print_r($Zaman1);
+	echo "<pre>";
+	echo $Zaman1->format("Y")." Year <br/>";
+	echo $Zaman1->format("m")." Monath <br/>";
+	echo $Zaman1->format("d")." Day <br/>";
+	echo $Zaman1->format("H")." Hour <br/>";
+	echo $Zaman1->format("i")." Minute <br/>";
+	echo $Zaman1->format("s")." Sekunde <br/>";
+	echo $Zaman1->format("ms");
 	?>
 </body>
 </html>

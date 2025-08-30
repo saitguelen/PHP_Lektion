@@ -33,9 +33,9 @@
 		3. SUNFUNCS_RET_TIMESTAMP		:	Sonuç zaman damgası olarak döner.
 	*/
 	
-	$Zamandamgasi	=	strtotime("1980-12-08");
+	$Zamandamgasi	=	strtotime("1987-05-15");//yada Zaman Damgasi olarak time() yada date("U") -> kullanabiliriz
 	
-	echo "08.12.1980 Tarihinin Zaman Damgası : " . $Zamandamgasi . "<br />";
+	echo "15.05.1987 Tarihinin Zaman Damgası : " . $Zamandamgasi . "<br />";
 	
 	$Sor			=	date_sun_info($Zamandamgasi, 39.913627, 32.850879); // T.B.M.M. Enlem ve Boylam Değerleri
 	

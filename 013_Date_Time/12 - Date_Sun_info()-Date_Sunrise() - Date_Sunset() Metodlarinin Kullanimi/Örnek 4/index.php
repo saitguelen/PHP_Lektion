@@ -37,7 +37,7 @@
 	
 	echo "Zaman Damgası : " . $Zamandamgasi . "<br />";
 	
-	$Sor			=	date_sun_info($Zamandamgasi, 39.913627, 32.850879); // T.B.M.M. Enlem ve Boylam Değerleri
+	$Sor			=	date_sun_info($Zamandamgasi, 49.410805, 8.717797); // Heidelberg Schloß enlem-boylam
 	
 	foreach($Sor as $Anahtar => $Icerik){
 		echo $Anahtar . " : " . date("d.m.Y H.i.s", $Icerik) . "<br />";

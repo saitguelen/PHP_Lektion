@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAID Nedir? - Eğitim Sunumu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide {
+            position: relative;
+            display: none;
+            padding: 60px;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide h1 {
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .slide h2 {
+            font-size: 2.5em;
+            margin-bottom: 25px;
+            color: #FFD700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .slide h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #87CEEB;
+        }
+
+        .slide p,
+        .slide li {
+            font-size: 1.3em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            max-width: 900px;
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin: 30px 0;
+        }
+
+        .concept-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .raid-comparison {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .raid-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+
+        .raid-0 {
+            border-left-color: #ff4444;
+        }
+
+        .raid-1 {
+            border-left-color: #44ff44;
+        }
+
+        .raid-5 {
+            border-left-color: #4444ff;
+        }
+
+        .raid-6 {
+            border-left-color: #ff44ff;
+        }
+
+        .raid-10 {
+            border-left-color: #ffff44;
+        }
+
+        .disk-visual {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .disk {
+            width: 80px;
+            height: 100px;
+            background: linear-gradient(145deg, #2c3e50, #34495e);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .disk.failed {
+            background: #e74c3c;
+            animation: pulse 1s infinite;
+        }
+
+        .disk.active {
+            background: linear-gradient(145deg, #27ae60, #2ecc71);
+        }
+
+        .stripe-demo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .data-block {
+            width: 40px;
+            height: 40px;
+            background: #3498db;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .arrow {
+            font-size: 2em;
+            color: #FFD700;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1.1em;
+        }
+
+        .comparison-table {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 2fr;
+            gap: 15px;
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            align-items: center;
+        }
+
+        .table-header {
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+        }
+
+        .performance-bar {
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .performance-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        .speed-high {
+            background: linear-gradient(90deg, #ff6b6b, #ee5a24);
+        }
+
+        .speed-normal {
+            background: linear-gradient(90deg, #feca57, #ff9ff3);
+        }
+
+        .security-high {
+            background: linear-gradient(90deg, #48dbfb, #0abde3);
+        }
+
+        .security-none {
+            background: linear-gradient(90deg, #ff6b6b, #ee5a24);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .analogy-box {
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px solid #FFD700;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        .analogy-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+
+
+        .home-link {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            font-size: 1.2em;
+            color: white;
+            text-decoration: none;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+            z-index: 10;
+            /* Diğer elementlerin üstünde kalması için */
+        }
+
+        .home-link:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">12</span>
+        </div>
+
+        <!-- Slide 1: Başlık -->
+        <div class="slide active">
+
+            <h1>🛡️ RAID Teknolojisi</h1>
+            <h2>Redundant Array of Independent Disks</h2>
+            <p style="font-size: 1.5em; margin-top: 40px;">Bağımsız Disklerin Artıklıklı Dizisi</p>
+            <div style="margin-top: 50px;">
+                <div class="disk-visual">
+                    <div class="disk active">HDD 1</div>
+                    <div class="disk active">HDD 2</div>
+                    <div class="disk active">HDD 3</div>
+                    <div class="disk active">HDD 4</div>
+                </div>
+                <p style="font-size: 1.2em; color: #FFD700;">Birden fazla disk = Daha hızlı + Daha güvenli</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Neden RAID? -->
+        <div class="slide">
+            <a href="#" class="home-link">🏠 Anasayfa</a>
+            <h2>🤔 Neden RAID'e İhtiyacımız Var?</h2>
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h3>⚡ Performans Artışı</h3>
+                    <p>Tek disk: 100 MB/s</p>
+                    <p>4 Disk RAID: 400 MB/s</p>
+                    <div class="performance-bar" style="margin-top: 15px;">
+                        <div class="performance-fill speed-high" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="concept-card">
+                    
+                    <h3>🛡️ Veri Güvenliği</h3>
+                    <p>Disk arızası = Veri kaybı yok!</p>
+                    <div style="margin-top: 15px;">
+                        <div class="disk" style="width: 50px; height: 60px; display: inline-block; margin: 5px;">💾
+                        </div>
+                        <div class="disk failed" style="width: 50px; height: 60px; display: inline-block; margin: 5px;">
+                            ❌</div>
+                        <div class="disk active" style="width: 50px; height: 60px; display: inline-block; margin: 5px;">
+                            ✅</div>
+                    </div>
+                </div>
+                <div class="concept-card">
+                    
+                    <h3>💰 Maliyet Optimizasyonu</h3>
+                    <p>Pahalı tek disk yerine</p>
+                    <p>Ucuz çoklu disk çözümü</p>
+                    <div style="font-size: 2em; margin-top: 10px;">💸 → 💵💵💵</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Temel Kavramlar -->
+        <div class="slide">
+            <a href="#" class="home-link">🏠 Anasayfa</a>
+            <h2>📚 RAID'in Üç Temel Kavramı</h2>
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h3>🔄 Striping (Şeritleme)</h3>
+                    <p>Veriyi böl, paralel yaz</p>
+                    <div class="stripe-demo" style="font-size: 0.8em;">
+                        <div class="data-block">A</div>
+                        <div class="data-block">B</div>
+                        <div class="data-block">C</div>
+                        <div class="data-block">D</div>
+                    </div>
+                    <div style="display: flex; gap: 10px; justify-content: center;">
+                        <div class="disk" style="width: 40px; height: 50px; font-size: 0.8em;">A,C</div>
+                        <div class="disk" style="width: 40px; height: 50px; font-size: 0.8em;">B,D</div>
+                    </div>
+                </div>
+                <div class="concept-card">
+                    
+                    <h3>🪞 Mirroring (Aynalama)</h3>
+                    <p>Aynı veri, iki yerde</p>
+                    <div style="display: flex; gap: 20px; justify-content: center; margin-top: 15px;">
+                        <div class="disk active" style="width: 50px; height: 60px; font-size: 0.8em;">DATA</div>
+                        <div style="font-size: 1.5em;">=</div>
+                        <div class="disk active" style="width: 50px; height: 60px; font-size: 0.8em;">DATA</div>
+                    </div>
+                </div>
+                <div class="concept-card">
+                    
+                    <h3>🧮 Parity (Parite)</h3>
+                    <p>Matematik ile güvenlik</p>
+                    <div style="margin-top: 15px; font-size: 1.1em;">
+                        <p>A + B = P</p>
+                        <p>5 + 7 = 12</p>
+                        <p style="color: #FFD700;">B kaybolsa: 12 - 5 = 7 ✅</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Striping Analojisi -->
+        <div class="slide">
+            <a href="#" class="home-link">🏠 Anasayfa</a>
+            <h2>🏪 Striping Analojisi: Market Kasaları</h2>
+            <div class="analogy-box">
+                <div class="analogy-icon">🛒</div>
+                <h3>Tek Kasa vs Çoklu Kasa</h3>
+            </div>
+            <div style="display: flex; justify-content: space-around; align-items: center; margin: 50px 0;">
+                <div style="text-align: center;">
+                    <h3>Tek Kasa (Normal Disk)</h3>
+                    <div style="font-size: 3em; margin: 20px;">👥👥👥👥</div>
+                    <div style="font-size: 2em;">🏪</div>
+                    <p>Yavaş - Sıra var!</p>
+                </div>
+                <div class="arrow">→</div>
+                <div style="text-align: center;">
+                    <h3>4 Kasa (RAID 0)</h3>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 20px;">
+                        <div style="font-size: 1.5em;">👥🏪</div>
+                        <div style="font-size: 1.5em;">👥🏪</div>
+                        <div style="font-size: 1.5em;">👥🏪</div>
+                        <div style="font-size: 1.5em;">👥🏪</div>
+                    </div>
+                    <p>4 Kat Hızlı!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: RAID 0 -->
+        <div class="slide">
+            <a href="#" class="home-link">🏠 Anasayfa</a>
+            <h2>⚡ RAID 0 - Sadece Hız!</h2>
+            <div class="raid-comparison">
+                <div class="raid-card raid-0">
+                    <h3>📊 Özellikler</h3>
+                    <ul style="text-align: left;">
+                        <li><strong>Minimum Disk:</strong> 2</li>
+                        <li><strong>Kapasite:</strong> Tüm diskler</li>
+                        <li><strong>Hız:</strong> Çok yüksek</li>
+                        <li><strong>Güvenlik:</strong> Hiç yok!</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>💽 Disk Yapısı</h3>
+                    <div class="disk-visual">
+                        <div class="disk active">A C E</div>
+                        <div class="disk active">B D F</div>
+                    </div>
+                    <p style="margin-top: 20px;">Veri: ABCDEF → Paralel yazılır</p>
+                </div>
+            </div>
+            <div class="analogy-box">
+                <div class="analogy-icon">⚠️</div>
+                <p><strong>DİKKAT:</strong> Bir disk bozulursa TÜM veriler kaybolur!</p>
+                <p><strong>Kullanım:</strong> Video düzenleme gibi geçici işler için idealdir.</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: RAID 1 -->
+        <div class="slide">
+            <a href="#" class="home-link">🏠 Anasayfa</a>
+            <h2>🛡️ RAID 1 - Maksimum Güvenlik!</h2>
+            <div class="raid-comparison">
+                <div class="raid-card raid-1">
+                    <h3>📊 Özellikler</h3>
+                    <ul style="text-align: left;">
+                        <li><strong>Minimum Disk:</strong> 2</li>
+                        <li><strong>Kapasite:</strong> Disk sayısı ÷ 2</li>
+                        <li><strong>Hız:</strong> Normal</li>
+                        <li><strong>Güvenlik:</strong> Maksimum</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>💽 Disk Yapısı</h3>
+                    <div class="disk-visual">
+                        <div class="disk active">ABC<br />DEF</div>
+                        <div class="disk active">ABC<br />DEF</div>
+                    </div>
+                    <p style="margin-top: 20px;">Birebir kopya - Perfect Mirror</p>
+                </div>
+            </div>
+            <div class="analogy-box">
+                <div class="analogy-icon">📄</div>
+                <p><strong>Analoji:</strong> Önemli belgenin fotokopisini farklı klasörde saklamak gibi.</p>
+                <p><strong>Kullanım:</strong> İşletim sistemi, kritik veritabanları için mükemmel.</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: RAID 5 -->
+        <div class="slide">
+            <a href="#" class="home-link">🏠 Anasayfa</a>
+            <h2>⚖️ RAID 5 - En Popüler Çözüm!</h2>
+            <div class="raid-comparison">
+                <div class="raid-card raid-5">
+                    <h3>📊 Özellikler</h3>
+                    <ul style="text-align: left;">
+                        <li><strong>Minimum Disk:</strong> 3</li>
+                        <li><strong>Kapasite:</strong> (n-1) × disk boyutu</li>
+                        <li><strong>Hız:</strong> Yüksek</li>
+                        <li><strong>Güvenlik:</strong> 1 disk arızasına karşı</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>💽 Disk Yapısı</h3>
+                    <div class="disk-visual">
+                        <div class="disk active">A<br />E<br />Pz</div>
+                        <div class="disk active">B<br />Py<br />F</div>
+                        <div class="disk active">Px<br />C<br />G</div>
+                    </div>
+                    <p style="margin-top: 20px;">Veri + Dağıtılmış Parite</p>
+                </div>
+            </div>
+            <div class="analogy-box">
+                <div class="analogy-icon">🧮</div>
+                <p><strong>Matematik:</strong> A ⊕ B = Px, B ⊕ C = Py, E ⊕ F = Pz</p>
+                <p><strong>Kullanım:</strong> Dosya sunucuları, NAS sistemleri için ideal.</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: RAID 6 -->
+        <div class="slide">
+            <a href="#" class="home-link">🏠 Anasayfa</a>
+            <h2>🔒 RAID 6 - Çifte Güvenlik!</h2>
+            <div class="raid-comparison">
+                <div class="raid-card raid-6">
+                    <h3>📊 Özellikler</h3>
+                    <ul style="text-align: left;">
+                        <li><strong>Minimum Disk:</strong> 4</li>
+                        <li><strong>Kapasite:</strong> (n-2) × disk boyutu</li>
+                        <li><strong>Hız:</strong> Orta</li>
+                        <li><strong>Güvenlik:</strong> 2 disk arızasına karşı</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>💽 Disk Yapısı</h3>
+                    <div class="disk-visual" style="gap: 10px;">
+                        <div class="disk active" style="font-size: 0.8em;">A<br />Py<br />Qw</div>
+                        <div class="disk active" style="font-size: 0.8em;">B<br />Qx<br />Pz</div>
+                        <div class="disk active" style="font-size: 0.8em;">Px<br />C<br />Qy</div>
+                        <div class="disk active" style="font-size: 0.8em;">Qz<br />Pv<br />D</div>
+                    </div>
+                    <p style="margin-top: 20px;">Çifte Parite (P ve Q)</p>
+                </div>
+            </div>
+            <div class="analogy-box">
+                <div class="analogy-icon">🏦</div>
+                <p><strong>Güvenlik:</strong> Banka kasası gibi - çifte koruma!</p>
+                <p><strong>Kullanım:</strong> Büyük arşivler, kritik veri depoları için.</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: RAID 10 -->
+        <div class="slide">
+            <a href="#" class="home-link">🏠 Anasayfa</a>
+            <h2>🚀 RAID 10 - En İyi Her Şey!</h2>
+            <div class="raid-comparison">
+                <div class="raid-card raid-10">
+                    <h3>📊 Özellikler</h3>
+                    <ul style="text-align: left;">
+                        <li><strong>Minimum Disk:</strong> 4</li>
+                        <li><strong>Kapasite:</strong> Disk sayısı ÷ 2</li>
+                        <li><strong>Hız:</strong> Çok yüksek</li>
+                        <li><strong>Güvenlik:</strong> Maksimum</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>💽 Disk Yapısı</h3>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 20px 0;">
+                        <div>
+                            <p>Mirror Group 1</p>
+                            <div class="disk-visual" style="gap: 10px;">
+                                <div class="disk active" style="font-size: 0.8em;">A<br />C</div>
+                                <div class="disk active" style="font-size: 0.8em;">A<br />C</div>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Mirror Group 2</p>
+                            <div class="disk-visual" style="gap: 10px;">
+                                <div class="disk active" style="font-size: 0.8em;">B<br />D</div>
+                                <div class="disk active" style="font-size: 0.8em;">B<br />D</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Stripe of Mirrors (1+0)</p>
+                </div>
+            </div>
+            <div class="analogy-box">
+                <div class="analogy-icon">👑</div>
+                <p><strong>En Pahalı ama En İyisi:</strong> Ferrari gibi - hem hızlı hem güvenli!</p>
+                <p><strong>Kullanım:</strong> Bankacılık, borsa gibi kritik sistemler.</p>
+            </div>
+        </div>
+
+        <!-- Slide 10: Karşılaştırma Tablosu -->
+        <div class="slide">
+            <a href="#" class="home-link">🏠 Anasayfa</a>
+            <h2>📊 RAID Seviyeleri Karşılaştırma</h2>
+            <div class="comparison-table">
+                <div class="table-row table-header">
+                    <div>RAID Level</div>
+                    <div>Min. Disk</div>
+                    <div>Kapasite</div>
+                    <div>Hız</div>
+                    <div>Güvenlik</div>
+                    <div>İdeal Kullanım</div>
+                </div>
+                <div class="table-row">
+                    <div><strong>RAID 0</strong></div>
+                    <div>2</div>
+                    <div>100%</div>
+                    <div>
+                        <div class="performance-bar">
+                            <div class="performance-fill speed-high" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="performance-bar">
+                            <div class="performance-fill security-none" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div>Video düzenleme, geçici veriler</div>
+                </div>
+                <div class="table-row">
+                    <div><strong>RAID 1</strong></div>
+                    <div>2</div>
+                    <div>50%</div>
+                    <div>
+                        <div class="performance-bar">
+                            <div class="performance-fill speed-normal" style="width: 50%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="performance-bar">
+                            <div class="performance-fill security-high" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                    <div>İşletim sistemi, kritik veriler</div>
+                </div>
+                <div class="table-row">
+                    <div><strong>RAID 5</strong></div>
+                    <div>3</div>
+                    <div>67%-75%</div>
+                    <div>
+                        <div class="performance-bar">
+                            <div class="performance-fill speed-high" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="performance-bar">
+                            <div class="performance-fill security-high" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                    <div>Dosya sunucuları, NAS</div>
+                </div>
+                <div class="table-row">
+                    <div><strong>RAID 6</strong></div>
+                    <div>4</div>
+                    <div>50%-67%</div>
+                    <div>
+                        <div class="performance-bar">
+                            <div class="performance-fill speed-normal" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="performance-bar">
+                            <div class="performance-fill security-high" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                    <div>Büyük arşivler, veri merkezleri</div>
+                </div>
+                <div class="table-row">
+                    <div><strong>RAID 10</strong></div>
+                    <div>4</div>
+                    <div>50%</div>
+                    <div>
+                        <div class="performance-bar">
+                            <div class="performance-fill speed-high" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="performance-bar">
+                            <div class="performance-fill security-high" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                    <div>Veritabanları, kritik uygulamalar</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Hangi RAID'i Seçmeli? -->
+        <div class="slide">
+            <a href="#" class="home-link">🏠 Anasayfa</a>
+            <h2>🤷‍♂️ Hangi RAID Seviyesini Seçmeli?</h2>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin: 30px 0;">
+                <div class="concept-card">
+                    <h3>💰 Bütçe Sınırlı</h3>
+                    <ul style="text-align: left;">
+                        <li><strong>RAID 5:</strong> İyi performans + makul güvenlik</li>
+                        <li>3+ disk yeterli</li>
+                        <li>Genel amaçlı kullanım için ideal</li>
+                    </ul>
+                </div>
+                <div class="concept-card">
+                    <h3>⚡ Performans Önceliği</h3>
+                    <ul style="text-align: left;">
+                        <li><strong>RAID 0:</strong> Maksimum hız (güvenlik yok)</li>
+                        <li><strong>RAID 10:</strong> Hız + güvenlik (pahalı)</li>
+                        <li>SSD ile kullanımda çok etkili</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <h3>🛡️ Güvenlik Önceliği</h3>
+                    <ul style="text-align: left;">
+                        <li><strong>RAID 1:</strong> Maksimum güvenlik (kapasite %50)</li>
+                        <li><strong>RAID 6:</strong> Çifte güvenlik (büyük diskler için)</li>
+                        <li><strong>RAID 10:</strong> Hız + güvenlik (pahalı)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="controls">
+        <button id="prev-btn" class="btn">Önceki</button>
+        <button id="next-btn" class="btn">Sonraki</button>
+    </div>
+    <script>
+        // 1. Gerekli HTML elemanlarını seçelim
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const currentSlideSpan = document.getElementById('current-slide');
+        const totalSlidesSpan = document.getElementById('total-slides');
+        const homeLinks = document.querySelectorAll('.home-link');
+
+        // 2. Başlangıç değişkenlerini ayarlayalım
+        let currentSlide = 0; // Aktif slaytın index'i (0'dan başlar)
+        const totalSlides = slides.length;
+        totalSlidesSpan.textContent = totalSlides;
+
+        // 3. Slaytları gösteren fonksiyonu yazalım
+        function showSlide(slideIndex) {
+            // Önce tüm slaytlardaki 'active' sınıfını kaldıralım
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+
+            // Sadece gösterilmek istenen slayta 'active' sınıfını ekleyelim
+            slides[slideIndex].classList.add('active');
+
+            // Slayt sayacını güncelleyelim
+            currentSlideSpan.textContent = slideIndex + 1;
+        }
+
+        // 4. Butonlara tıklama olaylarını (event listener) ekleyelim
+        nextBtn.addEventListener('click', () => {
+            // Eğer son slaytta değilsek, bir sonrakine geç
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            // Eğer ilk slaytta değilsek, bir öncekine geç
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+        homeLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                // a etiketinin varsayılan davranışını engelle
+                event.preventDefault();
+                // 0 index'li ilk slayta git
+                showSlide(0);
+            });
+        });
+
+
+        // 5. Sayfa ilk yüklendiğinde ilk slaytı gösterelim
+        showSlide(currentSlide);
+    </script>
+
+
+</body>
+
+</html>

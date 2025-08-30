@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sınav Analizi: AP Frühjahr 2023 - Bölüm 1</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; overflow: hidden; }
+        .presentation-container { height: 100vh; display: flex; flex-direction: column; }
+        .slide { position: relative; display: none; padding: 40px 60px; height: 100vh; justify-content: center; align-items: center; text-align: center; overflow-y: auto; }
+        .slide.active { display: flex; flex-direction: column; animation: fadeInUp 0.7s ease-out; }
+        .slide h1 { font-size: 3em; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        .slide h2 { font-size: 2.2em; margin-bottom: 25px; color: #f1c40f; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
+        .slide h3 { font-size: 1.5em; margin-bottom: 15px; color: #1abc9c; text-align: left; width: 100%; max-width: 900px; }
+        .slide p, .slide li { font-size: 1.1em; line-height: 1.6; margin-bottom: 15px; max-width: 900px; text-align: left; }
+        .teacher-note { background: rgba(241, 196, 15, 0.15); border-left: 5px solid #f1c40f; padding: 15px; margin: 20px 0; border-radius: 8px; text-align: left; }
+        .teacher-note strong { color: #f1c40f; }
+        .controls { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 100; }
+        .btn { padding: 12px 25px; background: rgba(255, 255, 255, 0.2); border: 2px solid rgba(255, 255, 255, 0.3); color: white; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-size: 1.1em; }
+        .btn:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-2px); }
+        .slide-counter { position: fixed; top: 30px; right: 30px; background: rgba(0, 0, 0, 0.5); padding: 10px 20px; border-radius: 20px; font-size: 1.1em; z-index: 100; }
+        .home-link { position: fixed; top: 30px; left: 30px; font-size: 1.2em; color: white; text-decoration: none; background-color: rgba(0, 0, 0, 0.3); padding: 8px 15px; border-radius: 20px; transition: background-color 0.3s ease; z-index: 100; }
+        .home-link:hover { background-color: rgba(0, 0, 0, 0.5); }
+        pre { background: #2d2d2d; color: #f8f8f2; padding: 20px; border-radius: 10px; text-align: left; font-family: 'Courier New', Courier, monospace; font-size: 0.9em; white-space: pre-wrap; word-wrap: break-word; margin: 20px auto; max-width: 900px; }
+        table { width: 100%; max-width: 900px; margin: 20px auto; border-collapse: collapse; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden; text-align: left;}
+        th, td { padding: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+        th { background: rgba(255, 255, 255, 0.2); }
+        .solution { color: #2ecc71; font-weight: bold; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">16</span></div>
+        <a href="#" class="home-link" style="display: none;">🏠 Anasayfa</a>
+
+        <div class="slide active">
+            <h1>Sınav Analizi</h1>
+            <h2>AP Frühjahr 2023 - Bölüm 1: IT Destekli Bir İş Yeri Kurulumu</h2>
+            <p style="text-align: center; margin-top: 20px;">Bu sunumda, sınavdaki soruları, çözümlerini ve arkasındaki mantığı adım adım inceleyeceğiz.</p>
+        </div>
+
+        <div class="slide">
+            <h2>Genel Bakış: Sınav Senaryosu</h2>
+            <p>Finans sektöründe faaliyet gösteren <strong>SecuRita AG</strong> şirketinde çalışıyorsun. Şirket, veri güvenliği ve veri korumayı dikkate alarak iş yerlerini yeniden yapılandırıyor. Bu süreçte senden beklenen görevler:</p>
+            <ul>
+                <li><strong>Görev 1:</strong> Fayda analizi ile son kullanıcı cihazlarını karşılaştırmak.</li>
+                <li><strong>Görev 2:</strong> Satın alma ve kiralama seçeneklerini karşılaştırarak maliyet hesaplaması yapmak.</li>
+                <li><strong>Görev 3:</strong> Veri koruma ve veri güvenliği konularını ele almak.</li>
+                <li><strong>Görev 4:</strong> Yapay zeka, Lastenheft/Pflichtenheft, UML ve SQL sorguları üzerine çalışmak.</li>
+            </ul>
+        </div>
+        
+        <div class="slide">
+            <h2>Görev 1a: Cihazların Avantaj ve Dezavantajları</h2>
+            <h3>Soru: Her cihaz modeli için birer avantaj ve dezavantaj belirtin.</h3>
+            <table>
+              <thead><tr><th>Cihaz Tipi</th><th>Avantaj (Çözüm)</th><th>Dezavantaj (Çözüm)</th></tr></thead>
+              <tbody>
+                <tr><td>Notebook</td><td class="solution">Mobil</td><td class="solution">Pahalı</td></tr>
+                <tr><td>All-in-One-PC</td><td class="solution">Satın alması uygun fiyatlı</td><td class="solution">Kötü bakım ve genişletilebilirlik</td></tr>
+                <tr><td>Thin-Client</td><td class="solution">Ucuz</td><td class="solution">Sunucu bağlantısı gerektirir</td></tr>
+                <tr><td>Desktop-Rechner</td><td class="solution">İyi genişletilebilir</td><td class="solution">Yer kaplar</td></tr>
+              </tbody>
+            </table>
+            <div class="teacher-note"><strong>Öğretmenin Notu:</strong> Bu soru, temel donanım bilgisini ölçer. [cite_start]Şirketin "esnek bir yapıya" geçmeyi planladığını unutma[cite: 72]. Notebook'un mobilitesi bu plana uyar. Thin Client'ın sunucuya bağımlı olması, merkezi yönetim için bir avantaj bile olabilir, bu da esnek çalışmayı destekler. Her zaman senaryoyu aklında tutarak cevap ver.</div>
+        </div>
+        
+        <div class="slide">
+            <h2>Görev 1b: Nutzwertanalyse (Fayda Analizi)</h2>
+            <h3>Soru: Tablodaki eksik puanları (1-4) doldurun ve ağırlıklı puanları hesaplayın.</h3>
+            <p>Fayda analizi, farklı seçenekleri objektif kriterlere göre karşılaştırmak için kullanılır. [cite_start]Her kritere bir ağırlık verilir ve her seçenek bu kriterlere göre puanlanır (1: en kötü, 4: en iyi)[cite: 81].</p>
+            <p><strong>Örnek Hesaplama (Desktop - Ergonomi):</strong><br>Puan: <span class="solution">3</span>, Ağırlık: 20% (0.20)<br>Ağırlıklı Puan (gP) = 3 * 0.20 = <span class="solution">0,6</span></p>
+            [cite_start]<div class="teacher-note"><strong>Öğretmenin Notu:</strong> Burada önemli olan, her satırda 1, 2, 3 ve 4 puanlarını sadece bir kez kullanmaktır[cite: 80]. [cite_start]Örneğin "Platzbedarf" (Yer ihtiyacı) kriterinde en az yer kaplayan Thin Client 4 puan, en çok yer kaplayan Desktop 1 puan alır[cite: 381]. Sonuçta en yüksek ağırlıklı puana sahip olan seçenek, en mantıklı olanıdır. [cite_start]Bu analizde <span class="solution">Thin Client (3,2 puan)</span> en iyi seçenek olarak çıkıyor[cite: 381].</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 1c & 1d: Karar ve Ek Kriter</h2>
+            <h3>Soru 1c: Planlanan modernizasyonu göz önünde bulundurarak bir model seçin ve kararınızı gerekçelendirin.</h3>
+            [cite_start]<p><strong>Cevap:</strong> <span class="solution">Thin Clients</span>[cite: 385].</p>
+            [cite_start]<p><strong>Gerekçe:</strong> <span class="solution">Thin Client, değişken çalışma ortamlarını (flexible Struktur) en iyi destekleyen modeldir</span>[cite: 386].</p>
+            
+            <h3>Soru 1d: Fayda analizi için başka bir anlamlı kriter belirtin ve önerinizi gerekçelendirin.</h3>
+            [cite_start]<p><strong>Cevap:</strong> <span class="solution">Enerji Tüketimi (Energieverbrauch)</span>[cite: 389].</p>
+            [cite_start]<p><strong>Gerekçe:</strong> <span class="solution">Maliyet tasarrufu sağlar ve CO2 emisyonunu azaltarak çevreye katkıda bulunur</span>[cite: 390].</p>
+
+            [cite_start]<div class="teacher-note"><strong>Öğretmenin Notu:</strong> Kararınız her zaman projenin ana hedefiyle (burada "esnek yapı" [cite: 72]) uyumlu olmalıdır. Ek kriter önerirken, sadece kriteri belirtmek yetmez, neden önemli olduğunu (maliyet, çevre, güvenlik vb.) de açıklamanız gerekir.</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 2aa: Bezugspreis (Maliyet Fiyatı) Hesaplaması</h2>
+            <h3>Soru: 3.500 yeni notebook için her bir tedarikçinin birim maliyet fiyatını hesaplayın.</h3>
+            <p>Bu hesaplama, bir ürünün tüm indirimler düşüldükten ve tüm ek masraflar (nakliye vb.) eklendikten sonraki net maliyetini bulmayı amaçlar.</p>
+            <p><strong>Kilit Noktalar:</strong></p>
+            <ul>
+                <li><strong>Lieferantenrabatt (%20):</strong> Liste fiyatından düşülür.</li>
+                <li><strong>Lieferantenskonto (%2):</strong> İndirimli fiyattan (Zieleinkaufspreis) düşülür.</li>
+                <li><strong>Bezugskosten (Nakliye Masrafları):</strong> Teslimat şartlarına göre eklenir. [cite_start]"ab Werk" (fabrikadan teslim), alıcının tüm nakliye masraflarını ödemesi anlamına gelir[cite: 101].</li>
+            </ul>
+            [cite_start]<p><strong>Sonuç:</strong> En uygun fiyatlı tedarikçi <span class="solution">Tech-ware (841,66 EUR)</span>'dir[cite: 396].</p>
+             <div class="teacher-note"><strong>Öğretmenin Notu:</strong> Sınavda verilen teslimat şartları tablosunu dikkatlice okumalısın. [cite_start]`ab Werk` tüm taşıma masraflarının (Rollgeld + Fracht + Rollgeld) alıcıya ait olduğunu gösterir[cite: 101]. 3500 adet için toplam 2 EUR/adet masraf çıkar. [cite_start]`frachtfrei` ise alıcının sadece varış yerindeki Rollgeld'i ödediğini belirtir[cite: 101].</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 2b: Leasing (Kiralama)</h2>
+            <h3>Soru: Leasing'in temel prensibini, satın alma ile maliyet karşılaştırmasını ve avantajlarını açıklayın.</h3>
+            [cite_start]<p><strong>Leasing Prensibi:</strong> Belirli bir süre için bir varlığın (notebook) kullanım hakkının kiralanmasıdır[cite: 405]. [cite_start]Mülkiyet <span class="solution">leasing şirketinde (Leasinggeber)</span> kalır, kullanım hakkı (zilyetlik) ise <span class="solution">kiracıda (Leasingnehmer)</span> olur[cite: 406, 407].</p>
+            <p><strong>Maliyet Karşılaştırması:</strong></p>
+            <ul>
+                [cite_start]<li>Satın Alma: <span class="solution">300.000 EUR</span> [cite: 409]</li>
+                [cite_start]<li>Leasing: 6.000 EUR/ay * 60 ay (5 yıl) = <span class="solution">360.000 EUR</span> [cite: 410]</li>
+                [cite_start]<li>Fark: Leasing <span class="solution">60.000 EUR</span> daha pahalıdır[cite: 411].</li>
+            </ul>
+            [cite_start]<p><strong>Leasing Avantajları:</strong> Likidite korunur, öz sermaye azalmaz, teknolojik olarak güncel kalmak kolaylaşır, sabit taksitlerle planlama kolaylığı sağlar[cite: 414, 415, 417, 419].</p>
+            [cite_start]<div class="teacher-note"><strong>Öğretmenin Notu:</strong> "Kaufoption" (Satın alma opsiyonu), kiralama süresi sonunda kiralanan malı anlaşılan bir bedel üzerinden satın alma hakkıdır[cite: 422]. Bu, leasing anlaşmalarında sıkça rastlanan bir maddedir.</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 3a: İşletim Sistemi Katman Modeli</h2>
+            <h3>Soru: İşletim sisteminin bir üst ve bir alt katmanını adlandırın ve fonksiyonlarını açıklayın.</h3>
+            <table>
+              <thead><tr><th>Katman</th><th>Fonksiyon</th></tr></thead>
+              <tbody>
+                <tr><td class="solution">Uygulama Yazılımı (z.B. Textverarbeitung)</td><td class="solution">Metin belgeleri oluşturma gibi son kullanıcıya yönelik görevleri yerine getirir.</td></tr>
+                <tr><td>İşletim Sistemi</td><td>Donanım ve yazılım arasında bir arayüz sağlar.</td></tr>
+                <tr><td class="solution">Donanım (PC-Hardware)</td><td class="solution">Verilerin işlenmesini ve depolanmasını sağlar.</td></tr>
+              </tbody>
+            </table>
+            <div class="teacher-note"><strong>Öğretmenin Notu:</strong> Bu model, bir bilgisayar sisteminin soyutlanmış yapısını gösterir. [cite_start]En altta fiziksel donanım, onun üzerinde donanımı yöneten işletim sistemi ve en üstte de kullanıcının etkileşimde bulunduğu uygulama yazılımları yer alır[cite: 426]. [cite_start]Çözümde alt katman olarak UEFI/BIOS da kabul edilmiş[cite: 426].</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 3b: BSI ve Sistem "Härtung" (Sertleştirme)</h2>
+            <h3>Soru: BSI'ın görevlerini, "Härtung" kavramını ve örneklerini açıklayın.</h3>
+            [cite_start]<p><strong>BSI'ın Görevleri:</strong> IT güvenliği standartları geliştirmek, federal sistemleri korumak, vatandaşlar ve şirketler için IT güvenliği konusunda bir başvuru noktası olmak[cite: 428, 429, 430].</p>
+            <p><strong>Härtung (Sertleştirme):</strong> Bir işletim sistemindeki <span class="solution">saldırı yüzeyini azaltmaktır</span>. [cite_start]Bu, genellikle gereksiz servislerin veya portların devre dışı bırakılmasıyla yapılır[cite: 433].</p>
+            <p><strong>Sertleştirme Örnekleri:</strong></p>
+            <ul>
+                [cite_start]<li>Gereksiz yazılım bileşenlerini kaldırmak veya devre dışı bırakmak[cite: 435].</li>
+                [cite_start]<li>Gereksiz kullanıcı hesaplarını silmek[cite: 437].</li>
+                [cite_start]<li>Kullanılmayan portları kapatmak[cite: 438].</li>
+                [cite_start]<li>Veri aktarımı için şifreleme kullanmak[cite: 436].</li>
+            </ul>
+             [cite_start]<div class="teacher-note"><strong>Öğretmenin Notu:</strong> "Bordmittel" [cite: 132] işletim sistemiyle birlikte gelen yerleşik araçlar demektir. [cite_start]Güvenlik için kullanılabilecek "Bordmittel" örnekleri Firewall ve Antivirüs yazılımıdır[cite: 441, 442]. [cite_start]Gruppenrichtlinien (Grup Politikaları) ise yöneticilerin ayarları merkezi olarak birden fazla bilgisayara uygulamasına ve kullanıcıların bu ayarları değiştirmesini engellemesine olanak tanır[cite: 448, 449].</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 3c: Protokollierung (Logging) ve Veri Koruma</h2>
+            <h3>Soru: Logging'in IT güvenliğine nasıl katkıda bulunduğunu ve bu süreçte dikkat edilmesi gereken veri koruma gerekliliklerini açıklayın.</h3>
+            [cite_start]<p><strong>Logging'in Güvenliğe Katkısı:</strong> Hataların ve <span class="solution">yetkisiz aktivitelerin tespit edilmesini</span> ve bunların belirli zamanlara ve kullanıcılara <span class="solution">atanmasını sağlar</span>[cite: 452].</p>
+            <p><strong>Veri Koruma Gereklilikleri (DSGVO/GDPR):</strong></p>
+            <ul>
+                [cite_start]<li><strong>Veri Minimizasyonu:</strong> Sadece kesinlikle gerekli olan veriler kaydedilmelidir[cite: 153, 154].</li>
+                [cite_start]<li><strong>Anonimleştirme:</strong> Gereksiz kişisel bilgiler saklanmamalıdır[cite: 155, 156].</li>
+                [cite_start]<li><strong>Erişim Kontrolü:</strong> Kayıtlara sadece yetkili kişilerin erişimi olmalıdır[cite: 157, 158].</li>
+            </ul>
+            <div class="teacher-note"><strong>Öğretmenin Notu:</strong> Logging, bir güvenlik olayı sonrasında "kim, ne zaman, ne yaptı?" sorularını cevaplamak için kritik öneme sahiptir. Ancak, çalışanların aktivitelerini kaydederken DSGVO (Genel Veri Koruma Tüzüğü) prensiplerine sıkı sıkıya uymak zorunludur. [cite_start]Veri tasarrufu (Datensparsamkeit) burada anahtar kelimedir[cite: 454].</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 4a & 4b: Chatbot ve Lastenheft/Pflichtenheft</h2>
+            <h3>Soru 4a: Bir yapay zeka destekli chatbot'un ekonomik ve sosyal avantaj/dezavantajlarını belirtin.</h3>
+            [cite_start]<p><strong>Ekonomik Avantaj:</strong> 7/24 ulaşılabilirlik, işletme maliyetlerinin düşmesi [cite: 458][cite_start].<br><strong>Ekonomik Dezavantaj:</strong> Yüksek başlangıç maliyeti, karmaşık sistem entegrasyonu[cite: 458].</p>
+            [cite_start]<p><strong>Sosyal Avantaj:</strong> Bekleme süresi yok, her zaman "nazik" [cite: 458][cite_start].<br><strong>Sosyal Dezavantaj:</strong> Kullanıcı güvensizliği, karmaşık talepler için uygun değil[cite: 458].</p>
+            <h3>Soru 4b: Lastenheft ve Pflichtenheft arasındaki iki farkı açıklayın.</h3>
+            [cite_start]<p><strong>Lastenheft (Gereksinimler Belgesi):</strong> Müşterinin (Auftraggeber) <span class="solution">NE istediğini</span> ve beklentilerini tanımlar[cite: 460]. Müşterinin dilinden yazılır.</p>
+            [cite_start]<p><strong>Pflichtenheft (Teknik Şartname):</strong> Yüklenicinin (Auftragnehmer) bu gereksinimleri <span class="solution">NASIL ve NEYLE</span> karşılayacağını açıklar[cite: 461]. [cite_start]Teknik bir dille yazılır ve yüklenicinin taahhütlerini içerir[cite: 462].</p>
+        </div>
+        
+        <div class="slide">
+            <h2>Görev 4c: UML Sınıf Diyagramı</h2>
+            <h3>Soru: KFZ ve Immobilie sınıfları için "Versicherungsobjekt" adında ortak bir üst sınıf içeren bir sınıf hiyerarşisi oluşturun.</h3>
+            <p>Bu görev, nesne yönelimli programlamanın (OOP) kalıtım (Vererbung) prensibini uygulama becerisini ölçer. Amaç, kod tekrarını önlemektir.</p>
+            <p><strong>Çözümün Mantığı:</strong></p>
+            <ul>
+                [cite_start]<li>Hem KFZ hem de Immobilie sınıflarında ortak olan özellikler (<span class="solution">Neupreis, Baujahr, Schadenshöhe</span>) ve metotlar (<span class="solution">auszahlen()</span>) üst sınıf olan <span class="solution">`Versicherungsobjekt`</span>'e taşınır[cite: 476, 477, 478, 479, 480].</li>
+                <li>`KFZ` ve `Immobilie` sınıfları, `Versicherungsobjekt` sınıfından `extends` (kalıtım) ile türetilir.</li>
+                [cite_start]<li>Her alt sınıf, sadece kendine özgü özellikleri (örn: KFZ için <span class="solution">Hersteller, Laufleistung</span> [cite: 481, 484]) ve metotları içerir.</li>
+                [cite_start]<li>`restwertBerechnen()` metodu her iki sınıfta da farklı çalıştığı için[cite: 203], her alt sınıf kendi implementasyonunu yapar. Bu, polimorfizme bir örnektir.</li>
+            </ul>
+             [cite_start]<div class="teacher-note"><strong>Öğretmenin Notu:</strong> Çözüm kağıdındaki görsel diyagram bu yapıyı gösterir[cite: 473]. Önemli olan, ortak elemanları bir üst sınıfta toplayarak "is-a" (bir...-dır) ilişkisini (örneğin, "KFZ bir Versicherungsobjekt'tir") doğru kurmaktır.</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 4da: SQL Sorgusu - Ortalama Hesaplama</h2>
+            <h3>Soru: Tüm KFZ sigorta sözleşmelerinin ortalama sigorta tutarını (Versicherungssumme) hesaplayan bir SQL sorgusu oluşturun.</h3>
+            <pre><code class="solution">SELECT AVG(Versicherung_Summe) 
+FROM KFZ_Versicherung;</code></pre>
+            <div class="teacher-note">
+                <strong>Öğretmenin Notu:</strong> Bu, temel bir toplama (aggregation) sorgusudur.
+                <ul>
+                    [cite_start]<li><code>SELECT AVG(...)</code>: `AVG()` fonksiyonu, belirtilen sütunun (<span class="solution">Versicherung_Summe</span>) aritmetik ortalamasını hesaplamak için kullanılır[cite: 355].</li>
+                    <li><code>FROM KFZ_Versicherung</code>: Verinin hangi tablodan alınacağını belirtir.</li>
+                </ul>
+                [cite_start]Sınav kağıdının son sayfalarında SQL fonksiyonları için bir kopya kağıdı (`SQL-Syntax`) bulunduğunu unutma[cite: 352]!
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 4db: SQL Sorgusu - Filtreleme</h2>
+            <h3>Soru: Mayıs 2022'de yapılan, sigorta tutarı 100.000 EUR'dan fazla olan ve garajda park edilmeyen araçların sigorta numaralarını (VID) listeleyen bir SQL sorgusu oluşturun.</h3>
+            <pre><code class="solution">SELECT VID FROM KFZ_Versicherung
+WHERE Year(Vertragsbeginn) = 2022 
+  AND Month(Vertragsbeginn) = 5
+  AND Versicherung_Summe > 100000 
+  AND Garage = FALSE;</code></pre>
+            <div class="teacher-note">
+                <strong>Öğretmenin Notu:</strong> Bu sorgu, `WHERE` koşulu ile verileri filtreleme becerisini test eder.
+                <ul>
+                    [cite_start]<li><code>Year(Vertragsbeginn) = 2022 AND Month(Vertragsbeginn) = 5</code>: `Vertragsbeginn` [cite: 245] [cite_start]tarih alanından yılı ve ayı ayıklayarak Mayıs 2022'yi filtreler[cite: 495].</li>
+                    [cite_start]<li><code>Versicherung_Summe > 100000</code>: Sigorta tutarını filtreler[cite: 496].</li>
+                    [cite_start]<li><code>Garage = FALSE</code>: `Garage` [cite: 210] [cite_start]alanı bir BOOLEAN olduğu için, garajda olmayanları `FALSE` ile kontrol ederiz[cite: 496].</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="slide">
+            <h1>Sınav Analizi Tamamlandı!</h1>
+            <h2>Önemli Çıkarımlar</h2>
+            <ul>
+                <li><strong>Senaryoyu Anla:</strong> Her soruyu projenin genel bağlamı (esnek çalışma, güvenlik) içinde düşün.</li>
+                <li><strong>Temel Kavramlar:</strong> Donanım, Leasing, Härtung, Lastenheft/Pflichtenheft, OOP ve SQL gibi temel kavramlara hakim ol.</li>
+                <li><strong>Hesaplamalara Dikkat:</strong> Nutzwertanalyse ve Bezugspreis gibi hesaplamalarda adımları dikkatlice takip et.</li>
+                <li><strong>Yardımcı Belgeleri Kullan:</strong> Sınavda verilen ek belgeleri (teslimat şartları, SQL syntax) etkin bir şekilde kullan.</li>
+            </ul>
+            <div class="teacher-note"><strong>Öğretmenin Notu:</strong> Sait, bu sınavı başarıyla analiz ettin. Gördüğün gibi sorular, ezber bilgiden çok, verilen senaryoyu anlama ve temel teorik bilgileri bu senaryoya uygulama becerisini ölçüyor. Bu şekilde çalışmaya devam edersen bir sonraki sınavda çok başarılı olacaksın. Tebrikler!</div>
+        </div>
+
+    </div>
+    <div class="controls">
+        <button id="prev-btn" class="btn">Önceki</button>
+        <button id="next-btn" class="btn">Sonraki</button>
+    </div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const homeLink = document.querySelector('.home-link');
+        const currentSlideSpan = document.getElementById('current-slide');
+        const totalSlides = slides.length;
+        document.getElementById('total-slides').textContent = totalSlides;
+        
+        let currentSlide = 0;
+
+        function showSlide(slideIndex) {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === slideIndex) slide.classList.add('active');
+            });
+            currentSlideSpan.textContent = slideIndex + 1;
+            homeLink.style.display = slideIndex === 0 ? 'none' : 'block';
+            prevBtn.style.display = slideIndex === 0 ? 'none' : 'inline-block';
+            nextBtn.style.display = slideIndex === totalSlides - 1 ? 'none' : 'inline-block';
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) showSlide(++currentSlide);
+        });
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) showSlide(--currentSlide);
+        });
+        homeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentSlide = 0;
+            showSlide(currentSlide);
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) nextBtn.click();
+            else if (e.key === 'ArrowLeft' && currentSlide > 0) prevBtn.click();
+        });
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

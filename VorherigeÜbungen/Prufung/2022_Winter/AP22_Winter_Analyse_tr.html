@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sınav Analizi: AP Winter 2022/23 - Bölüm 1</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; overflow: hidden; }
+        .presentation-container { height: 100vh; display: flex; flex-direction: column; }
+        .slide { position: relative; display: none; padding: 40px 60px; height: 100vh; justify-content: center; align-items: center; text-align: center; overflow-y: auto; }
+        .slide.active { display: flex; flex-direction: column; animation: fadeInUp 0.7s ease-out; }
+        .slide h1 { font-size: 3em; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        .slide h2 { font-size: 2.2em; margin-bottom: 25px; color: #f1c40f; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
+        .slide h3 { font-size: 1.5em; margin-bottom: 15px; color: #1abc9c; text-align: left; width: 100%; max-width: 900px; }
+        .slide p, .slide li { font-size: 1.1em; line-height: 1.6; margin-bottom: 15px; max-width: 900px; text-align: left; }
+        .teacher-note { background: rgba(241, 196, 15, 0.15); border-left: 5px solid #f1c40f; padding: 15px; margin: 20px 0; border-radius: 8px; text-align: left; }
+        .teacher-note strong { color: #f1c40f; }
+        .controls { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 100; }
+        .btn { padding: 12px 25px; background: rgba(255, 255, 255, 0.2); border: 2px solid rgba(255, 255, 255, 0.3); color: white; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-size: 1.1em; }
+        .btn:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-2px); }
+        .slide-counter { position: fixed; top: 30px; right: 30px; background: rgba(0, 0, 0, 0.5); padding: 10px 20px; border-radius: 20px; font-size: 1.1em; z-index: 100; }
+        .home-link { position: fixed; top: 30px; left: 30px; font-size: 1.2em; color: white; text-decoration: none; background-color: rgba(0, 0, 0, 0.3); padding: 8px 15px; border-radius: 20px; transition: background-color 0.3s ease; z-index: 100; }
+        .home-link:hover { background-color: rgba(0, 0, 0, 0.5); }
+        pre { background: #2d2d2d; color: #f8f8f2; padding: 20px; border-radius: 10px; text-align: left; font-family: 'Courier New', Courier, monospace; font-size: 0.9em; white-space: pre-wrap; word-wrap: break-word; margin: 20px auto; max-width: 900px; }
+        table { width: 100%; max-width: 900px; margin: 20px auto; border-collapse: collapse; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden; text-align: left;}
+        th, td { padding: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+        th { background: rgba(255, 255, 255, 0.2); }
+        .solution { color: #2ecc71; font-weight: bold; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">13</span></div>
+        <a href="#" class="home-link" style="display: none;">🏠 Anasayfa</a>
+
+        <div class="slide active">
+            <h1>Sınav Analizi</h1>
+            <h2>AP Winter 2022/23 - Bölüm 1: IT Destekli Bir İş Yeri Kurulumu</h2>
+            <p style="text-align: center; margin-top: 20px;">Bu sunumda, 2022/23 Kış dönemi sınavındaki soruları, çözümlerini ve arkasındaki mantığı adım adım inceleyeceğiz.</p>
+        </div>
+
+        <div class="slide">
+            <h2>Genel Bakış: Sınav Senaryosu</h2>
+            <p><strong>Systemhaus KG</strong>'de çalışıyorsun. Müşterin <strong>FairCare GmbH</strong>, Karlsruhe'deki ofisi için kapsamlı bir WLAN altyapısı kurmak istiyor. Senin görevin bu siparişi hazırlamak ve teknik detayları netleştirmek.</p>
+            <ul>
+                <li><strong>IT 1:</strong> Fayda analizi, ticari hesaplama ve teklif hazırlama.</li>
+                <li><strong>IT 2:</strong> WLAN güvenliği ve ağ yapılandırması (IPv6).</li>
+                <li><strong>IT 3:</strong> Sorun giderme (Troubleshooting) ve siber güvenlik.</li>
+                <li><strong>IT 4:</strong> Veritabanı tekniği (Kardinaliteler, SQL).</li>
+                <li><strong>IT 5:</strong> Programlamada hata ayıklama (Debugging).</li>
+            </ul>
+        </div>
+        
+        <div class="slide">
+            <h2>Görev 1.1: Nutzwertanalyse (Fayda Analizi)</h2>
+            [cite_start]<h3>Soru: Müşteri gereksinimlerine göre 3 WLAN Access Point (AP) için bir fayda analizi yapın ve birini seçin. [cite: 961]</h3>
+            <p><strong>Müşterinin Kilit Talepleri:</strong></p>
+            <ul>
+                [cite_start]<li>Mümkün olan en güncel WLAN ve şifreleme standardı. [cite: 961]</li>
+                [cite_start]<li>AP'ler tavana monte edilecek ve elektrik prizi yok (yani PoE gerekli). [cite: 961]</li>
+                [cite_start]<li>Fiyat önemli, bütçe sınırlı. [cite: 961]</li>
+            </ul>
+            [cite_start]<p><strong>Sonuç:</strong> Çözüm anahtarına göre en yüksek ağırlıklı puana (<span class="solution">140</span>) sahip olan <span class="solution">AP JP55A</span> seçilmelidir. [cite: 1654, 1655]</p>
+            [cite_start]<div class="teacher-note"><strong>Öğretmenin Notu:</strong> Bu analizde en yüksek ağırlık (<span class="solution">30'ar</span>) "WLAN Standardı" ve "Şifreleme Standardı"na verilmiş. [cite: 1654] [cite_start]AP JP55A bu iki kriterde de en yüksek puanı (2'şer) alarak öne çıkıyor çünkü 802.11ax (Wi-Fi 6) ve WPA3 standartlarını sunuyor. [cite: 1074, 1654] [cite_start]Bu, müşterinin "en güncel standartlar" talebini tam olarak karşılıyor. [cite: 961]</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 1.2: Handelskalkulation (Ticari Hesaplama)</h2>
+            [cite_start]<h3>Soru: Seçilen AP için müşteriye sunulacak satış fiyatını hesaplayın. [cite: 961]</h3>
+            <p>Bu, bir ürünün tedarikçiden alınıp müşteriye satılana kadarki tüm maliyet ve kâr adımlarını içeren tam bir ileriye dönük hesaplamadır (Vorwärtskalkulation).</p>
+            <p><strong>Hesaplama Adımları (Özet):</strong></p>
+            <ol>
+                [cite_start]<li><strong>Maloluş Fiyatı (Bezugspreis) bulunur:</strong> Liste Fiyatı (110,00 €) [cite: 1074] - [cite_start]%5 Yeni Müşteri İndirimi (5,50 €) [cite: 1076, 1663] - [cite_start]%3 Skonto (3,14 €) [cite: 1076, 1663] [cite_start]= <span class="solution">101,36 €</span>. [cite: 1663]</li>
+                [cite_start]<li><strong>Kendi Maliyetimiz (Selbstkosten) bulunur:</strong> Maloluş Fiyatı (101,36 €) + %25 İşletme Giderleri (25,34 €) [cite: 961, 1663] [cite_start]= <span class="solution">126,70 €</span>. [cite: 1663]</li>
+                [cite_start]<li><strong>Müşteri Fiyatı (Bruttoverkaufspreis) bulunur:</strong> Kendi Maliyetimiz (126,70 €) + %15 Kâr (19,01 €) [cite: 961, 1663] [cite_start]... + Müşteri İndirimi + Müşteri Skontosu + %19 KDV (31,37 €) [cite: 961, 1663] [cite_start]= <span class="solution">196,46 €</span>. [cite: 1663]</li>
+            </ol>
+             <div class="teacher-note"><strong>Öğretmenin Notu:</strong> Bu tür hesaplamalarda her adımın bir sonrakinin temelini oluşturduğunu unutma. Örneğin, skonto indirimi yapılmış fiyat üzerinden hesaplanır. [cite_start]Her adımı dikkatlice takip etmeli ve istenen yuvarlamayı yapmalısın. [cite: 962]</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 1.3: Angebotserstellung (Teklif Hazırlama)</h2>
+            [cite_start]<h3>Soru: Müşterinin ihtiyaç duyduğu tüm bileşenler, montaj ve konfigürasyon için bir teklif hazırlayın. [cite: 968]</h3>
+            <p>Bu görev, sadece ürünleri listelemek değil, projenin çalışması için gereken tüm parçaları düşünmeyi gerektirir.</p>
+            <p><strong>Teklifteki Kilit Nokta:</strong></p>
+            [cite_start]<p>Müşterinin mevcut switch'i (Anlage 2) <span class="solution">PoE (Power over Ethernet) desteklemiyor</span>. [cite: 1084] [cite_start]Ancak seçtiğimiz AP'ler PoE ile çalışıyor. [cite: 1074] [cite_start]Bu nedenle, AP'lere güç sağlamak için teklife <span class="solution">10 adet Power Injector</span> eklenmesi zorunludur. [cite: 1695]</p>
+            [cite_start]<p><strong>Toplam Tutar (Net):</strong> 3825,00 € - %10 Miktar İndirimi (382,50 €) = <span class="solution">3442,50 €</span> [cite: 1695]</p>
+            <div class="teacher-note"><strong>Öğretmenin Notu:</strong> Bu, bir teknisyenin ticari düşünme becerisini ölçen harika bir soru. Sadece isteneni değil, projenin başarısı için "gerekeni" de düşünüp teklife eklemen bekleniyor. Bu detayı atlamak, projenin başarısız olmasına ve müşteri memnuniyetsizliğine yol açardı.</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 2.1 & 2.2: WLAN Güvenliği ve Frekans Bantları</h2>
+            [cite_start]<h3>Soru 2.1: Modern bir WLAN yapılandırması için 4 güvenlik unsuru belirtin. [cite: 979, 981]</h3>
+            <ul>
+                [cite_start]<li><span class="solution">Güçlü bir yönetici şifresi belirlemek.</span> [cite: 1707]</li>
+                [cite_start]<li><span class="solution">En az WPA2, tercihen WPA3 şifreleme standardını kullanmak.</span> [cite: 1707]</li>
+                [cite_start]<li><span class="solution">Güncel Firmware kullanmak.</span> [cite: 1706]</li>
+                [cite_start]<li><span class="solution">WLAN'ı çalışma saatleri dışında kapatmak.</span> [cite: 1708]</li>
+            </ul>
+            [cite_start]<h3>Soru 2.2: 2.4 GHz ve 5 GHz frekans bantlarının ikişer özelliğini belirtin. [cite: 983, 986]</h3>
+            [cite_start]<p><strong>2.4 GHz:</strong> Daha <span class="solution">yüksek menzile</span> sahiptir ve duvarlardan daha iyi geçer. [cite: 1722] [cite_start]Ancak, daha fazla cihaz (Bluetooth, mikrodalga fırınlar) tarafından kullanıldığı için <span class="solution">daha kalabalıktır ve parazite daha açıktır</span>. [cite: 1723]</p>
+            [cite_start]<p><strong>5 GHz:</strong> Daha fazla sayıda (23'e kadar) <span class="solution">kesişmeyen kanal</span> sunar, bu da daha <span class="solution">stabil ve hızlı bir bağlantı</span> sağlar. [cite: 1725, 1726] Ancak menzili daha kısadır ve engellerden daha zor geçer.</p>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 2.3: IPv6 Yapılandırması</h2>
+            [cite_start]<h3>Soru: Bir mobil cihaz için geçerli bir IPv6 yapılandırması belirtin. [cite: 992]</h3>
+            [cite_start]<p>Ağ planına (Anlage 4) göre, ağın Global Prefix'i `2003:f3:71e:bb00::/64` olarak verilmiştir. [cite: 1093]</p>
+            <p><strong>Geçerli bir yapılandırma:</strong></p>
+            <ul>
+                [cite_start]<li><strong>Global Adres (kısaltılmış):</strong> <span class="solution">2003:f3:71e:bb00:fc89:bc42:de:5c5f/64</span> (Host ID kısmı rastgele olabilir). [cite: 1728]</li>
+                [cite_start]<li><strong>Link-Local Adres (kısaltılmış):</strong> <span class="solution">fe80::fc89:bc42:de:5c5f/64</span> (fe80:: ile başlar). [cite: 1728]</li>
+                [cite_start]<li><strong>Default Gateway:</strong> <span class="solution">fe80::1</span> (Ağdaki Router'ın Link-Local adresi). [cite: 1098, 1728]</li>
+                [cite_start]<li><strong>DNS-Server:</strong> <span class="solution">fe80::5</span> (Ağ planındaki DNS sunucusunun Link-Local adresi). [cite: 1111, 1728]</li>
+            </ul>
+            <div class="teacher-note"><strong>Öğretmenin Notu:</strong> IPv6'da bir cihazın genellikle birden fazla adresi vardır. Global adres internet iletişimi için, Link-Local adres ise sadece yerel ağdaki iletişim için kullanılır. Gateway ve DNS gibi yerel kaynaklara genellikle Link-Local adresleri üzerinden erişilir.</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 3.1: Hata Durumlarını Sınıflandırma</h2>
+            [cite_start]<h3>Soru: Gelen durum mesajlarını doğru aciliyet seviyesine atayın. [cite: 1001]</h3>
+            <table>
+                <thead><tr><th>Durum Mesajı</th><th>Seviye</th><th>Açıklama</th></tr></thead>
+                <tbody>
+                    <tr><td>Yönetim yeni bir renkli yazıcı istiyor.</td><td class="solution">Information</td><td>Bu bir arıza veya risk değil, standart bir taleptir.</td></tr>
+                    <tr><td>Sunucu disk kapasitesi %90 dolu.</td><td class="solution">Warnung (Uyarı)</td><td>Henüz bir arıza yok, ancak yakın zamanda bir sorun çıkabileceğine dair bir uyarıdır.</td></tr>
+                    <tr><td>ERP sistemi erişilemez durumda.</td><td class="solution">Ausnahme (İstisna)</td><td>Kritik bir sistem çalışmıyor, bu acil müdahale gerektiren bir kesintidir.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="slide">
+            <h2>Görev 3.2 & 3.3: Ransomware (Fidye Yazılımı)</h2>
+            [cite_start]<h3>Soru 3.2: Müşteriye, çalışanların fidye yazılımlarından korunması için 5 tavsiye verin. [cite: 1023]</h3>
+            <ul>
+                [cite_start]<li><span class="solution">Bilinmeyen göndericilerden gelen e-posta eklerini açmayın.</span> [cite: 1743]</li>
+                [cite_start]<li><span class="solution">Şüpheli linklere tıklamayın.</span> [cite: 1744]</li>
+                [cite_start]<li><span class="solution">İşletim sistemini ve yazılımları düzenli olarak güncelleyin (Patchmanagement).</span> [cite: 1745]</li>
+                [cite_start]<li><span class="solution">Verileri düzenli olarak çevrimdışı bir medyaya yedekleyin.</span> [cite: 1746]</li>
+                [cite_start]<li><span class="solution">Güçlü antivirüs ve güvenlik duvarı yazılımları kullanın.</span> [cite: 1744]</li>
+            </ul>
+            [cite_start]<h3>Soru 3.3: Bir fidye yazılımı saldırısının 3 temel güvenlik hedefine etkisini değerlendirin. [cite: 1026]</h3>
+            [cite_start]<p><strong>Verfügbarkeit (Erişilebilirlik):</strong> <span class="solution">Sistem artık mevcut değildir.</span> Dosyalar şifrelendiği için erişilemez hale gelir. [cite: 1748]</p>
+            [cite_start]<p><strong>Integrität (Bütünlük):</strong> <span class="solution">Veriler değiştirilmiştir.</span> Orijinal veriler şifrelenerek bozulmuştur. [cite: 1748]</p>
+            [cite_start]<p><strong>Vertraulichkeit (Gizlilik):</strong> <span class="solution">Bilgiler yetkisiz kişilere de açık hale gelir.</span> Saldırganlar genellikle verileri sızdırarak şantaj yaparlar. [cite: 1748]</p>
+        </div>
+        
+        <div class="slide">
+            <h2>Görev 4: Veritabanı Tekniği</h2>
+            [cite_start]<h3>Soru 4.1: Verilen `CREATE TABLE` ifadelerine göre ilişkisel modeldeki kardinaliteleri tamamlayın. [cite: 1037]</h3>
+            [cite_start]<p><strong>Analiz:</strong> `tblmeldung` tablosu, hem `tblbenutzer` hem de `tblstatus` tablolarına ait yabancı anahtarlar (`fbid` ve `fsid`) içerir. [cite: 1248, 1249, 1256]</p>
+            <ul>
+                <li><strong>tblbenutzer → tblmeldung:</strong> Bir kullanıcı (benutzer) birden çok mesaj (meldung) oluşturabilir. Bu bir <span class="solution">1:n</span> ilişkisidir.</li>
+                <li><strong>tblstatus → tblmeldung:</strong> Bir durum (status) birden çok mesaja atanabilir. [cite_start]Bu da bir <span class="solution">1:n</span> ilişkisidir. [cite: 1763]</li>
+            </ul>
+            [cite_start]<h3>Soru 4.3: `INSERT INTO tblstatus VALUES (1, 'Ausstehend');` sorgusu neden hata verir? [cite: 1046, 1049]</h3>
+            [cite_start]<p><strong>Açıklama:</strong> <span class="solution">`sid` sütunu bir Birincil Anahtar'dır (Primary Key).</span> [cite: 1255] [cite_start]Tabloda `sid`'si 1 olan bir kayıt zaten mevcuttur. [cite: 1264, 1267] [cite_start]Birincil anahtarlar benzersiz (unique) olmak zorunda olduğu için, veritabanı aynı PK değerine sahip ikinci bir kaydın eklenmesine izin vermez ve hata verir. [cite: 1781, 1782]</p>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 5: Programlamada Hata Ayıklama (Debugging)</h2>
+            [cite_start]<h3>Soru: Bir tamsayı dizisinin ortalamasını hesaplaması gereken koddaki hataları düzeltin. [cite: 1060]</h3>
+            <p>Verilen kodda 3 temel hata bulunmaktadır:</p>
+            <ol>
+                [cite_start]<li><strong>Hatalı Veri Tipi:</strong> `summe` ve `durchschnittswert` değişkenleri `int` olarak tanımlanmış. [cite: 1273, 1274] `int` / `int` işlemi ondalık kısmı atacaktır (tamsayı bölmesi). [cite_start]Sonucun ondalıklı olabilmesi için bu değişkenler <span class="solution">`double` veya `float`</span> olmalıdır. [cite: 1788, 1789]</li>
+                [cite_start]<li><strong>Hatalı Döngü Başlangıcı:</strong> Döngü `for(int i=1; ...)` ile başlıyor. [cite: 1275] Dizilerin indeksi 0'dan başlar. Bu kod, dizinin ilk elemanını (`daten[0]`) atlar. [cite_start]Döngü <span class="solution">`for(int i=0; ...)`</span> ile başlamalıdır. [cite: 1791]</li>
+                [cite_start]<li><strong>Yanlış Bölme İşlemi:</strong> `summe / daten.Length` işlemi tamsayı bölmesi yapar. [cite: 1279] [cite_start]Değişkenler `double` yapıldıktan sonra bu işlem doğru sonucu verecektir. [cite: 1800]</li>
+            </ol>
+             <div class="teacher-note"><strong>Öğretmenin Notu:</strong> Bu, klasik bir "off-by-one" ve "integer division" hatasıdır. Özellikle Java gibi dillerde, iki tamsayının bölünmesinin sonucunun da bir tamsayı olduğunu unutmamak çok önemlidir. Doğru sonuç için en az bir operandın ondalıklı sayı (double/float) olması gerekir.</div>
+        </div>
+        
+        <div class="slide">
+            <h1>Sınav Analizi Tamamlandı!</h1>
+            <h2>Önemli Çıkarımlar</h2>
+            <ul>
+                <li><strong>Ticari Süreçler:</strong> Fayda analizi ve tam bir ticari hesaplama, bu sınavın temelini oluşturuyor. Bu konulara hakim olmalısın.</li>
+                <li><strong>Teknik Detaylar Önemli:</strong> PoE, WLAN standartları (802.11ax), şifreleme (WPA3) gibi güncel teknik terimleri bilmen bekleniyor.</li>
+                <li><strong>Ağ ve Güvenlik:</strong> IPv6 temelleri, siber güvenlik tehditleri (Ransomware) ve temel güvenlik önlemleri her zaman karşına çıkabilir.</li>
+                <li><strong>Veritabanı Mantığı:</strong> Anahtarların (PK, FK) ne anlama geldiğini ve kardinaliteleri nasıl belirlediğini bilmek SQL soruları için kritiktir.</li>
+                <li><strong>Kod Okuma ve Hata Ayıklama:</strong> Temiz ve hatasız kod yazmak kadar, var olan koddaki mantık hatalarını bulup düzeltebilmek de önemli bir beceridir.</li>
+            </ul>
+        </div>
+        
+    </div>
+    <div class="controls">
+        <button id="prev-btn" class="btn">Önceki</button>
+        <button id="next-btn" class="btn">Sonraki</button>
+    </div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const homeLink = document.querySelector('.home-link');
+        const currentSlideSpan = document.getElementById('current-slide');
+        const totalSlides = slides.length;
+        document.getElementById('total-slides').textContent = totalSlides;
+        
+        let currentSlide = 0;
+
+        function showSlide(slideIndex) {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === slideIndex) slide.classList.add('active');
+            });
+            currentSlideSpan.textContent = slideIndex + 1;
+            homeLink.style.display = slideIndex === 0 ? 'none' : 'block';
+            prevBtn.style.display = slideIndex === 0 ? 'none' : 'inline-block';
+            nextBtn.style.display = slideIndex === totalSlides - 1 ? 'none' : 'inline-block';
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) showSlide(++currentSlide);
+        });
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) showSlide(--currentSlide);
+        });
+        homeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentSlide = 0;
+            showSlide(currentSlide);
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) nextBtn.click();
+            else if (e.key === 'ArrowLeft' && currentSlide > 0) prevBtn.click();
+        });
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

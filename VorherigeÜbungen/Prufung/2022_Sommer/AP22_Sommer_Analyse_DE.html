@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prüfungsanalyse: AP Sommer 2022 - Teil 1</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; overflow: hidden; }
+        .presentation-container { height: 100vh; display: flex; flex-direction: column; }
+        .slide { position: relative; display: none; padding: 40px 60px; height: 100vh; justify-content: center; align-items: center; text-align: center; overflow-y: auto; }
+        .slide.active { display: flex; flex-direction: column; animation: fadeInUp 0.7s ease-out; }
+        .slide h1 { font-size: 3em; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        .slide h2 { font-size: 2.2em; margin-bottom: 25px; color: #f1c40f; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
+        .slide h3 { font-size: 1.5em; margin-bottom: 15px; color: #1abc9c; text-align: left; width: 100%; max-width: 900px; }
+        .slide p, .slide li { font-size: 1.1em; line-height: 1.6; margin-bottom: 15px; max-width: 900px; text-align: left; }
+        .teacher-note { background: rgba(241, 196, 15, 0.15); border-left: 5px solid #f1c40f; padding: 15px; margin: 20px 0; border-radius: 8px; text-align: left; }
+        .teacher-note strong { color: #f1c40f; }
+        .controls { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 100; }
+        .btn { padding: 12px 25px; background: rgba(255, 255, 255, 0.2); border: 2px solid rgba(255, 255, 255, 0.3); color: white; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-size: 1.1em; }
+        .btn:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-2px); }
+        .slide-counter { position: fixed; top: 30px; right: 30px; background: rgba(0, 0, 0, 0.5); padding: 10px 20px; border-radius: 20px; font-size: 1.1em; z-index: 100; }
+        .home-link { position: fixed; top: 30px; left: 30px; font-size: 1.2em; color: white; text-decoration: none; background-color: rgba(0, 0, 0, 0.3); padding: 8px 15px; border-radius: 20px; transition: background-color 0.3s ease; z-index: 100; }
+        .home-link:hover { background-color: rgba(0, 0, 0, 0.5); }
+        pre { background: #2d2d2d; color: #f8f8f2; padding: 20px; border-radius: 10px; text-align: left; font-family: 'Courier New', Courier, monospace; font-size: 0.9em; white-space: pre-wrap; word-wrap: break-word; margin: 20px auto; max-width: 900px; }
+        table { width: 100%; max-width: 900px; margin: 20px auto; border-collapse: collapse; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden; text-align: left;}
+        th, td { padding: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+        th { background: rgba(255, 255, 255, 0.2); }
+        .solution { color: #2ecc71; font-weight: bold; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">11</span></div>
+        <a href="#" class="home-link" style="display: none;">🏠 Startseite</a>
+
+        <div class="slide active">
+            <h1>Prüfungsanalyse</h1>
+            <h2>AP Sommer 2022 - Teil 1: Einrichtung eines IT-gestützten Arbeitsplatzes</h2>
+            <p style="text-align: center; margin-top: 20px;">In dieser Präsentation werden wir die Fragen der Sommerprüfung 2022, ihre Lösungen und die dahinterstehende Logik Schritt für Schritt untersuchen.</p>
+        </div>
+        
+        <div class="slide">
+            <h2>Überblick: Prüfungsszenario</h2>
+            <p>Sie sind bei der <strong>Systemhaus KG</strong> beschäftigt. [cite_start]Ihr Kunde, die <strong>Innovativ Finanz GmbH</strong>, baut seinen Standort aus und beauftragt Sie, die neuen Arbeitsplätze mit Geräten auszustatten sowie die Netzwerkinfrastruktur anzupassen. [cite: 1789] Ihre Aufgaben:</p>
+            <ul>
+                [cite_start]<li><strong>IT 1:</strong> Anforderungsanalyse und Wareneingangskontrolle. [cite: 812]</li>
+                [cite_start]<li><strong>IT 2:</strong> Netzwerkkonfiguration und -sicherheit. [cite: 972]</li>
+                [cite_start]<li><strong>IT 3:</strong> Erweiterung eines Software-Moduls. [cite: 1865]</li>
+                [cite_start]<li><strong>IT 4:</strong> Erstellung eines Datenmodells basierend auf JSON-Daten. [cite: 1885]</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 1.1: Anforderungsanalyse</h2>
+            <h3>Frage: Arbeiten Sie die Kundenanforderungen aus der Anfrage von Herrn Kawon (Anlage 1) heraus. [cite_start]Übertragen Sie diese in die unternehmensinterne Checkliste (Anlage 2). [cite: 1791]</h3>
+            <p>Diese Aufgabe testet Ihre Fähigkeit, Kundenanforderungen zu lesen, zu verstehen und korrekt in technische Spezifikationen zu übersetzen.</p>
+            <p><strong>Beispielhafte Übertragungen:</strong></p>
+            <ul>
+                [cite_start]<li><strong>Kundenanforderung:</strong> "...schnell und einfach mit 2 Monitoren verbunden werden kann." [cite: 1900] [cite_start]<br><strong>Eintrag in Checkliste:</strong> <span class="solution">Docking-Station</span>. [cite: 946]</li>
+                [cite_start]<li><strong>Kundenanforderung:</strong> "Alle Geräte sollten möglichst leise sein." [cite: 1902] [cite_start]<br><strong>Eintrag in Checkliste:</strong> Lüfter → <span class="solution">keinen</span>. [cite: 826]</li>
+                [cite_start]<li><strong>Kundenanforderung:</strong> "...muss das Gerät über einen eigenen mobilen Netzzugang verfügen." [cite: 1908] [cite_start]<br><strong>Eintrag in Checkliste:</strong> Extras → <span class="solution">LTE-Modem</span>. [cite: 947]</li>
+            </ul>
+             <div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Bei dieser Aufgabe ist genaues Lesen entscheidend. Jeder Satz des Kunden kann auf eine oder mehrere technische Spezifikationen in der Checkliste hinweisen. [cite_start]Beispielsweise erfordern die Begriffe "Share-Place" [cite: 1896] [cite_start]und "Homeoffice" [cite: 1898][cite_start], dass die "Mobilität" des Geräts als <span class="solution">"oft"</span> eingestuft wird[cite: 859].</div>
+        </div>
+        
+        <div class="slide">
+            <h2>Aufgabe 1.2: Wareneingangskontrolle</h2>
+            [cite_start]<h3>Frage: Führen Sie die Kontrolle der angelieferten Ware durch und halten Sie Ihre Überprüfungen schriftlich fest. [cite: 1795]</h3>
+            <p>Diese Aufgabe umfasst den Prozess der Überprüfung, ob eine Lieferung mit der Bestellung übereinstimmt. Bestellung (Anlage 4), Lieferschein (Anlage 5) und E-Mails werden verglichen.</p>
+            <p><strong>Prüfungsergebnisse (laut Lösungshinweisen):</strong></p>
+            <ul>
+                [cite_start]<li><strong>Liefertermin:</strong> <span class="solution">Zu späte Lieferung.</span> Bestellt am 16.02. mit Wunschlieferung innerhalb von 7 Tagen (spätestens 23.02), aber die Ware kam erst am 28.02. an[cite: 965, 1989, 1792].</li>
+                [cite_start]<li><strong>Menge:</strong> <span class="solution">Zu wenig geliefert.</span> 24 Stück bestellt und auf dem Lieferschein vermerkt, aber nur 20 Pakete geliefert[cite: 965, 2006, 1793].</li>
+                [cite_start]<li><strong>Beschädigung:</strong> Verpackung äußerlich unbeschädigt. [cite: 1794]</li>
+                [cite_start]<li><strong>Maßnahmen:</strong> Mindermenge und Spätlieferung auf dem Lieferschein vermerken. [cite: 965] [cite_start]Die Ware soll gemäß E-Mail von Herrn Lumb (dringender Bedarf) trotzdem angenommen und der Empfang quittiert werden. [cite: 965, 2028]</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 2.1.1: IPv4-Konfiguration</h2>
+            [cite_start]<h3>Frage: Geben Sie eine dafür gültige IPv4-Adresskonfiguration an, um ein neues Gerät in das LAN einzubinden. [cite: 1819]</h3>
+            <p>Laut Netzwerkplan (Seite 2) ist das Netzwerk 192.168.0.0/24. Das bedeutet, die IP-Adressen können im Bereich 192.168.0.1 bis 192.168.0.254 liegen.</p>
+            <p><strong>Eine gültige Konfiguration:</strong></p>
+            <ul>
+                [cite_start]<li><strong>IP-Adresse:</strong> <span class="solution">192.168.0.30</span> (jede freie Adresse außer den bereits belegten wie 1, 2, 21, 22). [cite: 977]</li>
+                [cite_start]<li><strong>Subnetzmaske:</strong> <span class="solution">255.255.255.0</span> (da /24). [cite: 980]</li>
+                [cite_start]<li><strong>Standardgateway:</strong> <span class="solution">192.168.0.2</span> (die Adresse des Routers im Netz). [cite: 982]</li>
+                [cite_start]<li><strong>DNS-Server:</strong> <span class="solution">192.168.0.21</span> (der im Plan angegebene Server). [cite: 984]</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 2.1.2: Paketanalyse</h2>
+            [cite_start]<h3>Frage: Ermitteln Sie die Adressen des Datenrahmens zwischen dem Router und Switch 1, wenn Notebook 1 auf tagesschau.de zugreift. [cite: 1820, 1821]</h3>
+            <p>Dies testet das grundlegende Verständnis der Datenübertragung in einem Netzwerk.</p>
+            <ul>
+                [cite_start]<li><strong>Quell-IPv4-Adresse:</strong> <span class="solution">Notebook 1</span>. [cite: 1027] Die IP-Adresse ändert sich während der Übertragung nicht.</li>
+                [cite_start]<li><strong>Ziel-IPv4-Adresse:</strong> <span class="solution">tagesschau.de</span>. [cite: 998] Die IP des Zielservers ändert sich ebenfalls nicht.</li>
+                [cite_start]<li><strong>Quell-MAC-Adresse:</strong> <span class="solution">Notebook 1</span>. [cite: 1026] Das Gerät, das den Rahmen sendet.</li>
+                [cite_start]<li><strong>Ziel-MAC-Adresse:</strong> <span class="solution">Router (192.168.0.2)</span>. [cite: 1010] Innerhalb des lokalen Netzes ist die Ziel-MAC-Adresse immer der nächste "Hop" (Sprung). Der Router ist der nächste Schritt, um das Paket ins Internet zu leiten.</li>
+            </ul>
+             <div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Denke daran: IP-Adressen zeigen den Start- und Endpunkt der gesamten Reise und bleiben in der Regel unverändert. MAC-Adressen werden nur für den nächsten Hop verwendet und ändern sich bei jedem Router-Übergang. Switches ändern MAC-Adressen nicht, sie leiten sie nur weiter.</div>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 2.2 & 2.4: WLAN-Leistung und SLA</h2>
+            <h3>Frage 2.2: Beurteilen Sie den Sachverhalt, dass die WLAN-Datenrate ca. 50% und die LAN-Rate ca. [cite_start]94% erreicht. [cite: 1835]</h3>
+            [cite_start]<p><strong>Beurteilung:</strong> <span class="solution">Diese Werte sind in einem normalen Bereich.</span> [cite: 1030] [cite_start]Der Verlust von 50% im WLAN ist auf das geteilte Medium (shared medium), Störungen und Protokoll-Overhead zurückzuführen. [cite: 1033-1036] Der Verlust von ca. [cite_start]6% im kabelgebundenen LAN entspricht dem normalen Protokoll-Overhead. [cite: 1037]</p>
+            [cite_start]<h3>Frage 2.4: Erklären Sie, ob das Service Level Agreement eingehalten wurde. [cite: 1861]</h3>
+            <p><strong>Rechnung:</strong></p>
+            <ul>
+                [cite_start]<li>Gesamte Stördauer: 12 Stunden + 7 Stunden = <span class="solution">19 Stunden</span>. [cite: 1042]</li>
+                <li>Zulässige jährliche Ausfallzeit: 365 Tage * 24 Stunden * (1 - 0,997) = 26,28 Stunden.</li>
+                [cite_start]<li>Entstördauer: Ist auf 8 Stunden festgelegt. [cite: 1852]</li>
+            </ul>
+            [cite_start]<p><strong>Ergebnis:</strong> Die <span class="solution">zugesicherte Verfügbarkeit von 99,7% wurde eingehalten</span> (19h < 26,28h). [cite: 1043] [cite_start]Jedoch wurde die <span class="solution">zugesicherte Entstördauer von 8 Stunden nicht eingehalten</span>, da beide Störungen länger als 8 Stunden dauerten. [cite: 1048]</p>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 3: Software-Entwicklung (MAC-Adresssuche)</h2>
+            [cite_start]<h3>Frage: Erstellen Sie die Suchlogik für eine Methode `SucheMAC`, die eine bestimmte MAC-Adresse in einem String-Array sucht. [cite: 1873-1876]</h3>
+            <p>Ziel ist es, eine Schleife zu implementieren, die jedes Element des Arrays mit der gesuchten MAC-Adresse vergleicht. Bei einer Übereinstimmung wird `true` zurückgegeben, ansonsten am Ende der Schleife `false`.</p>
+            <p><strong>Beispiellösung in Java:</strong></p>
+            <pre><code>public static boolean SucheMAC(String[] macAdressen, String gesucht) {
+    // Iteriere durch jede MAC-Adresse im Array.
+    for (String mac : macAdressen) {
+        // Stimmt die aktuelle MAC-Adresse mit der gesuchten überein?
+        if (mac.equals(gesucht)) {
+            // Übereinstimmung gefunden, gib true zurück und verlasse die Methode.
+            [cite_start]return true; [cite: 1079]
+        }
+    }
+    // Die Schleife ist beendet und keine Übereinstimmung wurde gefunden.
+    [cite_start]return false; [cite: 1093]
+}</code></pre>
+            <div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Dies ist ein grundlegender linearer Suchalgorithmus. [cite_start]Die Lösungshinweise [cite: 1067-1117] zeigen diese Logik auf verschiedene Weisen, z.B. mit `foreach`-, `for`-Schleifen, einer C#-spezifischen `Contains`-Methode und Pseudocode. Alle basieren auf dem gleichen Prinzip: Iteration und Vergleich.</div>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 4: Datenmodellierung (von JSON zu ERM)</h2>
+            [cite_start]<h3>Frage: Ergänzen Sie das dargestellte ERM in Anlage 11 um die Beziehungen, Kardinalitäten und Attribute aus den JSON-Dateien. [cite: 1889]</h3>
+            <p>Diese Aufgabe testet die Fähigkeit, semistrukturierte JSON-Daten zu lesen und in ein strukturiertes Entity-Relationship-Modell (ERM) zu überführen.</p>
+            <p><strong>Analyse und Lösung:</strong></p>
+            <ul>
+                [cite_start]<li><strong>Entitäten:</strong> Aus der JSON-Struktur werden drei Hauptentitäten abgeleitet: <span class="solution">MainUser</span>, <span class="solution">PC</span>, und <span class="solution">IPAddress</span>. [cite: 1122, 1142, 1136]</li>
+                <li><strong>Attribute:</strong> Die Eigenschaften jeder Entität werden aus dem JSON übernommen:
+                    <ul>
+                        [cite_start]<li>MainUser: <span class="solution">userId, userName</span>. [cite: 1120, 1121]</li>
+                        [cite_start]<li>PC: <span class="solution">pcId, purpose, description</span>. [cite: 1139, 1140, 1141]</li>
+                        [cite_start]<li>IPAddress: <span class="solution">value, type</span> (ipID ist optional). [cite: 1137, 1138, 1135]</li>
+                    </ul>
+                </li>
+                <li><strong>Beziehungen und Kardinalitäten:</strong>
+                    <ul>
+                        [cite_start]<li><span class="solution">1</span> MainUser ist <span class="solution">1</span> PC zugewiesen (1:1-Beziehung). [cite: 1126, 1127]</li>
+                        [cite_start]<li><span class="solution">1</span> PC kann <span class="solution">n</span> (mehrere) IPAddress(en) haben (1:n-Beziehung). [cite: 1143, 1134]</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Prüfungsanalyse abgeschlossen!</h1>
+            <h2>Wichtige Erkenntnisse</h2>
+            <ul>
+                <li><strong>Sorgfältiges Lesen:</strong> Kleine Details in Kunden-E-Mails und Dokumenten (Daten, Spezifikationen) sind entscheidend.</li>
+                <li><strong>Kenntnis von Geschäftsprozessen:</strong> Die Schritte von Standardprozessen wie der Wareneingangskontrolle müssen bekannt sein.</li>
+                <li><strong>Netzwerkgrundlagen:</strong> Die Logik der IP/MAC-Adressierung und der Schichtenarchitektur (OSI-Modell) ist fundamental für Netzwerkaufgaben.</li>
+                <li><strong>Algorithmisches Denken:</strong> Die Fähigkeit, einen einfachen Suchalgorithmus in Code oder ein Diagramm umzusetzen, wird erwartet.</li>
+                <li><strong>Datenmodellierung:</strong> Daten aus verschiedenen Formaten (JSON) zu lesen und in ein strukturiertes Modell (ERM) zu überführen, ist eine wichtige Fähigkeit.</li>
+            </ul>
+            <div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Sait, mit dieser Prüfungsanalyse haben wir einen weiteren wichtigen Schritt gemacht. Wie du siehst, testen die Prüfungen nicht nur technisches Wissen, sondern auch die Fähigkeit, dieses Wissen in einem gegebenen Geschäftsszenario anzuwenden, Dokumente zu verstehen und logische Schlussfolgerungen zu ziehen. Diese Praxis ist sehr nah am realen Berufsleben. Mach weiter so, du bist auf einem hervorragenden Weg!</div>
+        </div>
+
+    </div>
+    <div class="controls">
+        <button id="prev-btn" class="btn">Zurück</button>
+        <button id="next-btn" class="btn">Weiter</button>
+    </div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const homeLink = document.querySelector('.home-link');
+        const currentSlideSpan = document.getElementById('current-slide');
+        const totalSlides = slides.length;
+        document.getElementById('total-slides').textContent = totalSlides;
+        
+        let currentSlide = 0;
+
+        function showSlide(slideIndex) {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === slideIndex) slide.classList.add('active');
+            });
+            currentSlideSpan.textContent = slideIndex + 1;
+            homeLink.style.display = slideIndex === 0 ? 'none' : 'block';
+            prevBtn.style.display = slideIndex === 0 ? 'none' : 'inline-block';
+            nextBtn.style.display = slideIndex === totalSlides - 1 ? 'none' : 'inline-block';
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) showSlide(++currentSlide);
+        });
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) showSlide(--currentSlide);
+        });
+        homeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentSlide = 0;
+            showSlide(currentSlide);
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) nextBtn.click();
+            else if (e.key === 'ArrowLeft' && currentSlide > 0) prevBtn.click();
+        });
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

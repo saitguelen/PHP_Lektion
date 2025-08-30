@@ -1,0 +1,399 @@
+!<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP Dosya ve Dizin İşlemleri Kılavuzu</title>
+    <style>
+        @media print {
+            body { margin: 0; }
+            .no-print { display: none; }
+            .page-break { page-break-before: always; }
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 40px;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            color: #34495e;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 30px 0 20px 0;
+            font-size: 1.4em;
+        }
+        
+        .function-block {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            position: relative;
+        }
+        
+        .function-name {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .function-desc {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .code-example {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .highlight::before {
+            content: "💡 ";
+            font-size: 1.2em;
+        }
+        
+        .print-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin: 20px auto;
+            display: block;
+        }
+        
+        .print-btn:hover {
+            background: #2980b9;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .table th {
+            background: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .table tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ecf0f1;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐘 PHP Dosya ve Dizin İşlemleri Kılavuzu</h1>
+        
+        <button class="print-btn no-print" onclick="window.print()">📄 PDF Olarak Yazdır</button>
+        
+        <div class="highlight">
+            Bu kılavuz, PHP'de dosya ve dizin işlemleri için en çok kullanılan fonksiyonları içerir. Her fonksiyon için açıklama ve örnek kod bulunmaktadır.
+        </div>
+
+        <h2>📁 Dosya İşlemleri</h2>
+        
+        <div class="function-block">
+            <span class="function-name">fopen($filename, $mode)</span>
+            <div class="function-desc">Dosya açar ve kaynak (resource) döndürür</div>
+            <div class="code-example">
+$handle = fopen("dosya.txt", "r");  // Okuma için aç
+$handle = fopen("dosya.txt", "w");  // Yazma için aç
+$handle = fopen("dosya.txt", "a");  // Ekleme için aç</div>
+        </div>
+
+        <div class="function-block">
+            <span class="function-name">fclose($handle)</span>
+            <div class="function-desc">Açık dosyayı kapatır</div>
+            <div class="code-example">
+fclose($handle);</div>
+        </div>
+
+        <div class="function-block">
+            <span class="function-name">fread($handle, $length)</span>
+            <div class="function-desc">Dosyadan belirtilen byte kadar okur</div>
+            <div class="code-example">
+$content = fread($handle, 1024);  // 1024 byte oku</div>
+        </div>
+
+        <div class="function-block">
+            <span class="function-name">fwrite($handle, $string)</span>
+            <div class="function-desc">Dosyaya string yazar</div>
+            <div class="code-example">
+fwrite($handle, "Merhaba Dünya!");</div>
+        </div>
+
+        <div class="function-block">
+            <span class="function-name">file_get_contents($file)</span>
+            <div class="function-desc">Tüm dosya içeriğini string olarak okur</div>
+            <div class="code-example">
+$content = file_get_contents("dosya.txt");</div>
+        </div>
+
+        <div class="function-block">
+            <span class="function-name">file_put_contents($file, $data)</span>
+            <div class="function-desc">Dosyaya veri yazar (dosya yoksa oluşturur)</div>
+            <div class="code-example">
+file_put_contents("dosya.txt", "İçerik buraya");</div>
+        </div>
+
+        <h2>🔍 Dosya Kontrolleri</h2>
+
+        <div class="function-block">
+            <span class="function-name">file_exists($filename)</span>
+            <div class="function-desc">Dosya veya dizin var mı kontrol eder</div>
+            <div class="code-example">
+if (file_exists("dosya.txt")) {
+    echo "Dosya mevcut";
+}</div>
+        </div>
+
+        <div class="function-block">
+            <span class="function-name">is_file($filename)</span>
+            <div class="function-desc">Dosya mı kontrol eder</div>
+            <div class="code-example">
+if (is_file("dosya.txt")) {
+    echo "Bu bir dosya";
+}</div>
+        </div>
+
+        <div class="function-block">
+            <span class="function-name">is_dir($dirname)</span>
+            <div class="function-desc">Dizin mi kontrol eder</div>
+            <div class="code-example">
+if (is_dir("klasor")) {
+    echo "Bu bir dizin";
+}</div>
+        </div>
+
+        <div class="function-block">
+            <span class="function-name">is_readable($file) / is_writable($file)</span>
+            <div class="function-desc">Dosyanın okunabilir/yazılabilir olduğunu kontrol eder</div>
+            <div class="code-example">
+if (is_readable("dosya.txt") && is_writable("dosya.txt")) {
+    echo "Dosya okunabilir ve yazılabilir";
+}</div>
+        </div>
+
+        <div class="function-block">
+            <span class="function-name">filesize($filename)</span>
+            <div class="function-desc">Dosya boyutunu byte olarak döndürür</div>
+            <div class="code-example">
+$size = filesize("dosya.txt");
+echo "Dosya boyutu: " . $size . " byte";</div>
+        </div>
+
+        <h2>📂 Dizin İşlemleri</h2>
+
+        <div class="function-block">
+            <span class="function-name">mkdir($pathname, $mode)</span>
+            <div class="function-desc">Dizin oluşturur</div>
+            <div class="code-example">
+mkdir("yeni_klasor", 0755);  // İzinlerle birlikte
+mkdir("klasor/alt_klasor", 0755, true);  // Recursive</div>
+        </div>
+
+        <div class="function-block">
+            <span class="function-name">rmdir($dirname)</span>
+            <div class="function-desc">Boş dizini siler</div>
+            <div class="code-example">
+rmdir("bos_klasor");</div>
+        </div>
+
+        <div class="function-block">
+            <span class="function-name">scandir($directory)</span>
+            <div class="function-desc">Dizin içeriğini array olarak döndürür</div>
+            <div class="code-example">
+$files = scandir(".");
+foreach ($files as $file) {
+    echo $file . "\n";
+}</div>
+        </div>
+
+        <div class="function-block">
+            <span class="function-name">opendir($path) / readdir($handle)</span>
+            <div class="function-desc">Dizin açar ve içeriğini okur</div>
+            <div class="code-example">
+$handle = opendir(".");
+while (($file = readdir($handle)) !== false) {
+    echo $file . "\n";
+}
+closedir($handle);</div>
+        </div>
+
+        <h2>⚙️ İzin ve Bilgi İşlemleri</h2>
+
+        <div class="function-block">
+            <span class="function-name">chmod($filename, $permissions)</span>
+            <div class="function-desc">Dosya izinlerini değiştirir</div>
+            <div class="code-example">
+chmod("dosya.txt", 0644);  // rw-r--r--
+chmod("script.sh", 0755);   // rwxr-xr-x</div>
+        </div>
+
+        <div class="function-block">
+            <span class="function-name">pathinfo($path)</span>
+            <div class="function-desc">Dosya yolu hakkında bilgi verir</div>
+            <div class="code-example">
+$info = pathinfo("/path/to/file.txt");
+// Array: dirname, basename, extension, filename</div>
+        </div>
+
+        <div class="function-block">
+            <span class="function-name">basename($path) / dirname($path)</span>
+            <div class="function-desc">Dosya adı ve dizin adını döndürür</div>
+            <div class="code-example">
+echo basename("/path/to/file.txt");  // file.txt
+echo dirname("/path/to/file.txt");   // /path/to</div>
+        </div>
+
+        <h2>🗑️ Dosya Silme/Taşıma</h2>
+
+        <div class="function-block">
+            <span class="function-name">unlink($filename)</span>
+            <div class="function-desc">Dosyayı siler</div>
+            <div class="code-example">
+if (unlink("silinecek_dosya.txt")) {
+    echo "Dosya silindi";
+}</div>
+        </div>
+
+        <div class="function-block">
+            <span class="function-name">rename($oldname, $newname)</span>
+            <div class="function-desc">Dosyayı yeniden adlandırır veya taşır</div>
+            <div class="code-example">
+rename("eski_ad.txt", "yeni_ad.txt");
+rename("dosya.txt", "klasor/dosya.txt");  // Taşıma</div>
+        </div>
+
+        <div class="function-block">
+            <span class="function-name">copy($source, $dest)</span>
+            <div class="function-desc">Dosyayı kopyalar</div>
+            <div class="code-example">
+copy("kaynak.txt", "hedef.txt");</div>
+        </div>
+
+        <h2>📊 Dosya Modları Tablosu</h2>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Mode</th>
+                    <th>Açıklama</th>
+                    <th>Okuma</th>
+                    <th>Yazma</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>r</strong></td>
+                    <td>Sadece okuma</td>
+                    <td>✅</td>
+                    <td>❌</td>
+                </tr>
+                <tr>
+                    <td><strong>w</strong></td>
+                    <td>Sadece yazma (dosyayı sıfırlar)</td>
+                    <td>❌</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><strong>a</strong></td>
+                    <td>Ekleme modu (sona ekler)</td>
+                    <td>❌</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><strong>r+</strong></td>
+                    <td>Okuma/yazma</td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><strong>w+</strong></td>
+                    <td>Okuma/yazma (dosyayı sıfırlar)</td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td><strong>a+</strong></td>
+                    <td>Okuma/ekleme</td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="highlight">
+            <strong>💡 İpucu:</strong> Dosya işlemlerinde her zaman hata kontrolü yapın ve güvenlik açısından kullanıcı girdilerini doğrulayın. <code>file_exists()</code> ve <code>is_readable()</code> gibi fonksiyonları kullanarak dosya işlemlerinden önce kontrol edin.
+        </div>
+
+        <div class="footer">
+            <p><strong>PHP Dosya ve Dizin İşlemleri Kılavuzu</strong></p>
+            <p>Bu fonksiyonlar dosya sistemi işlemlerinin %90'ını karşılar!</p>
+            <p>© 2025 - PHP Referans Kılavuzu</p>
+        </div>
+    </div>
+</body>
+</html>

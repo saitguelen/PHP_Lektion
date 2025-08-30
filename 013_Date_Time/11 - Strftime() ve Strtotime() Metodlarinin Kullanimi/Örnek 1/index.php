@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="tr-TR">
+<html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Content-Language" content="tr">
@@ -13,7 +13,7 @@
 	strftime()		:	Yerel tarih ve saat bilgilerini belirtilecek olan formata göre biçimlendirerek, biçimlendirdiği değeri geriye döndürür.
 	strtotime()		:	İngilizce metin içerikli bir zamanın Unix zaman damgası değerini bularak, bulduğu değeri geriye döndürür.
 	*/
-	
+	setlocale(LC_ALL,"de_DE");
 	$Zaman		=	strftime("%d %B %Y %T %A");
 	
 	echo $Zaman;

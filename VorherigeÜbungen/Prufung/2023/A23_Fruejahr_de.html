@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prüfungsanalyse: AP Frühjahr 2023 - Teil 1</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; overflow: hidden; }
+        .presentation-container { height: 100vh; display: flex; flex-direction: column; }
+        .slide { position: relative; display: none; padding: 40px 60px; height: 100vh; justify-content: center; align-items: center; text-align: center; overflow-y: auto; }
+        .slide.active { display: flex; flex-direction: column; animation: fadeInUp 0.7s ease-out; }
+        .slide h1 { font-size: 3em; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        .slide h2 { font-size: 2.2em; margin-bottom: 25px; color: #f1c40f; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
+        .slide h3 { font-size: 1.5em; margin-bottom: 15px; color: #1abc9c; text-align: left; width: 100%; max-width: 900px; }
+        .slide p, .slide li { font-size: 1.1em; line-height: 1.6; margin-bottom: 15px; max-width: 900px; text-align: left; }
+        .teacher-note { background: rgba(241, 196, 15, 0.15); border-left: 5px solid #f1c40f; padding: 15px; margin: 20px 0; border-radius: 8px; text-align: left; }
+        .teacher-note strong { color: #f1c40f; }
+        .controls { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 100; }
+        .btn { padding: 12px 25px; background: rgba(255, 255, 255, 0.2); border: 2px solid rgba(255, 255, 255, 0.3); color: white; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-size: 1.1em; }
+        .btn:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-2px); }
+        .slide-counter { position: fixed; top: 30px; right: 30px; background: rgba(0, 0, 0, 0.5); padding: 10px 20px; border-radius: 20px; font-size: 1.1em; z-index: 100; }
+        .home-link { position: fixed; top: 30px; left: 30px; font-size: 1.2em; color: white; text-decoration: none; background-color: rgba(0, 0, 0, 0.3); padding: 8px 15px; border-radius: 20px; transition: background-color 0.3s ease; z-index: 100; }
+        .home-link:hover { background-color: rgba(0, 0, 0, 0.5); }
+        pre { background: #2d2d2d; color: #f8f8f2; padding: 20px; border-radius: 10px; text-align: left; font-family: 'Courier New', Courier, monospace; font-size: 0.9em; white-space: pre-wrap; word-wrap: break-word; margin: 20px auto; max-width: 900px; }
+        table { width: 100%; max-width: 900px; margin: 20px auto; border-collapse: collapse; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden; text-align: left;}
+        th, td { padding: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+        th { background: rgba(255, 255, 255, 0.2); }
+        .solution { color: #2ecc71; font-weight: bold; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">16</span></div>
+        <a href="#" class="home-link" style="display: none;">🏠 Startseite</a>
+
+        <div class="slide active">
+            <h1>Prüfungsanalyse</h1>
+            <h2>AP Frühjahr 2023 - Teil 1: Einrichten eines IT-gestützten Arbeitsplatzes</h2>
+            <p style="text-align: center; margin-top: 20px;">In dieser Präsentation werden wir die Prüfungsfragen, ihre Lösungen und die dahinterstehende Logik Schritt für Schritt untersuchen.</p>
+        </div>
+        
+        <div class="slide">
+            <h2>Überblick: Prüfungsszenario</h2>
+            [cite_start]<p>Du arbeitest bei der <strong>SecuRita AG</strong>, einem Unternehmen im Finanzsektor[cite: 64]. [cite_start]Das Unternehmen plant eine Neustrukturierung der Arbeitsplätze unter Beachtung von Datensicherheit und Datenschutz[cite: 65]. Deine Aufgaben in diesem Prozess sind:</p>
+            <ul>
+                [cite_start]<li><strong>Aufgabe 1:</strong> Vergleich von Endgeräten mittels einer Nutzwertanalyse[cite: 67].</li>
+                [cite_start]<li><strong>Aufgabe 2:</strong> Bezugspreisermittlung mit Gegenüberstellung von Kauf und Leasing[cite: 68].</li>
+                [cite_start]<li><strong>Aufgabe 3:</strong> Auseinandersetzung mit Datenschutz und Datensicherheit[cite: 69].</li>
+                [cite_start]<li><strong>Aufgabe 4:</strong> Einsatz von KI, Lasten- und Pflichtenheft, UML und SQL-Abfragen[cite: 70].</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 1a: Vor- und Nachteile der Geräte</h2>
+            [cite_start]<h3>Frage: Nennen Sie pro Modell je einen Vor- und einen Nachteil. [cite: 75]</h3>
+            <table>
+              <thead><tr><th>Gerätetyp</th><th>Vorteil (Lösung)</th><th>Nachteil (Lösung)</th></tr></thead>
+              <tbody>
+                <tr><td>Notebook</td><td class="solution">mobil</td><td class="solution">teuer</td></tr>
+                <tr><td>All-in-One-PC</td><td class="solution">preisgünstig in der Anschaffung</td><td class="solution">schlechte Wartbarkeit und Erweiterbarkeit</td></tr>
+                <tr><td>Thin-Client</td><td class="solution">günstig</td><td class="solution">benötigt Serververbindung</td></tr>
+                <tr><td>Desktop-Rechner</td><td class="solution">gut erweiterbar</td><td class="solution">Platzbedarf</td></tr>
+              </tbody>
+            </table>
+            <div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Diese Frage prüft grundlegendes Hardwarewissen. [cite_start]Denke daran, dass das Unternehmen plant, auf eine "flexible Struktur" umzusteigen[cite: 72]. Die Mobilität des Notebooks passt zu diesem Plan. Die Serverabhängigkeit des Thin Clients kann sogar ein Vorteil für die zentrale Verwaltung sein, was flexibles Arbeiten ebenfalls unterstützt. Beantworte die Fragen immer im Kontext des Szenarios.</div>
+        </div>
+        
+        <div class="slide">
+            <h2>Aufgabe 1b: Nutzwertanalyse</h2>
+            <h3>Frage: Ergänzen Sie die Nutzwertanalyse in den Zellen mit den fehlenden Punkten (1-4) und berechnen Sie die gewichteten Punkte.</h3>
+            <p>Die Nutzwertanalyse dient dazu, verschiedene Optionen anhand objektiver Kriterien zu vergleichen. [cite_start]Jedes Kriterium wird gewichtet und jede Option erhält Punkte (1: am schlechtesten, 4: am besten)[cite: 81].</p>
+            <p><strong>Beispielrechnung (Desktop - Ergonomie):</strong><br>Punkte: <span class="solution">3</span>, Gewichtung: 20% (0.20)<br>Gewichtete Punkte (gP) = 3 * 0.20 = <span class="solution">0,6</span></p>
+            [cite_start]<div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Wichtig ist hier, dass in jeder Zeile die Punkte 1, 2, 3 und 4 nur einmal vergeben werden dürfen[cite: 80]. [cite_start]Beim Kriterium "Platzbedarf" erhält beispielsweise der Thin Client als kleinstes Gerät 4 Punkte, während der Desktop als größtes Gerät 1 Punkt erhält[cite: 381]. Am Ende ist die Option mit der höchsten gewichteten Gesamtpunktzahl die sinnvollste. [cite_start]In dieser Analyse ist der <span class="solution">Thin Client (3,2 Punkte)</span> die beste Wahl[cite: 381].</div>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 1c & 1d: Entscheidung und weiteres Kriterium</h2>
+            <h3>Frage 1c: Entscheiden Sie sich für eines der Modelle unter Berücksichtigung der geplanten Modernisierung und begründen Sie Ihre Entscheidung.</h3>
+            [cite_start]<p><strong>Antwort:</strong> <span class="solution">Thin Clients</span>[cite: 385].</p>
+            [cite_start]<p><strong>Begründung:</strong> <span class="solution">Der Thin Client unterstützt am besten einen wechselnden Arbeitsplatz (flexible Struktur)</span>[cite: 386].</p>
+            
+            <h3>Frage 1d: Geben Sie ein weiteres sinnvolles Kriterium für die Nutzwertanalyse an und begründen Sie Ihren Vorschlag.</h3>
+            [cite_start]<p><strong>Antwort:</strong> <span class="solution">Energieverbrauch</span>[cite: 389].</p>
+            [cite_start]<p><strong>Begründung:</strong> <span class="solution">Führt zu Kosteneinsparungen und leistet einen Beitrag zur CO2-Einsparung</span>[cite: 390].</p>
+
+            [cite_start]<div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Deine Entscheidung sollte immer mit dem Hauptziel des Projekts (hier "flexible Struktur" [cite: 72]) übereinstimmen. Wenn du ein zusätzliches Kriterium vorschlägst, reicht es nicht, es nur zu nennen. Du musst auch begründen, warum es wichtig ist (Kosten, Umwelt, Sicherheit etc.).</div>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 2aa: Bezugspreisermittlung</h2>
+            <h3>Frage: Ermitteln Sie den Bezugspreis der einzelnen Anbieter pro Notebook für 3.500 neue Notebooks.</h3>
+            <p>Diese Kalkulation zielt darauf ab, den Nettopreis eines Produkts zu ermitteln, nachdem alle Rabatte abgezogen und alle zusätzlichen Kosten (z.B. Transport) hinzugerechnet wurden.</p>
+            <p><strong>Schlüsselpunkte:</strong></p>
+            <ul>
+                <li><strong>Lieferantenrabatt (20%):</strong> Wird vom Listenpreis abgezogen.</li>
+                <li><strong>Lieferantenskonto (2%):</strong> Wird vom Zieleinkaufspreis abgezogen.</li>
+                <li><strong>Bezugskosten:</strong> Werden je nach Lieferbedingungen hinzugefügt. [cite_start]"ab Werk" bedeutet, dass der Käufer alle Transportkosten trägt[cite: 101].</li>
+            </ul>
+            [cite_start]<p><strong>Ergebnis:</strong> Der günstigste Anbieter ist <span class="solution">Tech-ware (841,66 EUR)</span>[cite: 396].</p>
+             <div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Lies die Tabelle mit den Lieferbedingungen in der Prüfung sorgfältig. [cite_start]`ab Werk` bedeutet, dass alle Transportkosten (Rollgeld + Fracht + Rollgeld) vom Käufer getragen werden[cite: 101]. Für 3500 Stück ergibt das Kosten von 2,00 EUR/Stück. [cite_start]`frachtfrei` bedeutet, dass der Käufer nur das Rollgeld am Zielort zahlt[cite: 101].</div>
+        </div>
+        
+        <div class="slide">
+            <h2>Aufgabe 2b: Leasing</h2>
+            <h3>Frage: Beschreiben Sie das Grundprinzip von Leasing, vergleichen Sie die Kosten mit dem Kauf und nennen Sie Vorteile.</h3>
+            [cite_start]<p><strong>Grundprinzip Leasing:</strong> Die zeitlich begrenzte Überlassung eines Wirtschaftsgutes (Notebook) zur Nutzung gegen Entgelt[cite: 405]. [cite_start]Das Eigentum verbleibt beim <span class="solution">Leasinggeber</span>, der Besitz geht auf den <span class="solution">Leasingnehmer</span> über[cite: 406, 407].</p>
+            <p><strong>Kostenvergleich:</strong></p>
+            <ul>
+                [cite_start]<li>Kauf: <span class="solution">300.000 EUR</span> [cite: 409]</li>
+                [cite_start]<li>Leasing: 6.000 EUR/Monat * 60 Monate (5 Jahre) = <span class="solution">360.000 EUR</span> [cite: 410]</li>
+                [cite_start]<li>Differenz: Leasing ist um <span class="solution">60.000 EUR</span> teurer[cite: 411].</li>
+            </ul>
+            [cite_start]<p><strong>Vorteile von Leasing:</strong> Liquidität wird geschont, Eigenkapital nicht gemindert, schnellere Anpassung an den technischen Fortschritt, Planungssicherheit durch feste Raten[cite: 414, 415, 417, 419].</p>
+            [cite_start]<div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Die "Kaufoption" ist das Recht des Leasingnehmers, den geleasten Gegenstand nach Vertragsablauf zu einem vereinbarten Preis zu erwerben[cite: 422]. Dies ist eine häufige Klausel in Leasingverträgen.</div>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 3a: Schichtenmodell des Betriebssystems</h2>
+            <h3>Frage: Benennen Sie eine Schicht oberhalb und eine unterhalb des Betriebssystems und beschreiben Sie deren Funktion.</h3>
+            <table>
+              <thead><tr><th>Schicht</th><th>Funktion</th></tr></thead>
+              <tbody>
+                <tr><td class="solution">Anwendungssoftware (z.B. Textverarbeitung)</td><td class="solution">Erfüllt benutzerspezifische Aufgaben, wie das Erstellen von Textdokumenten.</td></tr>
+                <tr><td>Betriebssystem</td><td>Stellt eine Schnittstelle zwischen Hardware und Software bereit.</td></tr>
+                <tr><td class="solution">PC-Hardware</td><td class="solution">Ist für die Verarbeitung und Speicherung von Daten zuständig.</td></tr>
+              </tbody>
+            </table>
+            <div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Dieses Modell zeigt die abstrahierte Struktur eines Computersystems. [cite_start]Ganz unten befindet sich die physische Hardware, darüber das Betriebssystem, das die Hardware verwaltet, und ganz oben die Anwendungssoftware, mit der der Benutzer interagiert[cite: 426]. [cite_start]In der Lösung wird auch UEFI/BIOS als untere Schicht akzeptiert[cite: 426].</div>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 3b: BSI und System-„Härtung“</h2>
+            <h3>Frage: Erklären Sie die Aufgaben des BSI, den Begriff „Härtung“ und nennen Sie Beispiele.</h3>
+            [cite_start]<p><strong>Aufgaben des BSI:</strong> Entwicklung von IT-Sicherheitsstandards, Schutz der IT-Systeme des Bundes, Anlaufstelle für Bürger und Unternehmen zum Thema IT-Sicherheit[cite: 428, 429, 430].</p>
+            [cite_start]<p><strong>Härtung:</strong> Die <span class="solution">Reduktion der Angriffsfläche</span> eines Betriebssystems, z.B. durch Deaktivierung nicht benötigter Dienste oder Ports[cite: 433].</p>
+            <p><strong>Beispiele für Härtung:</strong></p>
+            <ul>
+                [cite_start]<li>Entfernen oder Deaktivieren nicht benötigter Softwarekomponenten[cite: 435].</li>
+                [cite_start]<li>Löschen aller nicht benötigten Benutzerkonten[cite: 437].</li>
+                [cite_start]<li>Schließen aller nicht benötigten Ports[cite: 438].</li>
+                [cite_start]<li>Nutzung von Verschlüsselung für die Datenübertragung[cite: 436].</li>
+            </ul>
+             [cite_start]<div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> "Bordmittel" [cite: 132] sind im Betriebssystem integrierte Werkzeuge. [cite_start]Beispiele für "Bordmittel" zur Erhöhung der Sicherheit sind die Firewall und Antivirensoftware[cite: 441, 442]. [cite_start]Gruppenrichtlinien (Group Policies) ermöglichen es Administratoren, Einstellungen zentral für mehrere Rechner vorzugeben und zu verhindern, dass Benutzer diese ändern[cite: 448, 449].</div>
+        </div>
+        
+        <div class="slide">
+            <h2>Aufgabe 3c: Protokollierung und Datenschutz</h2>
+            <h3>Frage: Beschreiben Sie, wie Protokollierung (Logging) zur IT-Sicherheit beiträgt und welche Datenschutzanforderungen dabei zu beachten sind.</h3>
+            [cite_start]<p><strong>Beitrag zur Sicherheit:</strong> Ermöglicht die <span class="solution">Identifikation von Fehlern und unerlaubten Aktivitäten</span> und deren <span class="solution">Zuordnung</span> zu entsprechenden Zeiten und Benutzern[cite: 452].</p>
+            <p><strong>Datenschutzanforderungen (DSGVO):</strong></p>
+            <ul>
+                [cite_start]<li><strong>Datenminimierung:</strong> Nur die absolut notwendigen Daten sollten protokolliert werden[cite: 153, 154].</li>
+                [cite_start]<li><strong>Anonymisierung:</strong> Unnötige persönliche Informationen sollten nicht gespeichert werden[cite: 155, 156].</li>
+                [cite_start]<li><strong>Zugriffskontrolle:</strong> Nur befugte Personen dürfen Zugriff auf die Protokolle haben[cite: 157, 158].</li>
+            </ul>
+            <div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Logging ist entscheidend, um nach einem Sicherheitsvorfall die Fragen "Wer, wann, was?" zu beantworten. Bei der Protokollierung von Mitarbeiteraktivitäten müssen jedoch die Grundsätze der DSGVO strikt eingehalten werden. [cite_start]Datensparsamkeit ist hier das Schlüsselwort[cite: 454].</div>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 4a & 4b: Chatbot und Lastenheft/Pflichtenheft</h2>
+            <h3>Frage 4a: Nennen Sie wirtschaftliche und soziale Vor- und Nachteile eines KI-gestützten Chatbots.</h3>
+            [cite_start]<p><strong>Wirtschaftlicher Vorteil:</strong> 24/7-Erreichbarkeit, geringere Betriebskosten [cite: 458][cite_start].<br><strong>Wirtschaftlicher Nachteil:</strong> Hohe Anschaffungskosten, komplexe Systemintegration[cite: 458].</p>
+            [cite_start]<p><strong>Sozialer Vorteil:</strong> Keine Warteschleife, immer "gut gelaunt" [cite: 458][cite_start].<br><strong>Sozialer Nachteil:</strong> Misstrauen der Benutzer, ungeeignet bei komplexen Anfragen[cite: 458].</p>
+            <h3>Frage 4b: Beschreiben Sie zwei Unterschiede zwischen einem Lastenheft und einem Pflichtenheft.</h3>
+            [cite_start]<p><strong>Lastenheft:</strong> Beschreibt, <span class="solution">WAS</span> der Auftraggeber will und welche Erwartungen er hat[cite: 460]. Es ist aus der Sicht des Kunden formuliert.</p>
+            [cite_start]<p><strong>Pflichtenheft:</strong> Beschreibt, <span class="solution">WIE und WOMIT</span> der Auftragnehmer diese Anforderungen umsetzen wird[cite: 461]. [cite_start]Es ist technisch formuliert und enthält die Verpflichtungen des Auftragnehmers[cite: 462].</p>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 4c: UML-Klassendiagramm</h2>
+            <h3>Frage: Erstellen Sie eine sinnvolle Klassenhierarchie mit einer gemeinsamen Oberklasse „Versicherungsobjekt“ für die Klassen KFZ und Immobilie.</h3>
+            <p>Diese Aufgabe prüft die Fähigkeit, das Prinzip der Vererbung in der objektorientierten Programmierung (OOP) anzuwenden, um Codeduplizierung zu vermeiden.</p>
+            <p><strong>Logik der Lösung:</strong></p>
+            <ul>
+                [cite_start]<li>Gemeinsame Attribute (<span class="solution">Neupreis, Baujahr, Schadenshöhe</span>) und Methoden (<span class="solution">auszahlen()</span>) der Klassen KFZ und Immobilie werden in die Oberklasse <span class="solution">`Versicherungsobjekt`</span> verschoben[cite: 476, 477, 478, 479, 480].</li>
+                <li>Die Klassen `KFZ` und `Immobilie` erben von `Versicherungsobjekt`.</li>
+                [cite_start]<li>Jede Unterklasse enthält nur ihre spezifischen Eigenschaften (z.B. für KFZ: <span class="solution">Hersteller, Laufleistung</span> [cite: 481, 484]) und Methoden.</li>
+                [cite_start]<li>Da die Methode `restwertBerechnen()` in beiden Klassen unterschiedlich funktioniert[cite: 203], implementiert jede Unterklasse sie für sich. Dies ist ein Beispiel für Polymorphie.</li>
+            </ul>
+             [cite_start]<div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Das visuelle Diagramm im Lösungsbogen veranschaulicht diese Struktur[cite: 473]. Entscheidend ist, die gemeinsamen Elemente in einer Oberklasse zu bündeln und so eine "ist-ein"-Beziehung (z.B. "Ein KFZ ist ein Versicherungsobjekt") korrekt abzubilden.</div>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 4da: SQL-Abfrage - Durchschnittsberechnung</h2>
+            <h3>Frage: Erstellen Sie eine SQL-Abfrage, um die durchschnittliche Versicherungssumme über alle KFZ-Versicherungsverträge zu ermitteln.</h3>
+            <pre><code class="solution">SELECT AVG(Versicherung_Summe) 
+FROM KFZ_Versicherung;</code></pre>
+            <div class="teacher-note">
+                <strong>Anmerkung des Lehrers:</strong> Dies ist eine grundlegende Aggregationsabfrage.
+                <ul>
+                    [cite_start]<li><code>SELECT AVG(...)</code>: Die Funktion `AVG()` wird verwendet, um den arithmetischen Mittelwert der angegebenen Spalte (<span class="solution">Versicherung_Summe</span>) zu berechnen[cite: 355].</li>
+                    <li><code>FROM KFZ_Versicherung</code>: Gibt an, aus welcher Tabelle die Daten abgerufen werden sollen.</li>
+                </ul>
+                [cite_start]Vergiss nicht, dass auf den letzten Seiten des Prüfungsbogens ein Spickzettel (`SQL-Syntax`) für SQL-Funktionen vorhanden ist[cite: 352]!
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 4db: SQL-Abfrage - Filtern</h2>
+            <h3>Frage: Ermitteln Sie die Versicherungsnummern (VID) der Verträge, die im Mai 2022 abgeschlossen wurden, eine Versicherungssumme von über 100.000 EUR haben und bei denen das Fahrzeug nicht in einer Garage abgestellt wird.</h3>
+            <pre><code class="solution">SELECT VID FROM KFZ_Versicherung
+WHERE Year(Vertragsbeginn) = 2022 
+  AND Month(Vertragsbeginn) = 5
+  AND Versicherung_Summe > 100000 
+  AND Garage = FALSE;</code></pre>
+            <div class="teacher-note">
+                <strong>Anmerkung des Lehrers:</strong> Diese Abfrage testet die Fähigkeit, Daten mit einer `WHERE`-Klausel zu filtern.
+                <ul>
+                    [cite_start]<li><code>Year(Vertragsbeginn) = 2022 AND Month(Vertragsbeginn) = 5</code>: Filtert den Mai 2022, indem Jahr und Monat aus dem Datumsfeld `Vertragsbeginn` [cite: 245] [cite_start]extrahiert werden[cite: 495].</li>
+                    [cite_start]<li><code>Versicherung_Summe > 100000</code>: Filtert die Versicherungssumme[cite: 496].</li>
+                    [cite_start]<li><code>Garage = FALSE</code>: Da das Feld `Garage` [cite: 210] [cite_start]ein BOOLEAN ist, prüfen wir mit `FALSE` auf Fahrzeuge, die nicht in einer Garage stehen[cite: 496].</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="slide">
+            <h1>Prüfungsanalyse abgeschlossen!</h1>
+            <h2>Wichtige Erkenntnisse</h2>
+            <ul>
+                <li><strong>Szenario verstehen:</strong> Betrachte jede Frage im Gesamtkontext des Projekts (flexibles Arbeiten, Sicherheit).</li>
+                <li><strong>Grundlagen beherrschen:</strong> Sei sicher in grundlegenden Konzepten wie Hardware, Leasing, Härtung, Lasten-/Pflichtenheft, OOP und SQL.</li>
+                <li><strong>Sorgfältig rechnen:</strong> Verfolge die Schritte bei Berechnungen wie der Nutzwertanalyse und dem Bezugspreis genau.</li>
+                <li><strong>Hilfsmittel nutzen:</strong> Verwende die bereitgestellten Belege (Lieferbedingungen, SQL-Syntax) effektiv.</li>
+            </ul>
+            <div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Sait, du hast diese Prüfung erfolgreich analysiert. Wie du siehst, testen die Fragen weniger auswendig gelerntes Wissen, sondern vielmehr die Fähigkeit, ein gegebenes Szenario zu verstehen und theoretisches Grundwissen darauf anzuwenden. Wenn du so weiterarbeitest, wirst du bei der nächsten Prüfung sehr erfolgreich sein. Herzlichen Glückwunsch!</div>
+        </div>
+
+    </div>
+    <div class="controls">
+        <button id="prev-btn" class="btn">Zurück</button>
+        <button id="next-btn" class="btn">Weiter</button>
+    </div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const homeLink = document.querySelector('.home-link');
+        const currentSlideSpan = document.getElementById('current-slide');
+        const totalSlides = slides.length;
+        document.getElementById('total-slides').textContent = totalSlides;
+        
+        let currentSlide = 0;
+
+        function showSlide(slideIndex) {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === slideIndex) slide.classList.add('active');
+            });
+            currentSlideSpan.textContent = slideIndex + 1;
+            homeLink.style.display = slideIndex === 0 ? 'none' : 'block';
+            prevBtn.style.display = slideIndex === 0 ? 'none' : 'inline-block';
+            nextBtn.style.display = slideIndex === totalSlides - 1 ? 'none' : 'inline-block';
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) showSlide(++currentSlide);
+        });
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) showSlide(--currentSlide);
+        });
+        homeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentSlide = 0;
+            showSlide(currentSlide);
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) nextBtn.click();
+            else if (e.key === 'ArrowLeft' && currentSlide > 0) prevBtn.click();
+        });
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

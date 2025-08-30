@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP: Von den Grundlagen zum Profi - Schulungspräsentation</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #747fe2 0%, #4a59af 100%); color: white; overflow: hidden; }
+        .presentation-container { height: 100vh; display: flex; flex-direction: column; }
+        .slide { position: relative; display: none; padding: 40px 60px; height: 100vh; justify-content: center; align-items: center; text-align: center; overflow-y: auto; }
+        .slide.active { display: flex; flex-direction: column; animation: fadeInUp 0.7s ease-out; }
+        .slide h1 { font-size: 3.2em; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        .slide h2 { font-size: 2.3em; margin-bottom: 25px; color: #FFD700; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
+        .slide h3 { font-size: 1.6em; margin-bottom: 15px; color: #87CEEB; }
+        .slide p, .slide li { font-size: 1.2em; line-height: 1.6; margin-bottom: 15px; max-width: 900px; }
+        .concept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin: 20px 0; width: 100%; max-width: 1200px; }
+        .concept-card { background: rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .concept-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
+        .controls { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 100; }
+        .btn { padding: 12px 25px; background: rgba(255, 255, 255, 0.2); border: 2px solid rgba(255, 255, 255, 0.3); color: white; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-size: 1.1em; }
+        .btn:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-2px); }
+        .slide-counter { position: fixed; top: 30px; right: 30px; background: rgba(0, 0, 0, 0.5); padding: 10px 20px; border-radius: 20px; font-size: 1.1em; z-index: 100; }
+        .home-link { position: fixed; top: 30px; left: 30px; font-size: 1.2em; color: white; text-decoration: none; background-color: rgba(0, 0, 0, 0.3); padding: 8px 15px; border-radius: 20px; transition: background-color 0.3s ease; z-index: 100; }
+        .home-link:hover { background-color: rgba(0, 0, 0, 0.5); }
+        .analogy-box { background: rgba(255, 215, 0, 0.2); border: 2px solid #FFD700; border-radius: 15px; padding: 25px; margin: 20px 0; font-style: italic; }
+        .analogy-icon { font-size: 2em; margin-bottom: 10px; }
+        pre { background: #2d2d2d; color: #f8f8f2; padding: 20px; border-radius: 10px; text-align: left; font-family: 'Courier New', Courier, monospace; font-size: 0.9em; white-space: pre-wrap; word-wrap: break-word; margin: 20px auto; max-width: 800px; }
+        code { background: rgba(0, 0, 0, 0.3); padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; }
+        table { width: 100%; max-width: 800px; margin: 20px auto; border-collapse: collapse; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+        th { background: rgba(255, 255, 255, 0.2); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">24</span></div>
+        <a href="#" class="home-link" style="display: none;">🏠 Startseite</a>
+
+        <div class="slide active">
+            <h1>🐘 PHP: Von den Grundlagen zum Profi</h1>
+            <h2>Serverseitige Skriptsprache</h2>
+            <p style="font-size: 1.5em; margin-top: 40px;">Lass uns Schritt für Schritt die Technologie erlernen, die das Rückgrat des Webs bildet.</p>
+        </div>
+
+        <div class="slide">
+            <h2>🤔 Warum PHP?</h2>
+            <div class="concept-grid">
+                <div class="concept-card"><h3>🌐 Weite Verbreitung</h3><p>~78% der Websites im Internet nutzen PHP. Giganten wie WordPress, Wikipedia und Facebook haben mit PHP begonnen.</p></div>
+                <div class="concept-card"><h3>🚀 Einfacher Einstieg</h3><p>Die Syntax ähnelt C und ist leicht zu erlernen. Es hat eine riesige Community und eine umfangreiche Dokumentation.</p></div>
+                <div class="concept-card"><h3>🛠️ Großes Ökosystem</h3><p>Mit modernen Frameworks wie Laravel, Symfony und Paketmanagern wie Composer ist die Entwicklung professioneller Anwendungen sehr einfach.</p></div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>⚙️ Wie funktioniert es?</h2>
+            <p>PHP ist eine serverseitige Sprache. Der Code wird auf dem Server ausgeführt und als reines HTML an den Browser gesendet.</p>
+            <div class="analogy-box"><div class="analogy-icon">👨‍🍳</div><p><strong>Analogie:</strong> Restaurant. Sie (Benutzer) bestellen. Der Kellner (Browser) leitet die Bestellung an die Küche (Server) weiter. Der Koch (PHP) bereitet das Essen (dynamischer Inhalt) zu und der Kellner serviert Ihnen nur das Ergebnis (HTML-Seite).</p></div>
+            <p style="font-size: 2em; letter-spacing: 10px;">💻 (Anfrage) → 🌐 → 🖥️[Apache + 🐘PHP] → 🌐 → 💻 (Antwort HTML)</p>
+        </div>
+        
+        <div class="slide">
+            <h2>📝 Grundlegende Syntax</h2>
+            <p>PHP-Code wird zwischen <code>&lt;?php ... ?&gt;</code>-Tags geschrieben. Jeder Befehl endet mit einem <code>;</code>.</p>
+            <pre><code>&lt;?php
+  // Dies ist eine Kommentarzeile.
+  echo "Hallo Sait!"; // Wird verwendet, um Text auf dem Bildschirm auszugeben.
+?&gt;</code></pre>
+            <table><tr><th>Struktur</th><th>Erklärung</th></tr><tr><td><code>echo</code></td><td>Gibt eine oder mehrere Zeichenketten auf dem Bildschirm aus.</td></tr><tr><td><code>// ...</code></td><td>Wird für einzeilige Kommentare verwendet.</td></tr><tr><td><code>/* ... */</code></td><td>Wird für mehrzeilige Kommentarblöcke verwendet.</td></tr></table>
+        </div>
+
+        <div class="slide">
+            <h2>📦 Variablen und Datentypen</h2>
+            <p>Variablen sind Container zur Speicherung von Daten und beginnen mit einem <code>$</code>-Zeichen.</p>
+            <pre><code>$name = "Sait";                  // String (Zeichenkette)
+$alter = 30;                     // Integer (Ganzzahl)
+$istStudent = true;              // Boolean (true/false)
+$kurse = ["Java", "PHP"];        // Array (Feld)
+$leererWert = null;              // NULL (Leer)</code></pre>
+            <p>PHP ist eine "loosely typed" Sprache. Man muss den Typ einer Variable nicht im Voraus deklarieren.</p>
+        </div>
+
+        <div class="slide">
+            <h2>🔍 Variablenprüfung: isset(), empty()</h2>
+            <p>Dies sind entscheidende Funktionen zur Überprüfung des Zustands von Variablen, insbesondere bei der Verarbeitung von Formulardaten.</p>
+            <div class="concept-grid">
+                <div class="concept-card"><h3><code>isset($var)</code></h3><p>Prüft, ob eine Variable deklariert ist und ihr Wert nicht <code>null</code> ist. Gibt <code>true</code> zurück, wenn sie deklariert ist.</p><pre><code>$a = "test"; isset($a); // true
+$b = null; isset($b); // false
+isset($c); // false (nicht deklariert)</code></pre></div>
+                <div class="concept-card"><h3><code>empty($var)</code></h3><p>Prüft, ob eine Variable als "leer" gilt. Werte wie <code>""</code>, <code>0</code>, <code>"0"</code>, <code>null</code>, <code>false</code>, <code>[]</code> gelten als leer.</p><pre><code>$x = ""; empty($x); // true
+$y = 0; empty($y); // true
+$z = "a"; empty($z); // false</code></pre></div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🚦 Kontrollstrukturen: if/else</h2>
+            <p>Steuert den Programmfluss basierend auf bestimmten Bedingungen.</p>
+            <pre><code>$note = 75;
+if ($note >= 85) {
+  echo "Sehr Gut";
+} elseif ($note >= 70) {
+  echo "Gut";
+} else {
+  echo "Bestanden";
+}</code></pre>
+        </div>
+        
+        <div class="slide">
+            <h2>🔁 Schleifen: for & foreach</h2>
+            <p>Wird verwendet, um einen Codeblock zu wiederholen.</p>
+            <div class="concept-grid">
+              <div class="concept-card"><h3><code>for</code>-Schleife</h3><pre><code>for ($i = 1; $i <= 3; $i++) {
+  echo "Zahl: $i &lt;br&gt;";
+}</code></pre></div>
+              <div class="concept-card"><h3><code>foreach</code>-Schleife</h3><pre><code>$kurse = ["Java", "PHP"];
+foreach ($kurse as $kurs) {
+  echo $kurs . "&lt;br&gt;";
+}</code></pre></div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>📊 Arrays</h2>
+            <p>Ermöglicht das Speichern mehrerer Werte in einer einzigen Variablen.</p>
+            <div class="concept-grid">
+                <div class="concept-card"><h3>Indizierte Arrays</h3><pre><code>$autos = ["BMW", "Mercedes", "Audi"];
+echo $autos[0]; // Ausgabe: BMW</code></pre></div>
+                <div class="concept-card"><h3>Assoziative Arrays</h3><pre><code>$person = [
+  "name" => "Sait",
+  "alter" => 30
+];
+echo $person["name"]; // Ausgabe: Sait</code></pre></div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🔧 Häufige Array-Funktionen</h2>
+            <pre><code>$array = ["Apfel", "Birne"];
+
+// Gibt die Anzahl der Elemente zurück
+count($array); // 2
+
+// Fügt ein Element zum Array hinzu
+array_push($array, "Erdbeere");
+
+// Entfernt das letzte Element des Arrays
+array_pop($array);
+
+// Sortiert das Array
+sort($array);
+
+// Wandelt ein Array in eine Zeichenkette um
+$string = implode(", ", $array); // "Apfel, Birne"
+
+// Wandelt eine Zeichenkette in ein Array um
+$neuesArray = explode(", ", $string);</code></pre>
+        </div>
+
+        <div class="slide">
+            <h2>🧩 Funktionen</h2>
+            <p>Wiederverwendbare Codeblöcke. "Einmal schreiben, überall verwenden."</p>
+            <pre><code>// Funktionsdefinition
+function begruesse($name = "Gast") {
+  return "Hallo, " . $name . "!";
+}
+
+// Funktionsaufruf
+echo begruesse("Sait"); // Hallo, Sait!
+echo begruesse();      // Hallo, Gast!</code></pre>
+        </div>
+
+        <div class="slide">
+            <h2>📨 Formulardaten verarbeiten: GET & POST</h2>
+            <p>PHP fängt Daten aus HTML-Formularen mit den superglobalen Arrays <code>$_GET</code> und <code>$_POST</code> ab.</p>
+            <pre><code>// form.html
+&lt;form action="verarbeitung.php" method="post"&gt;
+  &lt;input type="text" name="benutzername"&gt;
+  &lt;button type="submit"&gt;Senden&lt;/button&gt;
+&lt;/form&gt;
+
+// verarbeitung.php
+if (!empty($_POST["benutzername"])) {
+    echo "Willkommen, " . htmlspecialchars($_POST["benutzername"]);
+}</code></pre>
+            <p><strong>Wichtig:</strong> Verwende aus Sicherheitsgründen immer <code>htmlspecialchars()</code>, wenn du Benutzereingaben ausgibst!</p>
+        </div>
+
+        <div class="slide">
+            <h2>🍪 Cookie- und Session-Management</h2>
+            <p>Wird verwendet, um Benutzerinformationen und den Status (z. B. ob eingeloggt) zu verfolgen.</p>
+            <div class="concept-grid">
+                <div class="concept-card"><h3>Cookie</h3><p>Wird im Browser des Benutzers gespeichert. Ideal für Funktionen wie "Angemeldet bleiben".</p><pre><code>// Erstellt ein Cookie, das 1 Stunde gültig ist
+setcookie("benutzer", "Sait", time() + 3600);
+// Cookie lesen
+echo $_COOKIE["benutzer"];</code></pre></div>
+                <div class="concept-card"><h3>Session</h3><p>Wird auf dem Server gespeichert. Wird für sichere Daten (wie Benutzer-ID) verwendet. Sicherer.</p><pre><code>session_start(); // Muss immer am Anfang stehen!
+// Daten in die Session schreiben
+$_SESSION["user_id"] = 123;
+// Daten aus der Session lesen
+echo $_SESSION["user_id"];</code></pre></div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>📁 Dateioperationen: Lesen und Schreiben</h2>
+            <p>Mit PHP können Sie Dateien auf dem Server lesen und Daten in Dateien schreiben.</p>
+            <pre><code>$datei = 'notizen.txt';
+$inhalt = "Diese Datei wurde von PHP erstellt.\n";
+
+// In Datei schreiben (überschreibt vorhandene)
+file_put_contents($datei, $inhalt);
+
+// An Datei anhängen
+file_put_contents($datei, "Eine neue Zeile.\n", FILE_APPEND);
+
+// Datei lesen
+$gelesenerInhalt = file_get_contents($datei);
+echo nl2br($gelesenerInhalt); // Wandelt Zeilenumbrüche in <br> um</code></pre>
+        </div>
+
+        <div class="slide">
+            <h2>📅 Datums- und Zeitfunktionen</h2>
+            <p>Wird verwendet, um Datum und Uhrzeit zu formatieren und zu bearbeiten.</p>
+            <pre><code>// Zeigt das aktuelle Datum und die Uhrzeit
+echo date('d.m.Y H:i:s'); // Bsp: 29.08.2025 14:22:38
+
+// Zeitstempel erstellen
+$morgen = mktime(0, 0, 0, date("m"), date("d")+1, date("Y"));
+echo date('d.m.Y', $morgen);
+
+// Modernerer Ansatz: DateTime-Objekt
+$date = new DateTime();
+$date->modify('+1 day');
+echo $date->format('d.m.Y');</code></pre>
+        </div>
+
+        <div class="slide">
+            <h2>🧮 Mathematische Funktionen</h2>
+            <p>Integrierte Funktionen für häufige mathematische Operationen.</p>
+            <pre><code>// Erzeugt eine Zufallszahl
+echo rand(1, 100);
+
+// Rundet eine Zahl
+echo round(4.7); // 5
+echo round(4.3); // 4
+
+// Findet den größten und kleinsten Wert
+echo max(5, 9, 2, 22); // 22
+echo min(5, 9, 2, 22); // 2
+
+// Absoluter Wert
+echo abs(-15); // 15</code></pre>
+        </div>
+
+        <div class="slide">
+            <h2>🚗 OOP-Einführung</h2>
+            <p>OOP ist ein Programmierparadigma, das Code um Objekte und Klassen herum organisiert.</p>
+            <div class="analogy-box"><div class="analogy-icon">🏠</div><p><strong>Analogie:</strong> Eine <strong>Klasse</strong> ist der Bauplan für ein Haus. Ein <strong>Objekt</strong> ist ein echtes Haus, das nach diesem Plan gebaut wurde.</p></div>
+            <pre><code>class Auto {
+  public $farbe; // Eigenschaft (property)
+  
+  public function __construct($farbe) {
+    $this->farbe = $farbe;
+  }
+
+  public function starten() { // Methode (method)
+    return "Das Auto ist gestartet!";
+  }
+}
+
+$bmw = new Auto("Schwarz"); // Objekt erstellen
+echo $bmw->farbe; // "Schwarz"</code></pre>
+        </div>
+
+        <div class="slide">
+            <h2>🏛️ OOP-Grundkonzepte</h2>
+            <div class="concept-grid">
+                <div class="concept-card"><h3>Kapselung (Encapsulation)</h3><p>Bündelt Daten und Methoden in einer Klasse und beschränkt den Zugriff von außen (<code>public</code>, <code>private</code>, <code>protected</code>).</p></div>
+                <div class="concept-card"><h3>Vererbung (Inheritance)</h3><p>Eine Klasse erbt Eigenschaften und Methoden von einer anderen Klasse (<code>extends</code>).</p></div>
+                <div class="concept-card"><h3>Polymorphie (Polymorphism)</h3><p>Verschiedene Klassen implementieren Methoden mit demselben Namen auf unterschiedliche Weise.</p></div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>➕ include und require</h2>
+            <p>Ermöglicht das Einbinden einer PHP-Datei in eine andere, um Ihren Code modularer zu gestalten.</p>
+            <div class="concept-grid">
+                <div class="concept-card"><h3><code>include</code></h3><p>Gibt eine Warnung (warning) aus, wenn die Datei nicht gefunden wird, und setzt die Ausführung fort.</p><pre><code>// header.php
+&lt;h1&gt;Willkommen auf meiner Seite&lt;/h1&gt;
+
+// index.php
+include 'header.php';
+echo "Inhalt der Hauptseite.";</code></pre></div>
+                <div class="concept-card"><h3><code>require</code></h3><p>Verursacht einen fatalen Fehler (fatal error), wenn die Datei nicht gefunden wird, und stoppt die Ausführung. Wird für kritische Dateien (z. B. DB-Verbindung) verwendet.</p><pre><code>// db_config.php - Datenbankeinstellungen
+require 'db_config.php';
+// ... Datenbankoperationen</code></pre></div>
+            </div>
+            <p><code>include_once</code> und <code>require_once</code> stellen sicher, dass eine Datei nur einmal eingebunden wird.</p>
+        </div>
+
+        <div class="slide">
+            <h2>🗄️ Datenbankverbindung: PDO</h2>
+            <p>In modernem PHP wird <strong>PDO (PHP Data Objects)</strong> für Datenbankoperationen verwendet. Es ist sicher und flexibel.</p>
+            <pre><code>try {
+  $conn = new PDO("mysql:host=localhost;dbname=test", "root", "");
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  // Sichere Methode gegen SQL-Injection
+  $stmt = $conn->prepare("SELECT * FROM users WHERE id = :id");
+  $stmt->execute(['id' => 123]);
+  $user = $stmt->fetch();
+
+} catch(PDOException $e) {
+  echo "Verbindungsfehler: " . $e->getMessage();
+}</code></pre>
+        </div>
+        
+        <div class="slide">
+            <h2>📦 Composer - Der Dependency Manager</h2>
+            <p>Ähnlich wie Maven in Java oder NPM in Node.js. Es verwaltet die Bibliotheken (Pakete), die Ihr Projekt benötigt.</p>
+            <div class="analogy-box"><div class="analogy-icon">🛒</div><p><strong>Analogie:</strong> Sie erstellen eine Einkaufsliste (<code>composer.json</code>) mit Zutaten (Bibliotheken) für Ihr Rezept (Projekt). Der Befehl <code>composer install</code> holt alle Zutaten für Sie und bringt sie in Ihre Küche (<code>vendor</code>-Ordner).</p></div>
+        </div>
+
+        <div class="slide">
+            <h2>✨ Modernes PHP: Namespaces & Autoloading</h2>
+            <p>Entscheidend für die Code-Organisation in großen Projekten.</p>
+            <div class="concept-grid">
+              <div class="concept-card"><h3>Namespaces</h3><p>Verhindert Namenskonflikte zwischen Klassen. Man kann es sich wie eine virtuelle Ordnerstruktur vorstellen.</p><pre><code>namespace App\Controllers;
+class UserController { }</code></pre></div>
+              <div class="concept-card"><h3>Autoloading</h3><p>Dank Composer werden Klassen bei Bedarf automatisch geladen. Die Flut von <code>require</code>-Anweisungen entfällt.</p><pre><code>use App\Controllers\UserController;
+$controller = new UserController();</code></pre></div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🏗️ Warum ein Framework verwenden?</h2>
+            <p>Frameworks bieten eine vorgefertigte Struktur, Bibliotheken und Best Practices. Sie verhindern, dass wir das Rad neu erfinden.</p>
+            <div class="concept-grid">
+              <div class="concept-card"><h3>Laravel</h3><p>Bekannt für schnelle Entwicklung, elegante Syntax und Anfängerfreundlichkeit.</p></div>
+              <div class="concept-card"><h3>Symfony</h3><p>Ideal für große und unternehmenskritische Projekte. Sehr flexibel durch seine modulare Struktur.</p></div>
+            </div>
+            <p>Als Fachinformatiker für Anwendungsentwicklung ist es für deine Karriere sehr wichtig, mindestens ein PHP-Framework gut zu beherrschen.</p>
+        </div>
+
+        <div class="slide">
+            <h2>🎓 Zusammenfassung und Nächste Schritte</h2>
+            <h3>Was wir gelernt haben:</h3>
+            <ul style="text-align: center; list-style-position: inside; font-size: 1em;">
+                <li>Grundlegende Syntax, Variablenprüfung, Schleifen</li>
+                <li>Array-, Datums-, Datei- und Mathematikfunktionen</li>
+                <li>Formular-, Cookie- und Session-Verwaltung</li>
+                <li>Konzepte von OOP, PDO, Composer und Frameworks</li>
+            </ul>
+            <div class="analogy-box" style="margin-top: 30px;"><div class="analogy-icon">🚀</div><p><strong>Jetzt bist du dran!</strong> Der beste Weg zu lernen ist die Praxis. Setze dir ein kleines Projektziel. Zum Beispiel: ein einfacher Blog, eine To-Do-Liste oder ein Kontaktformular. Das ist der beste Weg, um das Gelernte zu festigen. Viel Erfolg!</p></div>
+        </div>
+    </div>
+    <div class="controls">
+        <button id="prev-btn" class="btn">Zurück</button>
+        <button id="next-btn" class="btn">Weiter</button>
+    </div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const homeLink = document.querySelector('.home-link');
+        const currentSlideSpan = document.getElementById('current-slide');
+        const totalSlidesSpan = document.getElementById('total-slides');
+        
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        totalSlidesSpan.textContent = totalSlides;
+
+        function showSlide(slideIndex) {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === slideIndex) {
+                    slide.classList.add('active');
+                }
+            });
+            currentSlideSpan.textContent = slideIndex + 1;
+            homeLink.style.display = slideIndex === 0 ? 'none' : 'block';
+            prevBtn.style.display = slideIndex === 0 ? 'none' : 'inline-block';
+            nextBtn.style.display = slideIndex === totalSlides - 1 ? 'none' : 'inline-block';
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+        
+        homeLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            currentSlide = 0;
+            showSlide(currentSlide);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) {
+                nextBtn.click();
+            } else if (e.key === 'ArrowLeft' && currentSlide > 0) {
+                prevBtn.click();
+            }
+        });
+
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

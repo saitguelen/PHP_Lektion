@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prüfungsanalyse: AP Sommer 2023 - Teil 1</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; overflow: hidden; }
+        .presentation-container { height: 100vh; display: flex; flex-direction: column; }
+        .slide { position: relative; display: none; padding: 40px 60px; height: 100vh; justify-content: center; align-items: center; text-align: center; overflow-y: auto; }
+        .slide.active { display: flex; flex-direction: column; animation: fadeInUp 0.7s ease-out; }
+        .slide h1 { font-size: 3em; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        .slide h2 { font-size: 2.2em; margin-bottom: 25px; color: #f1c40f; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
+        .slide h3 { font-size: 1.5em; margin-bottom: 15px; color: #1abc9c; text-align: left; width: 100%; max-width: 900px; }
+        .slide p, .slide li { font-size: 1.1em; line-height: 1.6; margin-bottom: 15px; max-width: 900px; text-align: left; }
+        .teacher-note { background: rgba(241, 196, 15, 0.15); border-left: 5px solid #f1c40f; padding: 15px; margin: 20px 0; border-radius: 8px; text-align: left; }
+        .teacher-note strong { color: #f1c40f; }
+        .controls { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 100; }
+        .btn { padding: 12px 25px; background: rgba(255, 255, 255, 0.2); border: 2px solid rgba(255, 255, 255, 0.3); color: white; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-size: 1.1em; }
+        .btn:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-2px); }
+        .slide-counter { position: fixed; top: 30px; right: 30px; background: rgba(0, 0, 0, 0.5); padding: 10px 20px; border-radius: 20px; font-size: 1.1em; z-index: 100; }
+        .home-link { position: fixed; top: 30px; left: 30px; font-size: 1.2em; color: white; text-decoration: none; background-color: rgba(0, 0, 0, 0.3); padding: 8px 15px; border-radius: 20px; transition: background-color 0.3s ease; z-index: 100; }
+        .home-link:hover { background-color: rgba(0, 0, 0, 0.5); }
+        pre { background: #2d2d2d; color: #f8f8f2; padding: 20px; border-radius: 10px; text-align: left; font-family: 'Courier New', Courier, monospace; font-size: 0.9em; white-space: pre-wrap; word-wrap: break-word; margin: 20px auto; max-width: 900px; }
+        table { width: 100%; max-width: 900px; margin: 20px auto; border-collapse: collapse; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden; text-align: left;}
+        th, td { padding: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+        th { background: rgba(255, 255, 255, 0.2); }
+        .solution { color: #2ecc71; font-weight: bold; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">14</span></div>
+        <a href="#" class="home-link" style="display: none;">🏠 Startseite</a>
+
+        <div class="slide active">
+            <h1>Prüfungsanalyse</h1>
+            <h2>AP Sommer 2023 - Teil 1: Einrichtung eines IT-gestützten Arbeitsplatzes</h2>
+            <p style="text-align: center; margin-top: 20px;">In dieser Präsentation werden wir die Prüfungsfragen, ihre Lösungen und die dahinterstehende Logik Schritt für Schritt untersuchen.</p>
+        </div>
+
+        <div class="slide">
+            <h2>Überblick: Prüfungsszenario</h2>
+            [cite_start]<p>Sie arbeiten als Auszubildende/r im 2. Ausbildungsjahr im kleinen aufstrebenden IT-Systemhaus Löser (15 Mitarbeiter). [cite: 386] [cite_start]Das Unternehmen ist in den Bereichen Hard- und Softwarebeschaffung sowie Systemintegration tätig. [cite: 386] [cite_start]Aufgrund des Wachstums geht es manchmal etwas chaotisch zu. [cite: 387] Ihre Aufgaben umfassen:</p>
+            <ul>
+                <li><strong>IT 1:</strong> Unternehmen und Beschaffung.</li>
+                <li><strong>IT 2:</strong> Schutzbedarfsanalyse.</li>
+                <li><strong>IT 3:</strong> Netzwerkkonfiguration.</li>
+                <li><strong>IT 4 & 5:</strong> Datenmodellierung und Softwareentwicklung.</li>
+            </ul>
+        </div>
+        
+        <div class="slide">
+            <h2>Aufgabe 1.1.1: Organisationssystem</h2>
+            [cite_start]<h3>Frage: Benennen und beschreiben Sie das Organisationssystem, welches obigem Organigramm zugrunde liegt. [cite: 411]</h3>
+            [cite_start]<p><strong>Antwort:</strong> Es liegt eine <span class="solution">Stab-Linien-Organisation</span> vor. [cite: 1299]</p>
+            [cite_start]<p><strong>Beschreibung:</strong> Dieses System ergänzt eine hierarchische Linienorganisation um "Stabsstellen", die keine Entscheidungsbefugnis haben, sondern die Leitung in Fachgebieten beraten. [cite: 1299] [cite_start]Die "Rechtsberatung" im Organigramm ist eine solche Stabsstelle, die der Geschäftsführung unterstellt ist. [cite: 397, 959]</p>
+            [cite_start]<div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Der entscheidende Punkt ist, dass die "Rechtsberatung" den anderen Abteilungen keine Weisungen erteilen kann. [cite: 960] Ihre Aufgabe ist rein beratend. [cite_start]Dieses Merkmal unterscheidet die Struktur von einem reinen Einliniensystem und macht sie zu einer Stab-Linien-Organisation. [cite: 961]</div>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 1.2.1 & 1.2.2: Umfirmierung in eine GmbH</h2>
+            [cite_start]<h3>Frage: Nennen Sie 2 Vorteile und 2 Nachteile der gewünschten Umfirmierung von einer Einzelunternehmung in eine GmbH. [cite: 419]</h3>
+            <p><strong>Vorteile:</strong></p>
+            <ul>
+                [cite_start]<li><span class="solution">Haftungsbeschränkung:</span> Die Haftung ist auf das Gesellschaftsvermögen beschränkt, nicht auf das Privatvermögen. [cite: 1299]</li>
+                [cite_start]<li><span class="solution">Leichte Eigenkapitalbeschaffung:</span> Durch die Aufnahme neuer Gesellschafter kann leichter Kapital beschafft werden. [cite: 1299]</li>
+            </ul>
+            <p><strong>Nachteile:</strong></p>
+            <ul>
+                [cite_start]<li><span class="solution">Aufwändige und teure Gründung:</span> Der Gründungsprozess ist komplexer und kostenintensiver. [cite: 1299]</li>
+                [cite_start]<li><span class="solution">Stammkapital:</span> Ein Mindeststammkapital von 25.000 € ist erforderlich. [cite: 1299]</li>
+            </ul>
+            <div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Diese Frage testet kaufmännisches und rechtliches Grundwissen. Die wichtigste Unterscheidung für ein Unternehmen ist, ob die Haftung der Gesellschafter beschränkt (GmbH, AG) oder unbeschränkt (Einzelunternehmen) ist. [cite_start]Zudem ist der Zusatz "GmbH" im Firmennamen gesetzlich vorgeschrieben (z.B. "Die TurboLöser Systemhaus GmbH"). [cite: 1299]</div>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 1.3.2: Differenzkalkulation</h2>
+            [cite_start]<h3>Frage: Ermitteln Sie rechnerisch nachvollziehbar den Gewinn/Verlust in Euro und Prozent, welcher durch den Weiterverkauf der 30 Laptops entsteht. [cite: 434, 435]</h3>
+            <p>Diese Kalkulation zielt darauf ab, den Gewinn zu ermitteln, indem man die gesamten Selbstkosten vom Netto-Barverkaufspreis abzieht.</p>
+            <p><strong>Schritt 1: Bezugspreis ermitteln</strong></p>
+            <ul>
+                [cite_start]<li>Netto-Angebotspreis (30 Stück): 1.300 € * 30 = 39.000,00 € [cite: 1307]</li>
+                [cite_start]<li>- Liefererrabatt (20%): 7.800,00 € [cite: 1307]</li>
+                [cite_start]<li>- Liefererskonto (3%): 936,00 € [cite: 1307]</li>
+                [cite_start]<li>+ Bezugskosten: 10 € * 30 = 300,00 € [cite: 991]</li>
+                [cite_start]<li><strong>= Bezugspreis: <span class="solution">30.564,00 €</span></strong> [cite: 1307]</li>
+            </ul>
+            <p><strong>Schritt 2: Gewinn ermitteln</strong></p>
+            <ul>
+                [cite_start]<li>+ Handlungskosten (35%): 10.697,40 € [cite: 1307]</li>
+                [cite_start]<li>= Selbstkosten: 41.261,40 € [cite: 1307]</li>
+                [cite_start]<li>Bar-Verkaufspreis: 42.336,00 € (errechnet aus dem Budget von 54.000 € abzüglich Kundenrabatt und -skonto) [cite: 1307]</li>
+                [cite_start]<li><strong>= Gewinn (in Euro): 42.336,00 € - 41.261,40 € = <span class="solution">1.074,60 €</span></strong> [cite: 1307]</li>
+                [cite_start]<li><strong>= Gewinn (in %): (1.074,60 / 41.261,40) * 100 = <span class="solution">~2,6 %</span></strong> [cite: 1307]</li>
+            </ul>
+        </div>
+        
+        <div class="slide">
+            <h2>Aufgabe 1.4.2: ITIL-Klassifizierung</h2>
+            [cite_start]<h3>Frage: Begründen Sie in allen 5 Fällen, ob es sich um ein Event, ein Service Request oder ein Incident handelt. [cite: 453]</h3>
+            <table>
+                <thead><tr><th>Fall</th><th>Klassifizierung</th><th>Begründung</th></tr></thead>
+                <tbody>
+                    [cite_start]<tr><td>Lizenz der Office-Anwendung läuft ab.</td><td class="solution">Event</td><td>Eine vom System generierte Statusmeldung, die noch keine Störung verursacht hat. [cite: 1307]</td></tr>
+                    [cite_start]<tr><td>Antrag auf eine Maus für Linkshänder.</td><td class="solution">Service Request</td><td>Anfrage eines Anwenders zur Bereitstellung von Standard-Hardware; keine Störung. [cite: 1307]</td></tr>
+                    [cite_start]<tr><td>Accesspoint im Lager funktioniert nicht.</td><td class="solution">Incident</td><td>Eine ungeplante Unterbrechung eines Services; etwas ist defekt. [cite: 1307]</td></tr>
+                    [cite_start]<tr><td>Mehr als fünf fehlgeschlagene Anmeldeversuche.</td><td class="solution">Event</td><td>Eine vom Sicherheitssystem generierte Meldung, die auf ein Risiko hinweisen kann. [cite: 1307]</td></tr>
+                    [cite_start]<tr><td>Bildschirm flackert.</td><td class="solution">Incident</td><td>Ein Zustand, der die Servicequalität mindert und auf eine Störung hinweist. [cite: 1307]</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 2.1: Schutzbedarfsfeststellung</h2>
+            [cite_start]<h3>Frage: Ergänzen Sie den Schutzbedarf für Vertraulichkeit, Integrität und Verfügbarkeit der Auftrags- und Kundenverwaltung. [cite: 462, 463]</h3>
+            <p><strong>Antwort (gemäß Anlage 8):</strong></p>
+            <ul>
+                <li><strong>Vertraulichkeit:</strong> <span class="solution">hoch</span>. [cite_start]Da die Verarbeitung vertraulicher Kundendaten dem Unternehmen bei Missbrauch großen Schaden zufügen kann. [cite: 1321]</li>
+                <li><strong>Integrität:</strong> <span class="solution">hoch</span>. [cite_start]Da die Änderung von Mengen- oder Preisangaben zu einem finanziellen Schaden von über 50.000 € und erheblichem Ansehensverlust führen kann, was der Kategorie "hoch" entspricht. [cite: 594, 1321]</li>
+                <li><strong>Verfügbarkeit:</strong> <span class="solution">normal</span>. [cite_start]Da ein Ausfall der Client-Software auf einem Laptop für mehr als 24 Stunden hingenommen werden kann und auf einem anderen Gerät weitergearbeitet werden kann. [cite: 1321]</li>
+            </ul>
+            [cite_start]<div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Um diese Frage zu beantworten, musst du die Kategorien in Anlage 3 [cite: 575] sorgfältig lesen. Ordne das gegebene Szenario für jeden Grundwert (Vertraulichkeit, Integrität, Verfügbarkeit) dem entsprechenden Schadenslevel (finanziell, Ansehen, rechtlich) zu.</div>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 2.2: Prinzip des Gesamtschutzbedarfs</h2>
+            [cite_start]<h3>Frage: Erläutern Sie ein Prinzip, nach dem der gesamte Schutzbedarf eines Laptops ermittelt werden kann. [cite: 467]</h3>
+            [cite_start]<p><strong>Antwort:</strong> Das <span class="solution">Maximumprinzip</span>. [cite: 1323]</p>
+            [cite_start]<p><strong>Erläuterung:</strong> Nach diesem Prinzip wird der Gesamtschutzbedarf eines IT-Systems (z.B. eines Laptops) durch den <span class="solution">höchsten Schutzbedarf</span> der auf ihm betriebenen Anwendungen oder verarbeiteten Daten bestimmt. [cite: 1323] Wenn auf einem System Anwendungen mit "normalem", "hohem" und "sehr hohem" Schutzbedarf laufen, wird der Gesamtschutzbedarf des Systems als "sehr hoch" eingestuft.</p>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 3.1: Logische vs. Physische Netzwerktopologien</h2>
+            [cite_start]<h3>Frage: Stellen Sie 2 Unterschiede einer physikalischen zur logischen Struktur dar. [cite: 480]</h3>
+            <p><strong>Antwort:</strong></p>
+            <ul>
+                [cite_start]<li><strong>Fokus:</strong> Die <span class="solution">logische Struktur</span> zeigt, wie Geräte, Ports und das IP-Adressschema <span class="solution">logisch verbunden</span> sind und wie der Datenfluss aussieht. [cite: 1329] [cite_start]Die <span class="solution">physische Struktur</span> zeigt, wo sich Geräte und Kabel <span class="solution">tatsächlich befinden</span> (Raum, Schrank etc.). [cite: 1332]</li>
+                <li><strong>Zweck:</strong> Die <span class="solution">logische Struktur</span> dient dem Verständnis der Kommunikation und Segmentierung im Netzwerk. [cite_start]Die <span class="solution">physische Struktur</span> dient dem Auffinden, der Wartung oder der Reparatur der Hardware. [cite: 1333]</li>
+            </ul>
+        </div>
+        
+        <div class="slide">
+            <h2>Aufgabe 3.2: Analyse der Netzwerkkonfiguration</h2>
+            <h3>Frage: Beantworten Sie die Fragen auf Grundlage der IP-Konfiguration in Anlage 5.</h3>
+            <ul>
+                [cite_start]<li><strong>3.2.2 - Physische Adresse:</strong> Ist <span class="solution">48 Bits</span> lang und wird auf <span class="solution">Schicht 2 (Data Link Layer/Sicherungsschicht)</span> des OSI-Modells verwendet. [cite: 1344]</li>
+                <li><strong>3.2.4 - Netzwerk-/Broadcastadresse:</strong> Bei der IP-Adresse 10.1.10.1 und der Subnetzmaske 255.255.0.0 (/16) gilt:
+                    <ul>
+                        [cite_start]<li>Netzwerkadresse: <span class="solution">10.1.0.0</span> [cite: 1344]</li>
+                        [cite_start]<li>Broadcastadresse: <span class="solution">10.1.255.255</span> [cite: 1344]</li>
+                    </ul>
+                </li>
+                <li><strong>3.2.5 - Standardgateway und DNS-Server:</strong>
+                    <ul>
+                        [cite_start]<li><strong>Standardgateway:</strong> Das Gerät (i.d.R. ein Router), an das alle IP-Pakete gesendet werden, die für Ziele außerhalb des lokalen Netzes bestimmt sind. [cite: 1344]</li>
+                        [cite_start]<li><strong>DNS-Server:</strong> Ein Server, der Hostnamen (z.B. www.google.de) in IP-Adressen auflöst. [cite: 1344]</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 4: Datenmodellierung (ERM und Relationenschema)</h2>
+            [cite_start]<h3>Frage: Erweitern Sie das gegebene ERM und erstellen Sie auf Basis dieser Informationen ein relationales Datenbankschema. [cite: 521, 530]</h3>
+            <p><strong>ERM-Erweiterung:</strong></p>
+            <ul>
+                [cite_start]<li>Eine neue Entität <span class="solution">"Abteilung"</span> wird hinzugefügt. [cite: 1360]</li>
+                <li>Beziehungen und Kardinalitäten:
+                    <ul>
+                        [cite_start]<li><span class="solution">N</span> Mitarbeiter "ist teil von" <span class="solution">1</span> Abteilung [cite: 1350, 1358, 1360]</li>
+                        [cite_start]<li><span class="solution">N</span> Mitarbeiter "arbeitet in" <span class="solution">1</span> Projekt [cite: 1350, 1355, 1357]</li>
+                        [cite_start]<li><span class="solution">1</span> Mitarbeiter "arbeitet mit" <span class="solution">N</span> Laptop [cite: 1349, 1350, 1351, 1352]</li>
+                    </ul>
+                </li>
+            </ul>
+            [cite_start]<div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Die Kardinalitäten im ERM des Lösungsbogens [cite: 1345] sind teilweise anders interpretiert. Zum Beispiel ist eine N:M-Beziehung zwischen Mitarbeitern und Projekten in der Praxis üblicher als die hier gezeigte N:1-Beziehung. In der Prüfung wird erwartet, dass du die logischste Beziehung basierend auf den gegebenen Daten herstellst. [cite_start]Die Struktur im Lösungsbogen wurde in der Prüfung akzeptiert. [cite: 1345]</div>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 4.2: Relationales Datenbankschema</h2>
+            <h3>Frage: Erstellen Sie ein relationales Schema mit Tabellen, Spalten und Schlüsseln basierend auf den gegebenen Daten.</h3>
+            <p><strong>Lösung (zusammengefasst):</strong></p>
+            <ul>
+                [cite_start]<li><strong>Mitarbeiter</strong>(<span class="solution"><u>M_ID INT</u>, Vorname VARCHAR, Nachname VARCHAR, Alter INT, <u>Abteilung_ID INT</u>, <u>Projekt_ID INT</u></span>) [cite: 1362]</li>
+                [cite_start]<li><strong>Projekt</strong>(<span class="solution"><u>Projekt_ID INT</u>, Bezeichnung VARCHAR, Dauer DOUBLE</span>) [cite: 1363]</li>
+                [cite_start]<li><strong>Laptop</strong>(<span class="solution"><u>Laptop_ID INT</u>, Marke VARCHAR, Modell VARCHAR, ..., <u>M_ID INT</u></span>) [cite: 1364]</li>
+                [cite_start]<li><strong>Abteilung</strong>(<span class="solution"><u>Abteilung_ID INT</u>, Bezeichnung VARCHAR</span>) [cite: 1365]</li>
+            </ul>
+            <div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Die <u>unterstrichenen</u> Felder kennzeichnen Schlüssel. Zum Beispiel ist `M_ID` in der Tabelle `Laptop` ein Fremdschlüssel (FK), der auf den Primärschlüssel (PK) der Tabelle `Mitarbeiter` verweist und anzeigt, welcher Laptop welchem Mitarbeiter gehört.</div>
+        </div>
+        
+        <div class="slide">
+            <h2>Aufgabe 5: Softwareentwicklung</h2>
+            [cite_start]<h3>Frage: Erstellen Sie die Logik für eine Methode „LoginÜberprüfung“, die einen Benutzernamen und ein Passwort überprüft. [cite: 543]</h3>
+            [cite_start]<p>Die Methode soll die vorhandene Funktion `DB_Abfrage` verwenden, die 0 (Erfolg), 1 (Benutzer existiert nicht) oder 2 (Passwort falsch) zurückgibt. [cite: 541]</p>
+            <p><strong>Beispiellösung in Java:</strong></p>
+            <pre><code>public static boolean loginUeberpruefung(String username, String passwort) {
+    // Rufe die Methode DB_Abfrage auf und erhalte das Ergebnis
+    int dbErgebnis = DB_Abfrage(username, passwort); // Wir nehmen an, diese Methode existiert
+
+    // Überprüfe das Ergebnis
+    if (dbErgebnis == 0) {
+        // Erfolgsfall: Benutzername und Passwort sind korrekt.
+        return true; // Methode gibt true zurück.
+    } else {
+        // Fehlerfälle (1 oder 2).
+        System.out.println("Daten nicht korrekt"); // Gib eine Meldung aus.
+        return false; // Methode gibt false zurück.
+    }
+}</code></pre>
+            <div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Dies ist ein grundlegendes Problem der bedingten Logik (if-else). Der Schlüssel ist, den Rückgabewert der `DB_Abfrage`-Methode (0, 1 oder 2) korrekt zu interpretieren und die geforderte Ausgabe (true/false und die Meldung) zu erzeugen. [cite_start]Der C#-Code und die Diagramme im Lösungsbogen [cite: 1376-1391] folgen derselben Logik.</div>
+        </div>
+
+        <div class="slide">
+            <h1>Prüfungsanalyse abgeschlossen!</h1>
+            <h2>Wichtige Erkenntnisse</h2>
+            <ul>
+                <li><strong>Kaufmännisches Wissen ist wichtig:</strong> Organisationsstrukturen und kaufmännische Kalkulationen sind ein wesentlicher Teil der Prüfung.</li>
+                <li><strong>ITIL-Grundlagen:</strong> Der Unterschied zwischen Incident, Event und Service Request muss bekannt sein.</li>
+                <li><strong>Netzwerk & Sicherheit:</strong> Grundlagen wie IP-Adressierung, die Funktion von Netzwerkkomponenten und die Schutzbedarfsanalyse sind entscheidend.</li>
+                <li><strong>Datenbankdesign:</strong> Du musst in der Lage sein, von einem ERM zu einem relationalen Schema zu gelangen und Schlüssel korrekt zu identifizieren.</li>
+            </ul>
+            <div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Sait, wir haben auch diese Prüfung erfolgreich analysiert. Wie du siehst, verlangt diese Prüfung, wie die vorherige, dass du Grundlagenwissen aus verschiedenen Bereichen in einem gegebenen Szenario anwendest. Weiter so zu üben, wird dir helfen, dich an das Prüfungsformat zu gewöhnen und deine Zeit effizient zu nutzen. Großartige Arbeit!</div>
+        </div>
+
+    </div>
+    <div class="controls">
+        <button id="prev-btn" class="btn">Zurück</button>
+        <button id="next-btn" class="btn">Weiter</button>
+    </div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const homeLink = document.querySelector('.home-link');
+        const currentSlideSpan = document.getElementById('current-slide');
+        const totalSlides = slides.length;
+        document.getElementById('total-slides').textContent = totalSlides;
+        
+        let currentSlide = 0;
+
+        function showSlide(slideIndex) {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === slideIndex) slide.classList.add('active');
+            });
+            currentSlideSpan.textContent = slideIndex + 1;
+            homeLink.style.display = slideIndex === 0 ? 'none' : 'block';
+            prevBtn.style.display = slideIndex === 0 ? 'none' : 'inline-block';
+            nextBtn.style.display = slideIndex === totalSlides - 1 ? 'none' : 'inline-block';
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) showSlide(++currentSlide);
+        });
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) showSlide(--currentSlide);
+        });
+        homeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentSlide = 0;
+            showSlide(currentSlide);
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) nextBtn.click();
+            else if (e.key === 'ArrowLeft' && currentSlide > 0) prevBtn.click();
+        });
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

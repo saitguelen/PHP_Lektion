@@ -4,7 +4,7 @@
 //boolean in Java geht auch nicht.
 
 
-$dasda = "Yoghurt";
+$dasda = "Käse";
 switch($dasda){
     case "Apfel":
             echo "$dasda ist ein Obst";

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sınav Analizi: AP Sommer 2023 - Bölüm 1</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; overflow: hidden; }
+        .presentation-container { height: 100vh; display: flex; flex-direction: column; }
+        .slide { position: relative; display: none; padding: 40px 60px; height: 100vh; justify-content: center; align-items: center; text-align: center; overflow-y: auto; }
+        .slide.active { display: flex; flex-direction: column; animation: fadeInUp 0.7s ease-out; }
+        .slide h1 { font-size: 3em; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        .slide h2 { font-size: 2.2em; margin-bottom: 25px; color: #f1c40f; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
+        .slide h3 { font-size: 1.5em; margin-bottom: 15px; color: #1abc9c; text-align: left; width: 100%; max-width: 900px; }
+        .slide p, .slide li { font-size: 1.1em; line-height: 1.6; margin-bottom: 15px; max-width: 900px; text-align: left; }
+        .teacher-note { background: rgba(241, 196, 15, 0.15); border-left: 5px solid #f1c40f; padding: 15px; margin: 20px 0; border-radius: 8px; text-align: left; }
+        .teacher-note strong { color: #f1c40f; }
+        .controls { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 100; }
+        .btn { padding: 12px 25px; background: rgba(255, 255, 255, 0.2); border: 2px solid rgba(255, 255, 255, 0.3); color: white; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-size: 1.1em; }
+        .btn:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-2px); }
+        .slide-counter { position: fixed; top: 30px; right: 30px; background: rgba(0, 0, 0, 0.5); padding: 10px 20px; border-radius: 20px; font-size: 1.1em; z-index: 100; }
+        .home-link { position: fixed; top: 30px; left: 30px; font-size: 1.2em; color: white; text-decoration: none; background-color: rgba(0, 0, 0, 0.3); padding: 8px 15px; border-radius: 20px; transition: background-color 0.3s ease; z-index: 100; }
+        .home-link:hover { background-color: rgba(0, 0, 0, 0.5); }
+        pre { background: #2d2d2d; color: #f8f8f2; padding: 20px; border-radius: 10px; text-align: left; font-family: 'Courier New', Courier, monospace; font-size: 0.9em; white-space: pre-wrap; word-wrap: break-word; margin: 20px auto; max-width: 900px; }
+        table { width: 100%; max-width: 900px; margin: 20px auto; border-collapse: collapse; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden; text-align: left;}
+        th, td { padding: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+        th { background: rgba(255, 255, 255, 0.2); }
+        .solution { color: #2ecc71; font-weight: bold; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">14</span></div>
+        <a href="#" class="home-link" style="display: none;">🏠 Anasayfa</a>
+
+        <div class="slide active">
+            <h1>Sınav Analizi</h1>
+            <h2>AP Sommer 2023 - Bölüm 1: IT Destekli Bir İş Yeri Kurulumu</h2>
+            <p style="text-align: center; margin-top: 20px;">Bu sunumda, sınavdaki soruları, çözümlerini ve arkasındaki mantığı adım adım inceleyeceğiz.</p>
+        </div>
+
+        <div class="slide">
+            <h2>Genel Bakış: Sınav Senaryosu</h2>
+            [cite_start]<p>Küçük ve gelişmekte olan IT Systemhaus Löser'de (15 çalışan) 2. yıl çırağı olarak çalışıyorsun. [cite: 386] [cite_start]Şirket, donanım/yazılım tedariği ve sistem entegrasyonu alanlarında faaliyet gösteriyor. [cite: 386] [cite_start]Büyüme nedeniyle şirkette işler biraz kaotik. [cite: 387] Senden beklenen görevler:</p>
+            <ul>
+                <li><strong>IT 1:</strong> Şirket yapısı ve tedarik süreçleri.</li>
+                <li><strong>IT 2:</strong> Koruma ihtiyacı analizi (Schutzbedarfsanalyse).</li>
+                <li><strong>IT 3:</strong> Ağ yapılandırması.</li>
+                <li><strong>IT 4 & 5:</strong> Veri modelleme ve yazılım geliştirme.</li>
+            </ul>
+        </div>
+        
+        <div class="slide">
+            <h2>Görev 1.1.1: Organizasyon Sistemi</h2>
+            [cite_start]<h3>Soru: Organigramda gösterilen organizasyon sistemini adlandırın ve tanımlayın. [cite: 411]</h3>
+            [cite_start]<p><strong>Cevap:</strong> Bu bir <span class="solution">Stab-Linien-Organisation</span>'dur (Kurmay-Komuta Organizasyonu). [cite: 1299]</p>
+            [cite_start]<p><strong>Tanım:</strong> Bu sistem, hiyerarşik bir komuta zincirine (Linienorganisation) ek olarak, karar verme yetkisi olmayan ancak yönetime uzmanlık alanlarında danışmanlık yapan "kurmay" birimleri (Stabsstellen) içerir. [cite: 1299] [cite_start]Şemadaki "Rechtsberatung" (Hukuk Danışmanlığı) birimi, yönetime bağlı bir kurmay birimidir. [cite: 397, 959]</p>
+            [cite_start]<div class="teacher-note"><strong>Öğretmenin Notu:</strong> Anahtar nokta, "Rechtsberatung" biriminin diğer departmanlara emir verememesidir. [cite: 960] Görevi sadece danışmanlıktır. [cite_start]Bu özellik, yapıyı saf bir hiyerarşiden (Einliniensystem) ayırır ve bir "Stab-Linien-Organisation" yapar. [cite: 961]</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 1.2.1 & 1.2.2: GmbH'ye Geçiş</h2>
+            [cite_start]<h3>Soru: Şahıs şirketinden GmbH'ye (Limited Şirket) geçişin 2 avantajını ve 2 dezavantajını belirtin. [cite: 419]</h3>
+            <p><strong>Avantajlar:</strong></p>
+            <ul>
+                [cite_start]<li><span class="solution">Sınırlı Sorumluluk (Haftungsbeschränkung):</span> Sorumluluk, kişisel mal varlığı yerine şirket varlığıyla sınırlıdır. [cite: 1299]</li>
+                [cite_start]<li><span class="solution">Kolay Sermaye Temini:</span> Yeni ortaklar alarak sermaye artırmak daha kolaydır. [cite: 1299]</li>
+            </ul>
+            <p><strong>Dezavantajlar:</strong></p>
+            <ul>
+                [cite_start]<li><span class="solution">Karmaşık ve Masraflı Kuruluş:</span> Kuruluş süreci daha zor ve pahalıdır. [cite: 1299]</li>
+                [cite_start]<li><span class="solution">Asgari Sermaye Şartı (Stammkapital):</span> En az 25.000 € sermaye gerektirir. [cite: 1299]</li>
+            </ul>
+            <div class="teacher-note"><strong>Öğretmenin Notu:</strong> Bu soru, temel işletme ve hukuk bilgisini ölçer. Bir şirket için en önemli ayrım, ortakların sorumluluğunun sınırlı (GmbH, AG) veya sınırsız (Einzelunternehmen) olmasıdır. [cite_start]Ayrıca, şirket isminin sonunda "GmbH" eki bulunması zorunludur (Örn: "Die TurboLöser Systemhaus GmbH"). [cite: 1299]</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 1.3.2: Kâr/Zarar Hesaplaması (Differenzkalkulation)</h2>
+            [cite_start]<h3>Soru: 30 adet laptopun satışından elde edilecek kâr/zararı Euro ve yüzde olarak hesaplayın. [cite: 434, 435]</h3>
+            <p>Bu hesaplama, malın bize olan toplam maliyetini (Selbstkosten) bulup, müşteriden alacağımız net paradan (Bar-Verkaufspreis) çıkararak kârı bulmayı amaçlar.</p>
+            <p><strong>Adım 1: Maloluş Fiyatı (Bezugspreis) Hesabı</strong></p>
+            <ul>
+                [cite_start]<li>Net Teklif Fiyatı (30 adet): 1.300 € * 30 = 39.000,00 € [cite: 1307]</li>
+                [cite_start]<li>- Tedarikçi İndirimi (%20): 7.800,00 € [cite: 1307]</li>
+                [cite_start]<li>- Tedarikçi Skontosu (%3): 936,00 € [cite: 1307]</li>
+                [cite_start]<li>+ Nakliye Masrafı: 10 € * 30 = 300,00 € [cite: 991]</li>
+                [cite_start]<li><strong>= Maloluş Fiyatı: <span class="solution">30.564,00 €</span></strong> [cite: 1307]</li>
+            </ul>
+            <p><strong>Adım 2: Kâr Hesabı</strong></p>
+            <ul>
+                [cite_start]<li>+ İşletme Giderleri (%35): 10.697,40 € [cite: 1307]</li>
+                [cite_start]<li>= Toplam Maliyetimiz (Selbstkosten): 41.261,40 € [cite: 1307]</li>
+                [cite_start]<li>Müşteriden Alınacak Para (Bar-VKP): 42.336,00 € (Bütçe 54.000 €'dan müşteri indirimi ve skontosu düşülerek bulunur) [cite: 1307]</li>
+                [cite_start]<li><strong>= Kâr (Euro): 42.336,00 € - 41.261,40 € = <span class="solution">1.074,60 €</span></strong> [cite: 1307]</li>
+                [cite_start]<li><strong>= Kâr (Yüzde): (1.074,60 / 41.261,40) * 100 = <span class="solution">~2,6 %</span></strong> [cite: 1307]</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 1.4.2: ITIL Sınıflandırması</h2>
+            [cite_start]<h3>Soru: Gelen 5 bildirimi Event, Service Request veya Incident olarak sınıflandırın ve gerekçelendirin. [cite: 453]</h3>
+            <table>
+                <thead><tr><th>Durum</th><th>Sınıflandırma</th><th>Gerekçe</th></tr></thead>
+                <tbody>
+                    [cite_start]<tr><td>Office lisansı sona eriyor.</td><td class="solution">Event (Olay)</td><td>Sistem tarafından üretilen, henüz arızaya yol açmamış durum bildirimi. [cite: 1307]</td></tr>
+                    [cite_start]<tr><td>Solak faresi talebi.</td><td class="solution">Service Request</td><td>Kullanıcının standart bir donanım talebi, bir arıza değil. [cite: 1307]</td></tr>
+                    [cite_start]<tr><td>Depodaki Access Point çalışmıyor.</td><td class="solution">Incident (Vaka)</td><td>Hizmette planlanmamış bir kesinti, bir şey bozulmuş. [cite: 1307]</td></tr>
+                    [cite_start]<tr><td>5'ten fazla hatalı giriş denemesi.</td><td class="solution">Event (Olay)</td><td>Güvenlik sistemi tarafından üretilen, bir riske işaret edebilen bildirim. [cite: 1307]</td></tr>
+                    [cite_start]<tr><td>Ekran titriyor.</td><td class="solution">Incident (Vaka)</td><td>Hizmet kalitesini düşüren ve bir arızaya işaret eden durum. [cite: 1307]</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 2.1: Koruma İhtiyacı Analizi (Schutzbedarf)</h2>
+            [cite_start]<h3>Soru: Müşteri yönetim yazılımının Gizlilik, Bütünlük ve Erişilebilirlik için koruma ihtiyacını belirleyin. [cite: 462, 463]</h3>
+            <p><strong>Cevap (Anlage 8'e göre):</strong></p>
+            <ul>
+                <li><strong>Vertraulichkeit (Gizlilik):</strong> <span class="solution">hoch (yüksek)</span>. [cite_start]Çünkü müşteri verileri gibi hassas bilgilerin sızması şirkete büyük zarar verebilir. [cite: 1321]</li>
+                <li><strong>Integrität (Bütünlük):</strong> <span class="solution">hoch (yüksek)</span>. Çünkü fiyat veya miktar gibi verilerin değiştirilmesi, 50.000 €'yu aşan mali zarara ve itibar kaybına yol açabilir. [cite_start]Bu, "yüksek" kategori kriteriyle eşleşir. [cite: 594, 1321]</li>
+                <li><strong>Verfügbarkeit (Erişilebilirlik):</strong> <span class="solution">normal</span>. [cite_start]Çünkü yazılımın bir laptopta 24 saatten fazla çalışmaması tolere edilebilir, başka bir cihazdan çalışmaya devam edilebilir. [cite: 1321]</li>
+            </ul>
+            [cite_start]<div class="teacher-note"><strong>Öğretmenin Notu:</strong> Bu soruyu cevaplamak için Anlage 3'teki [cite: 575] kategorileri dikkatlice okumalısın. Her bir temel değer (Gizlilik, Bütünlük, Erişilebilirlik) için verilen senaryonun hangi hasar seviyesine (finansal, itibar, hukuki) denk geldiğini bulmalısın.</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 2.2: Genel Koruma İhtiyacı Prensibi</h2>
+            [cite_start]<h3>Soru: Bir laptopun genel koruma ihtiyacının hangi prensibe göre belirlenebileceğini açıklayın. [cite: 467]</h3>
+            [cite_start]<p><strong>Cevap:</strong> <span class="solution">Maksimum Prensibi (Maximumprinzip)</span>. [cite: 1323]</p>
+            [cite_start]<p><strong>Açıklama:</strong> Bu prensibe göre, bir IT sisteminin (örneğin laptopun) genel koruma ihtiyacı, o sistemde çalışan uygulamaların veya işlenen verilerin sahip olduğu <span class="solution">en yüksek koruma ihtiyacına</span> göre belirlenir. [cite: 1323] Eğer bir sistemde "normal", "yüksek" ve "çok yüksek" koruma ihtiyacı olan üç farklı uygulama varsa, sistemin genel koruma ihtiyacı "çok yüksek" olarak kabul edilir.</p>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 3.1: Mantıksal ve Fiziksel Ağ Yapıları</h2>
+            [cite_start]<h3>Soru: Mantıksal ve fiziksel ağ yapıları arasındaki 2 farkı belirtin. [cite: 480]</h3>
+            <p><strong>Cevap:</strong></p>
+            <ul>
+                [cite_start]<li><strong>Odak Noktası:</strong> <span class="solution">Mantıksal yapı</span>, cihazların, portların ve IP adresleme şemasının nasıl <span class="solution">mantıksal olarak bağlandığını</span> ve veri akışını gösterir. [cite: 1329] [cite_start]<span class="solution">Fiziksel yapı</span> ise cihazların ve kabloların <span class="solution">gerçekte nerede (oda, dolap vb.) bulunduğunu</span> gösterir. [cite: 1332]</li>
+                <li><strong>Kullanım Amacı:</strong> <span class="solution">Mantıksal yapı</span>, ağdaki iletişimi ve segmentasyonu anlamak için kullanılır. [cite_start]<span class="solution">Fiziksel yapı</span> ise donanımı bulmak, bakım veya onarım yapmak için kullanılır. [cite: 1333]</li>
+            </ul>
+        </div>
+        
+        <div class="slide">
+            <h2>Görev 3.2: Ağ Yapılandırması Analizi</h2>
+            <h3>Soru: Anlage 5'teki IP yapılandırmasına dayanarak soruları cevaplayın.</h3>
+            <ul>
+                <li><strong>3.2.2 - Fiziksel Adres:</strong> <span class="solution">48 bit</span> uzunluğundadır ve OSI modelinin <span class="solution">2. [cite_start]Katmanı (Data Link Layer)</span>'nda kullanılır. [cite: 1344]</li>
+                <li><strong>3.2.4 - Ağ/Broadcast Adresi:</strong> IP adresi 10.1.10.1 ve alt ağ maskesi 255.255.0.0 (/16) olduğuna göre:
+                    <ul>
+                        [cite_start]<li>Ağ Adresi: <span class="solution">10.1.0.0</span> [cite: 1344]</li>
+                        [cite_start]<li>Broadcast Adresi: <span class="solution">10.1.255.255</span> [cite: 1344]</li>
+                    </ul>
+                </li>
+                <li><strong>3.2.5 - Gateway ve DNS:</strong>
+                    <ul>
+                        [cite_start]<li><strong>Standardgateway:</strong> Yerel ağ dışındaki (örn. internet) hedeflere gönderilecek IP paketlerinin yönlendirildiği cihazdır (genellikle router). [cite: 1344]</li>
+                        [cite_start]<li><strong>DNS-Server:</strong> Alan adlarını (örn. www.google.de) IP adreslerine çeviren sunucudur. [cite: 1344]</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 4: Veri Modelleme (ERM ve İlişkisel Şema)</h2>
+            [cite_start]<h3>Soru: Verilen ERM'yi genişletin ve bu bilgilere dayanarak bir ilişkisel şema oluşturun. [cite: 521, 530]</h3>
+            <p><strong>ERM Genişletmesi:</strong></p>
+            <ul>
+                [cite_start]<li>Yeni bir varlık olan <span class="solution">"Abteilung" (Departman)</span> eklenir. [cite: 1360]</li>
+                <li>İlişkiler ve Kardinaliteler:
+                    <ul>
+                        [cite_start]<li><span class="solution">N</span> Mitarbeiter "ist teil von" <span class="solution">1</span> Abteilung (N çalışan 1 departmana aittir) [cite: 1350, 1358, 1360]</li>
+                        [cite_start]<li><span class="solution">N</span> Mitarbeiter "arbeitet in" <span class="solution">1</span> Projekt (N çalışan 1 projede çalışır) [cite: 1350, 1355, 1357]</li>
+                        [cite_start]<li><span class="solution">1</span> Mitarbeiter "arbeitet mit" <span class="solution">N</span> Laptop (1 çalışan N laptop ile çalışır) [cite: 1349, 1350, 1351, 1352]</li>
+                    </ul>
+                </li>
+            </ul>
+             [cite_start]<div class="teacher-note"><strong>Öğretmenin Notu:</strong> Çözüm anahtarındaki ERM'de [cite: 1345] bazı kardinaliteler farklı yorumlanmış. Örneğin, N çalışanın 1 projede çalışması (N:1) yerine, genellikle N çalışanın M projede çalıştığı (N:M) bir yapı daha yaygındır. Sınavda, verilen veri setine en uygun mantıksal ilişkiyi kurman beklenir. Benim yukarıda belirttiğim kardinaliteler, çözüm kağıdındakilerden biraz farklı ama pratikte daha yaygındır. [cite_start]Sınavda çözüm kağıdındaki [cite: 1345] gibi bir yapı kabul edilmiştir.</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 4.2: İlişkisel Şema</h2>
+            <h3>Soru: Verilen verilere göre tabloları, sütunları ve anahtarları içeren bir ilişkisel şema oluşturun.</h3>
+            <p><strong>Çözüm (Özetlenmiş):</strong></p>
+            <ul>
+                [cite_start]<li><strong>Mitarbeiter</strong>(<span class="solution"><u>M_ID INT</u>, Vorname VARCHAR, Nachname VARCHAR, Alter INT, <u>Abteilung_ID INT</u>, <u>Projekt_ID INT</u></span>) [cite: 1362]</li>
+                [cite_start]<li><strong>Projekt</strong>(<span class="solution"><u>Projekt_ID INT</u>, Bezeichnung VARCHAR, Dauer DOUBLE</span>) [cite: 1363]</li>
+                [cite_start]<li><strong>Laptop</strong>(<span class="solution"><u>Laptop_ID INT</u>, Marke VARCHAR, Modell VARCHAR, ..., <u>M_ID INT</u></span>) [cite: 1364]</li>
+                [cite_start]<li><strong>Abteilung</strong>(<span class="solution"><u>Abteilung_ID INT</u>, Bezeichnung VARCHAR</span>) [cite: 1365]</li>
+            </ul>
+            <div class="teacher-note"><strong>Öğretmenin Notu:</strong> <u>Altı çizili</u> alanlar anahtarları belirtir. Örneğin, `Laptop` tablosundaki `M_ID` bir Yabancı Anahtar (FK) olup, `Mitarbeiter` tablosunun Birincil Anahtarına (PK) bağlanır ve hangi laptopun hangi çalışana ait olduğunu gösterir.</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 5: Yazılım Geliştirme</h2>
+            [cite_start]<h3>Soru: "LoginÜberprüfung" adında, kullanıcı adı ve şifreyi kontrol eden bir metodun mantığını oluşturun. [cite: 543]</h3>
+            <p>Metod, var olan `DB_Abfrage` fonksiyonunu kullanmalıdır. [cite_start]Bu fonksiyon şu değerleri döndürür: 0 (başarılı), 1 (kullanıcı yok), 2 (şifre yanlış). [cite: 541]</p>
+            <p><strong>Java Çözüm Örneği:</strong></p>
+            <pre><code>public static boolean loginUeberpruefung(String username, String passwort) {
+    // DB_Abfrage metodunu çağırıp sonucu alalım.
+    int dbErgebnis = DB_Abfrage(username, passwort); // Bu metodun var olduğunu varsayıyoruz
+
+    // Sonucu kontrol edelim
+    if (dbErgebnis == 0) {
+        // Başarılı durum: Kullanıcı adı ve şifre doğru.
+        return true; // Metod true döndürür.
+    } else {
+        // Hatalı durumlar (1 veya 2).
+        System.out.println("Daten nicht korrekt"); // Ekrana mesaj yazdır.
+        return false; // Metod false döndürür.
+    }
+}</code></pre>
+            <div class="teacher-note"><strong>Öğretmenin Notu:</strong> Bu, temel bir koşullu mantık (if-else) problemidir. Anahtar nokta, `DB_Abfrage` metodundan dönen değeri (0, 1, veya 2) doğru şekilde yorumlayıp, istenen çıktıyı (true/false ve mesaj) üretmektir. [cite_start]Çözüm kağıdındaki [cite: 1376-1391] C# ve diyagramlar da aynı mantığı izler.</div>
+        </div>
+
+        <div class="slide">
+            <h1>Sınav Analizi Tamamlandı!</h1>
+            <h2>Önemli Çıkarımlar</h2>
+            <ul>
+                <li><strong>İşletme Bilgisi Önemli:</strong> Organizasyon yapıları ve ticari hesaplamalar sınavın önemli bir parçası.</li>
+                <li><strong>ITIL Temelleri:</strong> Incident, Event ve Service Request arasındaki farkı bilmek zorundasın.</li>
+                <li><strong>Ağ ve Güvenlik:</strong> IP adresleme, ağ bileşenlerinin görevleri ve Schutzbedarf analizi gibi temel konulara hakim ol.</li>
+                <li><strong>Veritabanı Tasarımı:</strong> ERM'den ilişkisel şemaya geçiş yapabilmeli ve anahtarları doğru belirleyebilmelisin.</li>
+            </ul>
+            <div class="teacher-note"><strong>Öğretmenin Notu:</strong> Sait, bu sınavı da başarıyla analiz ettik. Bu sınav, bir önceki gibi, farklı alanlardaki temel bilgileri bir senaryo etrafında birleştirmeni istiyor. Bu şekilde pratik yapmaya devam etmen, sınav formatına alışmanı ve zamanı verimli kullanmanı sağlayacaktır. Harika iş çıkardın!</div>
+        </div>
+
+    </div>
+    <div class="controls">
+        <button id="prev-btn" class="btn">Önceki</button>
+        <button id="next-btn" class="btn">Sonraki</button>
+    </div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const homeLink = document.querySelector('.home-link');
+        const currentSlideSpan = document.getElementById('current-slide');
+        const totalSlides = slides.length;
+        document.getElementById('total-slides').textContent = totalSlides;
+        
+        let currentSlide = 0;
+
+        function showSlide(slideIndex) {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === slideIndex) slide.classList.add('active');
+            });
+            currentSlideSpan.textContent = slideIndex + 1;
+            homeLink.style.display = slideIndex === 0 ? 'none' : 'block';
+            prevBtn.style.display = slideIndex === 0 ? 'none' : 'inline-block';
+            nextBtn.style.display = slideIndex === totalSlides - 1 ? 'none' : 'inline-block';
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) showSlide(++currentSlide);
+        });
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) showSlide(--currentSlide);
+        });
+        homeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentSlide = 0;
+            showSlide(currentSlide);
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) nextBtn.click();
+            else if (e.key === 'ArrowLeft' && currentSlide > 0) prevBtn.click();
+        });
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

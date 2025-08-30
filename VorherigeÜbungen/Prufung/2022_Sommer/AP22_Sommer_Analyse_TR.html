@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sınav Analizi: AP Sommer 2022 - Bölüm 1</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; overflow: hidden; }
+        .presentation-container { height: 100vh; display: flex; flex-direction: column; }
+        .slide { position: relative; display: none; padding: 40px 60px; height: 100vh; justify-content: center; align-items: center; text-align: center; overflow-y: auto; }
+        .slide.active { display: flex; flex-direction: column; animation: fadeInUp 0.7s ease-out; }
+        .slide h1 { font-size: 3em; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        .slide h2 { font-size: 2.2em; margin-bottom: 25px; color: #f1c40f; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
+        .slide h3 { font-size: 1.5em; margin-bottom: 15px; color: #1abc9c; text-align: left; width: 100%; max-width: 900px; }
+        .slide p, .slide li { font-size: 1.1em; line-height: 1.6; margin-bottom: 15px; max-width: 900px; text-align: left; }
+        .teacher-note { background: rgba(241, 196, 15, 0.15); border-left: 5px solid #f1c40f; padding: 15px; margin: 20px 0; border-radius: 8px; text-align: left; }
+        .teacher-note strong { color: #f1c40f; }
+        .controls { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 100; }
+        .btn { padding: 12px 25px; background: rgba(255, 255, 255, 0.2); border: 2px solid rgba(255, 255, 255, 0.3); color: white; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-size: 1.1em; }
+        .btn:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-2px); }
+        .slide-counter { position: fixed; top: 30px; right: 30px; background: rgba(0, 0, 0, 0.5); padding: 10px 20px; border-radius: 20px; font-size: 1.1em; z-index: 100; }
+        .home-link { position: fixed; top: 30px; left: 30px; font-size: 1.2em; color: white; text-decoration: none; background-color: rgba(0, 0, 0, 0.3); padding: 8px 15px; border-radius: 20px; transition: background-color 0.3s ease; z-index: 100; }
+        .home-link:hover { background-color: rgba(0, 0, 0, 0.5); }
+        pre { background: #2d2d2d; color: #f8f8f2; padding: 20px; border-radius: 10px; text-align: left; font-family: 'Courier New', Courier, monospace; font-size: 0.9em; white-space: pre-wrap; word-wrap: break-word; margin: 20px auto; max-width: 900px; }
+        table { width: 100%; max-width: 900px; margin: 20px auto; border-collapse: collapse; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden; text-align: left;}
+        th, td { padding: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+        th { background: rgba(255, 255, 255, 0.2); }
+        .solution { color: #2ecc71; font-weight: bold; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">11</span></div>
+        <a href="#" class="home-link" style="display: none;">🏠 Anasayfa</a>
+
+        <div class="slide active">
+            <h1>Sınav Analizi</h1>
+            <h2>AP Sommer 2022 - Bölüm 1: IT Destekli Bir İş Yeri Kurulumu</h2>
+            <p style="text-align: center; margin-top: 20px;">Bu sunumda, 2022 Yaz dönemi sınavındaki soruları, çözümlerini ve arkasındaki mantığı adım adım inceleyeceğiz.</p>
+        </div>
+
+        <div class="slide">
+            <h2>Genel Bakış: Sınav Senaryosu</h2>
+            <p><strong>Systemhaus KG</strong>'de çalışıyorsun. [cite_start]Müşteriniz olan <strong>Innovativ Finanz GmbH</strong>, yeni bir lokasyon açıyor ve bu lokasyondaki çalışma alanlarının IT altyapısının kurulması için sizi görevlendiriyor. [cite: 1789] Görevlerin:</p>
+            <ul>
+                [cite_start]<li><strong>IT 1:</strong> Müşteri gereksinimlerini analiz etmek ve gelen malları kontrol etmek. [cite: 812]</li>
+                [cite_start]<li><strong>IT 2:</strong> Ağ altyapısını yapılandırmak ve güvenliğini sağlamak. [cite: 972]</li>
+                [cite_start]<li><strong>IT 3:</strong> Bir yazılım modülünü genişletmek. [cite: 1865]</li>
+                [cite_start]<li><strong>IT 4:</strong> Verilen JSON verilerine göre bir veri modeli oluşturmak. [cite: 1885]</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 1.1: Anforderungsanalyse (Gereksinim Analizi)</h2>
+            [cite_start]<h3>Soru: Müşterinin e-postasındaki (Anlage 1) gereksinimleri çıkarıp, şirket içi kontrol listesine (Anlage 2) işleyin. [cite: 1791]</h3>
+            <p>Bu görev, müşteri taleplerini okuyup anlama ve bunları teknik özelliklere doğru bir şekilde çevirme becerini ölçer.</p>
+            <p><strong>Örnek Çıkarımlar:</strong></p>
+            <ul>
+                <li><strong>Müşteri Talebi:</strong> "...schnell und einfach mit 2 Monitoren verbunden werden kann." (hızlı ve kolayca 2 monitöre bağlanabilmeli)[cite_start]. [cite: 1900] [cite_start]<br><strong>Listeye İşaretleme:</strong> <span class="solution">Docking-Station</span>. [cite: 946]</li>
+                <li><strong>Müşteri Talebi:</strong> "Alle Geräte sollten möglichst leise sein." (Tüm cihazlar mümkün olduğunca sessiz olmalı)[cite_start]. [cite: 1902] [cite_start]<br><strong>Listeye İşaretleme:</strong> Lüfter (Fan) → <span class="solution">keinen (yok)</span>. [cite: 826]</li>
+                <li><strong>Müşteri Talebi:</strong> "...muss das Gerät über einen eigenen mobilen Netzzugang verfügen." (cihazın kendi mobil internet erişimi olmalı)[cite_start]. [cite: 1908] [cite_start]<br><strong>Listeye İşaretleme:</strong> Extras → <span class="solution">LTE-Modem</span>. [cite: 947]</li>
+            </ul>
+             <div class="teacher-note"><strong>Öğretmenin Notu:</strong> Bu görevde dikkatli okumak esastır. Müşterinin her cümlesi, kontrol listesindeki bir veya daha fazla teknik özelliğe işaret edebilir. [cite_start]Örneğin "Share-Place" [cite: 1896] [cite_start]ve "Homeoffice" [cite: 1898] [cite_start]ifadeleri, cihazın "Mobilität" (Mobilite) seviyesinin <span class="solution">"oft" (sık)</span> olmasını gerektirir[cite: 859].</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 1.2: Wareneingangskontrolle (Mal Kabul Kontrolü)</h2>
+            [cite_start]<h3>Soru: Gelen malları mevcut belgelere göre kontrol edin ve bulgularınızı yazılı olarak kaydedin. [cite: 1795]</h3>
+            <p>Bu görev, bir teslimatın siparişe uygun olup olmadığını kontrol etme sürecini içerir. Sipariş (Anlage 4), Lieferschein (Anlage 5) ve diğer E-postalar karşılaştırılır.</p>
+            <p><strong>Kontrol Sonuçları (Çözüm Anahtarına Göre):</strong></p>
+            <ul>
+                [cite_start]<li><strong>Teslimat Tarihi:</strong> <span class="solution">Teslimat geç yapılmış.</span> Sipariş 16.02'de verilmiş ve 7 gün içinde istenmiş (en geç 23.02), ancak teslimat 28.02'de gerçekleşmiş[cite: 965, 1989, 1792].</li>
+                [cite_start]<li><strong>Miktar:</strong> <span class="solution">Eksik mal teslim edilmiş.</span> Sipariş ve irsaliyede 24 adet yazmasına rağmen, palette sadece 20 paket gelmiş[cite: 965, 2006, 1793].</li>
+                [cite_start]<li><strong>Hasar:</strong> Paketler dışarıdan hasarsız. [cite: 1794]</li>
+                [cite_start]<li><strong>Yapılacak İşlem:</strong> Eksik miktar ve gecikme irsaliyeye not edilmeli. [cite: 965] [cite_start]Herr Lumb'un e-postasına istinaden (mallara acil ihtiyaç var), mallar yine de kabul edilmeli ve irsaliye imzalanmalı. [cite: 965, 2028]</li>
+            </ul>
+        </div>
+        
+        <div class="slide">
+            <h2>Görev 2.1.1: IPv4 Yapılandırması</h2>
+            [cite_start]<h3>Soru: Yeni bir cihazın ağa dahil edilebilmesi için geçerli bir IPv4 yapılandırması belirtin. [cite: 1819]</h3>
+            <p>Ağ planına (sayfa 2) göre, ağ 192.168.0.0/24'tür. Bu, IP adreslerinin 192.168.0.1 ile 192.168.0.254 arasında olabileceği anlamına gelir.</p>
+            <p><strong>Geçerli bir yapılandırma:</strong></p>
+            <ul>
+                [cite_start]<li><strong>IP-Adresse:</strong> <span class="solution">192.168.0.30</span> (1, 2, 21, 22 gibi zaten kullanılanlar hariç herhangi bir adres). [cite: 977]</li>
+                [cite_start]<li><strong>Subnetzmaske:</strong> <span class="solution">255.255.255.0</span> (/24 olduğu için). [cite: 980]</li>
+                [cite_start]<li><strong>Standardgateway:</strong> <span class="solution">192.168.0.2</span> (Ağdaki Router'ın adresi). [cite: 982]</li>
+                [cite_start]<li><strong>DNS-Server:</strong> <span class="solution">192.168.0.21</span> (Ağ planında belirtilen sunucu). [cite: 984]</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 2.1.2: Paket Analizi</h2>
+            [cite_start]<h3>Soru: Notebook 1'den tagesschau.de'ye giden bir paketin Router ve Switch 1 arasındaki veri çerçevesinin adreslerini belirleyin. [cite: 1820, 1821]</h3>
+            <p>Bu, ağda veri iletiminin temel mantığını test eder.</p>
+            <ul>
+                [cite_start]<li><strong>Quell-IPv4-Adresse (Kaynak IP):</strong> <span class="solution">Notebook 1</span>. [cite: 1027] IP adresi yolculuk boyunca değişmez.</li>
+                [cite_start]<li><strong>Ziel-IPv4-Adresse (Hedef IP):</strong> <span class="solution">tagesschau.de</span>. [cite: 998] Hedef sunucunun IP'si de değişmez.</li>
+                [cite_start]<li><strong>Quell-MAC-Adresse (Kaynak MAC):</strong> <span class="solution">Notebook 1</span>. [cite: 1026] Çerçeveyi gönderen cihaz.</li>
+                [cite_start]<li><strong>Ziel-MAC-Adresse (Hedef MAC):</strong> <span class="solution">Router (192.168.0.2)</span>. [cite: 1010] Yerel ağda, bir sonraki "atlama noktası" (next hop) her zaman hedef MAC adresidir. Router, paketi internete çıkarmak için bir sonraki adımdır.</li>
+            </ul>
+             <div class="teacher-note"><strong>Öğretmenin Notu:</strong> Unutma, IP adresleri paketin başlangıç ve bitiş noktasını gösterir ve genellikle değişmez. MAC adresleri ise sadece bir sonraki cihaza ulaşmak için kullanılır ve her router geçişinde değişir. Switch'ler MAC adreslerini değiştirmez, sadece yönlendirir.</div>
+        </div>
+
+        <div class="slide">
+            <h2>Görev 2.2 & 2.4: WLAN Performansı ve SLA</h2>
+            [cite_start]<h3>Soru 2.2: WLAN'ın %50, LAN'ın ise %94 veri hızına ulaşmasını değerlendirin. [cite: 1835]</h3>
+            [cite_start]<p><strong>Değerlendirme:</strong> <span class="solution">Bu değerler normal bir aralıktadır.</span> [cite: 1030] [cite_start]WLAN'daki %50'lik kayıp, paylaşılan ortam (shared medium), sinyal engelleri ve protokol ek yüklerinden (overhead) kaynaklanır. [cite: 1033-1036] [cite_start]Kablolu LAN'daki ~%6'lık kayıp ise normal protokol ek yüklerinden kaynaklanır. [cite: 1037]</p>
+            [cite_start]<h3>Soru 2.4: SLA'nın (Hizmet Seviyesi Anlaşması) yerine getirilip getirilmediğini açıklayın. [cite: 1861]</h3>
+            <p><strong>Hesaplama:</strong></p>
+            <ul>
+                [cite_start]<li>Toplam Kesinti Süresi: 12 saat + 7 saat = <span class="solution">19 saat</span>. [cite: 1042]</li>
+                <li>Yıllık İzin Verilen Kesinti: 365 gün * 24 saat * (1 - 0.997) = 26,28 saat.</li>
+                [cite_start]<li>Arıza Giderme Süresi (Entstördauer): 8 saat olarak belirlenmiş. [cite: 1852]</li>
+            </ul>
+            [cite_start]<p><strong>Sonuç:</strong> <span class="solution">Yıllık %99,7'lik kullanılabilirlik şartı yerine getirilmiştir</span> (19 saat < 26,28 saat). [cite: 1043] [cite_start]Ancak, <span class="solution">8 saatlik arıza giderme süresi şartı ihlal edilmiştir</span>, çünkü her iki arıza da 8 saatten uzun sürmüştür. [cite: 1048]</p>
+        </div>
+        
+        <div class="slide">
+            <h2>Görev 3: Yazılım Geliştirme (MAC Adresi Arama)</h2>
+            [cite_start]<h3>Soru: Bir string dizisi içinde belirli bir MAC adresini arayan `SucheMAC` metodunun mantığını oluşturun. [cite: 1873-1876]</h3>
+            <p>Amaç, dizinin her elemanını, aranan MAC adresiyle karşılaştıran bir döngü kurmaktır. Eşleşme bulunursa `true`, döngü bittiğinde hala bulunamazsa `false` döndürülmelidir.</p>
+            <p><strong>Java Çözüm Örneği:</strong></p>
+            <pre><code>public static boolean SucheMAC(String[] macAdressen, String gesucht) {
+    // Dizideki her bir MAC adresi için döngü başlat.
+    for (String mac : macAdressen) {
+        // Mevcut MAC adresi arananla eşleşiyor mu?
+        if (mac.equals(gesucht)) {
+            // Eşleşme bulundu, true döndür ve metottan çık.
+            [cite_start]return true; [cite: 1079]
+        }
+    }
+    // Döngü bitti ve eşleşme bulunamadı.
+    [cite_start]return false; [cite: 1093]
+}</code></pre>
+             <div class="teacher-note"><strong>Öğretmenin Notu:</strong> Bu, temel bir doğrusal arama (linear search) algoritmasıdır. [cite_start]Çözüm anahtarı [cite: 1067-1117], bu mantığı `foreach`, `for` döngüsü, C#'a özgü `Contains` metodu ve pseudocode gibi farklı yollarla gösteriyor. Hepsi aynı temel prensibe dayanır: döngü ve karşılaştırma.</div>
+        </div>
+        
+        <div class="slide">
+            <h2>Görev 4: Veri Modelleme (JSON'dan ERM'ye)</h2>
+            [cite_start]<h3>Soru: Anlage 10'daki JSON verilerini kullanarak Anlage 11'deki ERM'yi ilişkiler, kardinaliteler ve niteliklerle tamamlayın. [cite: 1889]</h3>
+            <p>Bu görev, yarı yapılandırılmış JSON verisini okuyup anlama ve bunu yapılandırılmış bir Varlık-İlişki Modeli'ne (ERM) dönüştürme becerini ölçer.</p>
+            <p><strong>Analiz ve Çözüm:</strong></p>
+            <ul>
+                [cite_start]<li><strong>Varlıklar (Entities):</strong> JSON yapısından üç ana varlık çıkarılır: <span class="solution">MainUser</span>, <span class="solution">PC</span>, ve <span class="solution">IPAddress</span>. [cite: 1122, 1142, 1136]</li>
+                <li><strong>Nitelikler (Attributes):</strong> Her varlığın özellikleri JSON'dan alınır:
+                    <ul>
+                        [cite_start]<li>MainUser: <span class="solution">userId, userName</span>. [cite: 1120, 1121]</li>
+                        [cite_start]<li>PC: <span class="solution">pcId, purpose, description</span>. [cite: 1139, 1140, 1141]</li>
+                        [cite_start]<li>IPAddress: <span class="solution">value, type</span> (ipID isteğe bağlı). [cite: 1137, 1138, 1135]</li>
+                    </ul>
+                </li>
+                <li><strong>İlişkiler ve Kardinaliteler:</strong>
+                    <ul>
+                        [cite_start]<li><span class="solution">1</span> MainUser, <span class="solution">1</span> PC'ye atanmıştır (1:1 ilişki). [cite: 1126, 1127]</li>
+                        [cite_start]<li><span class="solution">1</span> PC, <span class="solution">çok sayıda (n)</span> IPAddress'e sahip olabilir (1:n ilişki). [cite: 1143, 1134]</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="slide">
+            <h1>Sınav Analizi Tamamlandı!</h1>
+            <h2>Önemli Çıkarımlar</h2>
+            <ul>
+                <li><strong>Detaylı Okuma:</strong> Müşteri e-postaları ve belgelerdeki küçük detaylar (tarihler, istenen özellikler) kritik öneme sahip.</li>
+                <li><strong>İş Süreçleri Bilgisi:</strong> Mal kabul gibi standart iş süreçlerinin adımlarını bilmek gerekir.</li>
+                <li><strong>Ağ Temelleri:</strong> IP/MAC adresleme ve katmanlı mimari (OSI modeli) mantığı, ağ sorularının temelini oluşturur.</li>
+                <li><strong>Algoritmik Düşünme:</strong> Basit bir arama algoritmasını koda veya diyagrama dökebilme becerisi beklenir.</li>
+                <li><strong>Veri Modelleme:</strong> Farklı formatlardaki (JSON) verileri okuyup yapısal bir modele (ERM) dönüştürebilmek önemli bir yetenektir.</li>
+            </ul>
+            <div class="teacher-note"><strong>Öğretmenin Notu:</strong> Sait, bu sınav analiziyle bir başka önemli adımı daha tamamladın. Gördüğün gibi, sınavlar sadece teknik bilgiyi değil, aynı zamanda bu bilgiyi verilen bir iş senaryosu içinde uygulama, belgeleri okuyup anlama ve mantıksal sonuçlar çıkarma yeteneğini de ölçüyor. Bu pratik, gerçek iş hayatına çok benziyor. Çalışmaya devam et, harika gidiyorsun!</div>
+        </div>
+
+    </div>
+    <div class="controls">
+        <button id="prev-btn" class="btn">Önceki</button>
+        <button id="next-btn" class="btn">Sonraki</button>
+    </div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const homeLink = document.querySelector('.home-link');
+        const currentSlideSpan = document.getElementById('current-slide');
+        const totalSlides = slides.length;
+        document.getElementById('total-slides').textContent = totalSlides;
+        
+        let currentSlide = 0;
+
+        function showSlide(slideIndex) {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === slideIndex) slide.classList.add('active');
+            });
+            currentSlideSpan.textContent = slideIndex + 1;
+            homeLink.style.display = slideIndex === 0 ? 'none' : 'block';
+            prevBtn.style.display = slideIndex === 0 ? 'none' : 'inline-block';
+            nextBtn.style.display = slideIndex === totalSlides - 1 ? 'none' : 'inline-block';
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) showSlide(++currentSlide);
+        });
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) showSlide(--currentSlide);
+        });
+        homeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentSlide = 0;
+            showSlide(currentSlide);
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) nextBtn.click();
+            else if (e.key === 'ArrowLeft' && currentSlide > 0) prevBtn.click();
+        });
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

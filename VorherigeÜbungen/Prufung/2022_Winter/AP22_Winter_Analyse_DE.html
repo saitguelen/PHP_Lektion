@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prüfungsanalyse: AP Winter 2022/23 - Teil 1</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; overflow: hidden; }
+        .presentation-container { height: 100vh; display: flex; flex-direction: column; }
+        .slide { position: relative; display: none; padding: 40px 60px; height: 100vh; justify-content: center; align-items: center; text-align: center; overflow-y: auto; }
+        .slide.active { display: flex; flex-direction: column; animation: fadeInUp 0.7s ease-out; }
+        .slide h1 { font-size: 3em; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        .slide h2 { font-size: 2.2em; margin-bottom: 25px; color: #f1c40f; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
+        .slide h3 { font-size: 1.5em; margin-bottom: 15px; color: #1abc9c; text-align: left; width: 100%; max-width: 900px; }
+        .slide p, .slide li { font-size: 1.1em; line-height: 1.6; margin-bottom: 15px; max-width: 900px; text-align: left; }
+        .teacher-note { background: rgba(241, 196, 15, 0.15); border-left: 5px solid #f1c40f; padding: 15px; margin: 20px 0; border-radius: 8px; text-align: left; }
+        .teacher-note strong { color: #f1c40f; }
+        .controls { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 100; }
+        .btn { padding: 12px 25px; background: rgba(255, 255, 255, 0.2); border: 2px solid rgba(255, 255, 255, 0.3); color: white; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-size: 1.1em; }
+        .btn:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-2px); }
+        .slide-counter { position: fixed; top: 30px; right: 30px; background: rgba(0, 0, 0, 0.5); padding: 10px 20px; border-radius: 20px; font-size: 1.1em; z-index: 100; }
+        .home-link { position: fixed; top: 30px; left: 30px; font-size: 1.2em; color: white; text-decoration: none; background-color: rgba(0, 0, 0, 0.3); padding: 8px 15px; border-radius: 20px; transition: background-color 0.3s ease; z-index: 100; }
+        .home-link:hover { background-color: rgba(0, 0, 0, 0.5); }
+        pre { background: #2d2d2d; color: #f8f8f2; padding: 20px; border-radius: 10px; text-align: left; font-family: 'Courier New', Courier, monospace; font-size: 0.9em; white-space: pre-wrap; word-wrap: break-word; margin: 20px auto; max-width: 900px; }
+        table { width: 100%; max-width: 900px; margin: 20px auto; border-collapse: collapse; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden; text-align: left;}
+        th, td { padding: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+        th { background: rgba(255, 255, 255, 0.2); }
+        .solution { color: #2ecc71; font-weight: bold; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">13</span></div>
+        <a href="#" class="home-link" style="display: none;">🏠 Startseite</a>
+
+        <div class="slide active">
+            <h1>Prüfungsanalyse</h1>
+            <h2>AP Winter 2022/23 - Teil 1: Einrichtung eines IT-gestützten Arbeitsplatzes</h2>
+            <p style="text-align: center; margin-top: 20px;">In dieser Präsentation werden wir die Fragen der Winterprüfung 2022/23, ihre Lösungen und die dahinterstehende Logik Schritt für Schritt untersuchen.</p>
+        </div>
+
+        <div class="slide">
+            <h2>Überblick: Prüfungsszenario</h2>
+            <p>Sie sind bei der <strong>Systemhaus KG</strong> beschäftigt. Ihr Kunde, die <strong>FairCare GmbH</strong>, möchte seine Niederlassung in Karlsruhe mit einer flächendeckenden WLAN-Infrastruktur ausstatten. Ihre Aufgabe ist es, diesen Auftrag vorzubereiten und die technischen Details zu klären.</p>
+            <ul>
+                <li><strong>IT 1:</strong> Nutzwertanalyse, Handelskalkulation und Angebotserstellung.</li>
+                <li><strong>IT 2:</strong> WLAN-Sicherheit und Netzwerkkonfiguration (IPv6).</li>
+                <li><strong>IT 3:</strong> Troubleshooting und Cybersicherheit.</li>
+                <li><strong>IT 4:</strong> Datenbanktechnik (Kardinalitäten, SQL).</li>
+                <li><strong>IT 5:</strong> Programmierung (Debugging).</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 1.1: Nutzwertanalyse</h2>
+            [cite_start]<h3>Frage: Erstellen Sie eine Nutzwertanalyse für 3 WLAN-Accesspoints (AP) auf Grundlage der Kundenanforderungen und treffen Sie eine Auswahlentscheidung. [cite: 961]</h3>
+            <p><strong>Wichtigste Kundenanforderungen:</strong></p>
+            <ul>
+                [cite_start]<li>Ein möglichst aktueller WLAN- und Verschlüsselungsstandard. [cite: 961]</li>
+                [cite_start]<li>Die APs sollen an der Decke montiert werden, wo keine 230V-Steckdosen vorhanden sind (d.h. PoE ist erforderlich). [cite: 961]</li>
+                [cite_start]<li>Der Preis ist wichtig, das Budget soll eingehalten werden. [cite: 961]</li>
+            </ul>
+            [cite_start]<p><strong>Ergebnis:</strong> Laut Lösungshinweisen sollte der <span class="solution">AP JP55A</span> ausgewählt werden, da er die höchste gewichtete Punktzahl (<span class="solution">140</span>) erreicht. [cite: 1654, 1655]</p>
+            [cite_start]<div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> In dieser Analyse wurden die Kriterien "WLAN-Standard" und "Verschlüsselungsstandard" am höchsten gewichtet (<span class="solution">jeweils 30</span>). [cite: 1654] [cite_start]Der AP JP55A erhält in beiden Kriterien die höchste Punktzahl (jeweils 2), da er die Standards 802.11ax (Wi-Fi 6) und WPA3 bietet. [cite: 1074, 1654] [cite_start]Dies erfüllt exakt die Anforderung des Kunden nach den "aktuellsten Standards". [cite: 961]</div>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 1.2: Handelskalkulation</h2>
+            [cite_start]<h3>Frage: Berechnen Sie den Preis für einen WLAN-Accesspoint, welchen Sie Herrn Krautter anbieten können. [cite: 961]</h3>
+            <p>Dies ist eine vollständige Vorwärtskalkulation, die alle Kosten- und Gewinnschritte von der Beschaffung bis zum Verkauf an den Kunden umfasst.</p>
+            <p><strong>Rechenschritte (Zusammenfassung):</strong></p>
+            <ol>
+                [cite_start]<li><strong>Bezugspreis ermitteln:</strong> Listeneinkaufspreis (110,00 €) [cite: 1074] - [cite_start]5% Neukundenrabatt (5,50 €) [cite: 1076, 1663] - [cite_start]3% Skonto (3,14 €) [cite: 1076, 1663] [cite_start]= <span class="solution">101,36 €</span>. [cite: 1663]</li>
+                [cite_start]<li><strong>Selbstkosten ermitteln:</strong> Bezugspreis (101,36 €) + 25% Handlungskosten (25,34 €) [cite: 961, 1663] [cite_start]= <span class="solution">126,70 €</span>. [cite: 1663]</li>
+                [cite_start]<li><strong>Bruttoverkaufspreis ermitteln:</strong> Selbstkosten (126,70 €) + 15% Gewinn (19,01 €)[cite: 961, 1663]... + Kundenrabatt + Kundenskonto + 19% USt. (31,37 €) [cite_start][cite: 961, 1663] [cite_start]= <span class="solution">196,46 €</span>. [cite: 1663]</li>
+            </ol>
+             <div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Vergiss nicht, dass bei solchen Kalkulationen jeder Schritt auf dem vorherigen aufbaut. Zum Beispiel wird das Skonto vom rabattierten Preis berechnet. [cite_start]Befolge jeden Schritt sorgfältig und achte auf die geforderte Rundung. [cite: 962]</div>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 1.3: Angebotserstellung</h2>
+            [cite_start]<h3>Frage: Vervollständigen Sie das Angebot für alle benötigten IT-Komponenten, sowie Montage und Konfiguration. [cite: 968]</h3>
+            <p>Diese Aufgabe erfordert nicht nur das Auflisten der Produkte, sondern auch das Mitdenken über alle für den Betrieb notwendigen Teile.</p>
+            <p><strong>Entscheidender Punkt im Angebot:</strong></p>
+            [cite_start]<p>Der vorhandene Switch des Kunden (Anlage 2) <span class="solution">unterstützt kein PoE (Power over Ethernet)</span>. [cite: 1084] [cite_start]Die ausgewählten APs benötigen jedoch PoE für die Stromversorgung. [cite: 1074] [cite_start]Daher ist es zwingend erforderlich, dem Angebot <span class="solution">10 Power Injectors</span> hinzuzufügen, um die APs mit Strom zu versorgen. [cite: 1695]</p>
+            [cite_start]<p><strong>Gesamtsumme (Netto):</strong> 3825,00 € - 10% Rabatt (382,50 €) = <span class="solution">3442,50 €</span> [cite: 1695]</p>
+            <div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Dies ist eine ausgezeichnete Frage, um das kaufmännische Denken eines Technikers zu prüfen. Es wird erwartet, dass du nicht nur das Bestellte, sondern auch das für den Erfolg des Projekts "Notwendige" berücksichtigst und anbietest. Dieses Detail zu übersehen, würde zum Scheitern des Projekts und zur Unzufriedenheit des Kunden führen.</div>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 2.1 & 2.2: WLAN-Sicherheit und Frequenzbänder</h2>
+            [cite_start]<h3>Frage 2.1: Nennen Sie vier Sicherheitsaspekte, die bei einer zeitgemäßen WLAN-Absicherung beachtet werden müssen. [cite: 979, 981]</h3>
+            <ul>
+                [cite_start]<li><span class="solution">Ein sicheres Kennwort für die Konfigurationsoberfläche festlegen.</span> [cite: 1707]</li>
+                [cite_start]<li><span class="solution">Mindestens den Sicherheitsstandard WPA2, besser WPA3, verwenden.</span> [cite: 1707]</li>
+                [cite_start]<li><span class="solution">Aktuelle Firmware verwenden.</span> [cite: 1706]</li>
+                [cite_start]<li><span class="solution">Abschaltung des WLANs außerhalb der Betriebszeiten.</span> [cite: 1708]</li>
+            </ul>
+            [cite_start]<h3>Frage 2.2: Nennen Sie jeweils zwei Eigenschaften der Frequenzbereiche 2,4 GHz und 5 GHz. [cite: 983, 986]</h3>
+            [cite_start]<p><strong>2,4 GHz:</strong> Hat eine <span class="solution">größere Reichweite</span> und durchdringt Wände besser. [cite: 1722] [cite_start]Ist jedoch <span class="solution">stärker ausgelastet und anfälliger für Störungen</span> durch andere Geräte (Bluetooth, Mikrowellen). [cite: 1723]</p>
+            [cite_start]<p><strong>5 GHz:</strong> Bietet eine größere Anzahl (<span class="solution">bis zu 23</span>) nicht überlappender Kanäle, was eine <span class="solution">stabilere und schnellere Verbindung</span> ermöglicht. [cite: 1725, 1726] Hat jedoch eine geringere Reichweite und wird stärker von Hindernissen gedämpft.</p>
+        </div>
+        
+        <div class="slide">
+            <h2>Aufgabe 2.3: IPv6-Konfiguration</h2>
+            [cite_start]<h3>Frage: Geben Sie eine dafür gültige IPv6-Adresskonfiguration für ein mobiles Gerät an. [cite: 992]</h3>
+            [cite_start]<p>Laut Netzwerkplan (Anlage 4) lautet der globale Netzwerkpräfix `2003:f3:71e:bb00::/64`. [cite: 1093]</p>
+            <p><strong>Eine gültige Konfiguration:</strong></p>
+            <ul>
+                [cite_start]<li><strong>Globale Adresse (gekürzt):</strong> <span class="solution">2003:f3:71e:bb00:fc89:bc42:de:5c5f/64</span> (der Host-Teil kann zufällig sein). [cite: 1728]</li>
+                [cite_start]<li><strong>Link-Local-Adresse (gekürzt):</strong> <span class="solution">fe80::fc89:bc42:de:5c5f/64</span> (beginnt mit fe80::). [cite: 1728]</li>
+                [cite_start]<li><strong>Default Gateway:</strong> <span class="solution">fe80::1</span> (die Link-Local-Adresse des Routers im Netzwerk). [cite: 1098, 1728]</li>
+                [cite_start]<li><strong>DNS-Server:</strong> <span class="solution">fe80::5</span> (die Link-Local-Adresse des DNS-Servers im Netzwerkplan). [cite: 1111, 1728]</li>
+            </ul>
+            <div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Bei IPv6 hat ein Gerät typischerweise mehrere Adressen. Die globale Adresse dient der Internetkommunikation, die Link-Local-Adresse nur der Kommunikation im lokalen Netzwerk. Auf lokale Ressourcen wie das Gateway und den DNS-Server wird oft über deren Link-Local-Adressen zugegriffen.</div>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 3.1: Klassifizierung von Statusmeldungen</h2>
+            [cite_start]<h3>Frage: Ordnen Sie den Statusmeldungen die jeweilige Dringlichkeitsstufe zu. [cite: 1001]</h3>
+            <table>
+                <thead><tr><th>Statusmeldung</th><th>Stufe</th><th>Erklärung</th></tr></thead>
+                <tbody>
+                    <tr><td>Die Geschäftsführung wünscht sich einen neuen Farbdrucker.</td><td class="solution">Information</td><td>Dies ist keine Störung oder ein Risiko, sondern eine Standardanfrage.</td></tr>
+                    <tr><td>Die Festplattenkapazität des Servers ist zu 90% erschöpft.</td><td class="solution">Warnung</td><td>Es liegt noch keine Störung vor, aber es ist eine Warnung, dass bald ein Problem auftreten könnte.</td></tr>
+                    <tr><td>Das ERP-System ist nicht erreichbar.</td><td class="solution">Ausnahme (Exception)</td><td>Ein kritisches System funktioniert nicht; dies ist eine Unterbrechung, die sofortiges Handeln erfordert.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="slide">
+            <h2>Aufgabe 3.2 & 3.3: Ransomware</h2>
+            [cite_start]<h3>Frage 3.2: Nennen Sie dem Kunden fünf Handlungsempfehlungen für Mitarbeitende zum Schutz vor Ransomware. [cite: 1023]</h3>
+            <ul>
+                [cite_start]<li><span class="solution">Öffnen Sie keine E-Mail-Anhänge von unbekannten Absendern.</span> [cite: 1743]</li>
+                [cite_start]<li><span class="solution">Klicken Sie nicht auf verdächtige Links.</span> [cite: 1744]</li>
+                [cite_start]<li><span class="solution">Halten Sie Betriebssystem und Software durch regelmäßige Updates aktuell (Patchmanagement).</span> [cite: 1745]</li>
+                [cite_start]<li><span class="solution">Sichern Sie Daten regelmäßig auf einem Offlinemedium.</span> [cite: 1746]</li>
+                [cite_start]<li><span class="solution">Verwenden Sie starke Antiviren- und Firewall-Systeme.</span> [cite: 1744]</li>
+            </ul>
+            [cite_start]<h3>Frage 3.3: Beurteilen Sie die Auswirkung eines Ransomware-Angriffes auf die drei Schutzziele der Informationssicherheit. [cite: 1026]</h3>
+            [cite_start]<p><strong>Verfügbarkeit:</strong> <span class="solution">Das System ist nicht mehr verfügbar.</span> Die Daten sind verschlüsselt und unzugänglich. [cite: 1748]</p>
+            [cite_start]<p><strong>Integrität:</strong> <span class="solution">Die Daten sind verändert.</span> Die Originaldaten wurden durch die Verschlüsselung kompromittiert. [cite: 1748]</p>
+            [cite_start]<p><strong>Vertraulichkeit:</strong> <span class="solution">Informationen sind auch Unbefugten zugänglich.</span> Angreifer exfiltrieren oft Daten, um damit zu erpressen. [cite: 1748]</p>
+        </div>
+        
+        <div class="slide">
+            <h2>Aufgabe 4: Datenbanktechnik</h2>
+            [cite_start]<h3>Frage 4.1: Ergänzen Sie die Kardinalitäten im Relationenmodell auf Basis der `CREATE TABLE`-Anweisungen. [cite: 1037]</h3>
+            [cite_start]<p><strong>Analyse:</strong> Die Tabelle `tblmeldung` enthält Fremdschlüssel (`fbid` und `fsid`), die auf die Tabellen `tblbenutzer` und `tblstatus` verweisen. [cite: 1248, 1249, 1256]</p>
+            <ul>
+                <li><strong>tblbenutzer → tblmeldung:</strong> Ein Benutzer kann mehrere Meldungen erstellen. Dies ist eine <span class="solution">1:n</span>-Beziehung.</li>
+                <li><strong>tblstatus → tblmeldung:</strong> Ein Status kann mehreren Meldungen zugewiesen werden. [cite_start]Dies ist ebenfalls eine <span class="solution">1:n</span>-Beziehung. [cite: 1763]</li>
+            </ul>
+            [cite_start]<h3>Frage 4.3: Warum schlägt die Anweisung `INSERT INTO tblstatus VALUES (1, 'Ausstehend');` fehl? [cite: 1046, 1049]</h3>
+            [cite_start]<p><strong>Erklärung:</strong> <span class="solution">Die Spalte `sid` ist ein Primärschlüssel (Primary Key).</span> [cite: 1255] [cite_start]Ein Datensatz mit der `sid`=1 existiert bereits in der Tabelle. [cite: 1264, 1267] [cite_start]Da Primärschlüssel eindeutig sein müssen, lässt die Datenbank das Einfügen eines zweiten Datensatzes mit demselben PK-Wert nicht zu und gibt einen Fehler aus. [cite: 1781, 1782]</p>
+        </div>
+
+        <div class="slide">
+            <h2>Aufgabe 5: Programmierung (Debugging)</h2>
+            [cite_start]<h3>Frage: Korrigieren Sie die Fehler im Code, der den Durchschnitt eines Integer-Arrays berechnen soll. [cite: 1060]</h3>
+            <p>Der gegebene Code enthält 3 grundlegende Fehler:</p>
+            <ol>
+                [cite_start]<li><strong>Falscher Datentyp:</strong> Die Variablen `summe` und `durchschnittswert` sind als `int` deklariert. [cite: 1273, 1274] Die Division `int` / `int` schneidet den Dezimalteil ab (Ganzzahldivision). [cite_start]Damit das Ergebnis eine Kommazahl sein kann, müssen diese Variablen <span class="solution">`double` oder `float`</span> sein. [cite: 1788, 1789]</li>
+                [cite_start]<li><strong>Falscher Schleifenstart:</strong> Die Schleife beginnt mit `for(int i=1; ...)`. [cite: 1275] Array-Indizes beginnen bei 0. Dieser Code überspringt das erste Element des Arrays (`daten[0]`). [cite_start]Die Schleife muss mit <span class="solution">`for(int i=0; ...)`</span> beginnen. [cite: 1791]</li>
+                [cite_start]<li><strong>Fehlerhafte Division:</strong> Die Operation `summe / daten.Length` führt eine Ganzzahldivision durch. [cite: 1279] [cite_start]Nachdem die Variablen in `double` geändert wurden, liefert diese Operation das korrekte Ergebnis. [cite: 1800]</li>
+            </ol>
+             <div class="teacher-note"><strong>Anmerkung des Lehrers:</strong> Dies ist ein klassischer "Off-by-one"- und "Integer-Division"-Fehler. Besonders in Sprachen wie Java ist es wichtig zu wissen, dass das Ergebnis der Division zweier Ganzzahlen wieder eine Ganzzahl ist. Für ein korrektes Ergebnis muss mindestens ein Operand eine Fließkommazahl (double/float) sein.</div>
+        </div>
+
+        <div class="slide">
+            <h1>Prüfungsanalyse abgeschlossen!</h1>
+            <h2>Wichtige Erkenntnisse</h2>
+            <ul>
+                <li><strong>Kaufmännische Prozesse:</strong> Die Nutzwertanalyse und eine vollständige Handelskalkulation sind das Kernstück dieser Prüfung. Diese Themen musst du beherrschen.</li>
+                <li><strong>Technische Details sind entscheidend:</strong> Aktuelle technische Begriffe wie PoE, WLAN-Standards (802.11ax) und Verschlüsselung (WPA3) werden als bekannt vorausgesetzt.</li>
+                <li><strong>Netzwerk & Sicherheit:</strong> IPv6-Grundlagen, Cybersicherheitsbedrohungen (Ransomware) und grundlegende Sicherheitsmaßnahmen sind immer relevant.</li>
+                <li><strong>Datenbanklogik:</strong> Du musst wissen, was Schlüssel (PK, FK) bedeuten und wie sie Kardinalitäten bestimmen, um SQL-Fragen zu beantworten.</li>
+                <li><strong>Code-Lesen und Debugging:</strong> Genauso wichtig wie das Schreiben von fehlerfreiem Code ist die Fähigkeit, logische Fehler in bestehendem Code zu finden und zu korrigieren.</li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="controls">
+        <button id="prev-btn" class="btn">Zurück</button>
+        <button id="next-btn" class="btn">Weiter</button>
+    </div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const homeLink = document.querySelector('.home-link');
+        const currentSlideSpan = document.getElementById('current-slide');
+        const totalSlides = slides.length;
+        document.getElementById('total-slides').textContent = totalSlides;
+        
+        let currentSlide = 0;
+
+        function showSlide(slideIndex) {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === slideIndex) slide.classList.add('active');
+            });
+            currentSlideSpan.textContent = slideIndex + 1;
+            homeLink.style.display = slideIndex === 0 ? 'none' : 'block';
+            prevBtn.style.display = slideIndex === 0 ? 'none' : 'inline-block';
+            nextBtn.style.display = slideIndex === totalSlides - 1 ? 'none' : 'inline-block';
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) showSlide(++currentSlide);
+        });
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) showSlide(--currentSlide);
+        });
+        homeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentSlide = 0;
+            showSlide(currentSlide);
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) nextBtn.click();
+            else if (e.key === 'ArrowLeft' && currentSlide > 0) prevBtn.click();
+        });
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

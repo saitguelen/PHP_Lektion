@@ -14,9 +14,9 @@
 	checkdate()		:	Belirtilecek olan zamani Gregoryen (Miladi) takvimine göre doğrulamasını yaparak, doğrulama sonucunu boolean (mantıksal) veri türünde döndürmek için kullanılır.
 	*/
 	
-	$Zaman	=	date("d.m.Y H:i:s");
-	
-	echo "Zaman : " . $Zaman;
+	$Zaman =date("d.m.Y H:i:s");
+
+	echo "Su an ki Tarih ve Saat: ". $Zaman;
 	
 	?>
 </body>

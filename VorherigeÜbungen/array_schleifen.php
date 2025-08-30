@@ -42,8 +42,8 @@ $besteck = ["Gabel", "Messer", "Löffel", "Kuchengabel"];
 
 //foreach (Name der Datenstruktur as $irgendeinName)
 
-    foreach($besteck as $wert)
-        echo $wert." ";
+    foreach($besteck as $Anahtar => $wert)
+        echo $Anahtar ."=>". $wert." </br>";
 
 echo "<br>";
 

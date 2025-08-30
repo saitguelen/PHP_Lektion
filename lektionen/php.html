@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP: Temellerden Ustalığa - Eğitim Sunumu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #747fe2 0%, #4a59af 100%); color: white; overflow: hidden; }
+        .presentation-container { height: 100vh; display: flex; flex-direction: column; }
+        .slide { position: relative; display: none; padding: 40px 60px; height: 100vh; justify-content: center; align-items: center; text-align: center; overflow-y: auto; }
+        .slide.active { display: flex; flex-direction: column; animation: fadeInUp 0.7s ease-out; }
+        .slide h1 { font-size: 3.2em; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        .slide h2 { font-size: 2.3em; margin-bottom: 25px; color: #FFD700; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
+        .slide h3 { font-size: 1.6em; margin-bottom: 15px; color: #87CEEB; }
+        .slide p, .slide li { font-size: 1.2em; line-height: 1.6; margin-bottom: 15px; max-width: 900px; }
+        .concept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin: 20px 0; width: 100%; max-width: 1200px; }
+        .concept-card { background: rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .concept-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
+        .controls { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 100; }
+        .btn { padding: 12px 25px; background: rgba(255, 255, 255, 0.2); border: 2px solid rgba(255, 255, 255, 0.3); color: white; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-size: 1.1em; }
+        .btn:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-2px); }
+        .slide-counter { position: fixed; top: 30px; right: 30px; background: rgba(0, 0, 0, 0.5); padding: 10px 20px; border-radius: 20px; font-size: 1.1em; z-index: 100; }
+        .home-link { position: fixed; top: 30px; left: 30px; font-size: 1.2em; color: white; text-decoration: none; background-color: rgba(0, 0, 0, 0.3); padding: 8px 15px; border-radius: 20px; transition: background-color 0.3s ease; z-index: 100; }
+        .home-link:hover { background-color: rgba(0, 0, 0, 0.5); }
+        .analogy-box { background: rgba(255, 215, 0, 0.2); border: 2px solid #FFD700; border-radius: 15px; padding: 25px; margin: 20px 0; font-style: italic; }
+        .analogy-icon { font-size: 2em; margin-bottom: 10px; }
+        pre { background: #2d2d2d; color: #f8f8f2; padding: 20px; border-radius: 10px; text-align: left; font-family: 'Courier New', Courier, monospace; font-size: 0.9em; white-space: pre-wrap; word-wrap: break-word; margin: 20px auto; max-width: 800px; }
+        code { background: rgba(0, 0, 0, 0.3); padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; }
+        table { width: 100%; max-width: 800px; margin: 20px auto; border-collapse: collapse; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+        th { background: rgba(255, 255, 255, 0.2); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">24</span></div>
+        <a href="#" class="home-link" style="display: none;">🏠 Anasayfa</a>
+
+        <div class="slide active">
+            <h1>🐘 PHP: Temellerden Ustalığa</h1>
+            <h2>Sunucu Taraflı Betik Dili</h2>
+            <p style="font-size: 1.5em; margin-top: 40px;">Web'in bel kemiğini oluşturan teknolojiyi adım adım öğrenelim.</p>
+        </div>
+
+        <div class="slide">
+            <h2>🤔 Neden PHP?</h2>
+            <div class="concept-grid">
+                <div class="concept-card"><h3>🌐 Yaygın Kullanım</h3><p>İnternet'teki sitelerin ~%78'i PHP kullanır. WordPress, Wikipedia, Facebook gibi devler PHP ile başlamıştır.</p></div>
+                <div class="concept-card"><h3>🚀 Kolay Öğrenim</h3><p>Sözdizimi (syntax) C'ye benzer ve öğrenmesi kolaydır. Geniş bir topluluğa ve zengin bir dokümantasyona sahiptir.</p></div>
+                <div class="concept-card"><h3>🛠️ Geniş Ekosistem</h3><p>Laravel, Symfony gibi modern framework'ler ve Composer gibi paket yöneticileri ile profesyonel uygulamalar geliştirmek çok kolaydır.</p></div>
+            </div>
+        </div>
+        
+        <div class="slide">
+            <h2>⚙️ Nasıl Çalışır?</h2>
+            <p>PHP, sunucu taraflı bir dildir. Kodlar kullanıcının bilgisayarında değil, sunucuda çalışır ve tarayıcıya saf HTML olarak gönderilir.</p>
+            <div class="analogy-box"><div class="analogy-icon">👨‍🍳</div><p><strong>Analoji:</strong> Restoran. Siz (kullanıcı) sipariş verirsiniz. Garson (tarayıcı) siparişi mutfağa (sunucu) iletir. Aşçı (PHP) yemeği (dinamik içerik) hazırlar ve garson size sadece sonucu (HTML sayfası) sunar.</p></div>
+            <p style="font-size: 2em; letter-spacing: 10px;">💻 (İstek) → 🌐 → 🖥️[Apache + 🐘PHP] → 🌐 → 💻 (Cevap HTML)</p>
+        </div>
+        
+        <div class="slide">
+            <h2>📝 Temel Sözdizimi</h2>
+            <p>PHP kodu <code>&lt;?php ... ?&gt;</code> etiketleri arasına yazılır. Her komut <code>;</code> ile biter.</p>
+            <pre><code>&lt;?php
+  // Bu bir yorum satırıdır.
+  echo "Merhaba Sait!"; // Ekrana yazı yazdırmak için kullanılır.
+?&gt;</code></pre>
+            <table><tr><th>Yapı</th><th>Açıklama</th></tr><tr><td><code>echo</code></td><td>Ekrana bir veya daha fazla metin yazdırmak için kullanılır.</td></tr><tr><td><code>// ...</code></td><td>Tek satırlık yorumlar için kullanılır.</td></tr><tr><td><code>/* ... */</code></td><td>Çok satırlı yorum blokları için kullanılır.</td></tr></table>
+        </div>
+        
+        <div class="slide">
+            <h2>📦 Değişkenler ve Veri Tipleri</h2>
+            <p>Değişkenler, verileri saklamak için kullanılan kaplardır ve <code>$</code> işareti ile başlarlar.</p>
+            <pre><code>$isim = "Sait";                  // String (Metin)
+$yas = 30;                       // Integer (Tam Sayı)
+$ogrenciMi = true;               // Boolean (true/false)
+$dersler = ["Java", "PHP"];      // Array (Dizi)
+$bosDeger = null;                // NULL (Boş)</code></pre>
+            <p>PHP, "gevşek tipli" (loosely typed) bir dildir. Değişkenin tipini önceden belirtmenize gerek yoktur.</p>
+        </div>
+
+        <div class="slide">
+            <h2>🔍 Değişken Kontrolü: isset(), empty()</h2>
+            <p>Değişkenlerin durumunu kontrol etmek için hayati fonksiyonlardır, özellikle formlardan gelen verilerle çalışırken.</p>
+            <div class="concept-grid">
+                <div class="concept-card"><h3><code>isset($var)</code></h3><p>Bir değişkenin tanımlı olup olmadığını ve değerinin <code>null</code> olmadığını kontrol eder. Tanımlıysa <code>true</code> döner.</p><pre><code>$a = "test"; isset($a); // true
+$b = null; isset($b); // false
+isset($c); // false (tanımsız)</code></pre></div>
+                <div class="concept-card"><h3><code>empty($var)</code></h3><p>Bir değişkenin "boş" olup olmadığını kontrol eder. <code>""</code>, <code>0</code>, <code>"0"</code>, <code>null</code>, <code>false</code>, <code>[]</code> gibi değerler boş kabul edilir.</p><pre><code>$x = ""; empty($x); // true
+$y = 0; empty($y); // true
+$z = "a"; empty($z); // false</code></pre></div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🚦 Kontrol Yapıları: if/else</h2>
+            <p>Programın akışını belirli koşullara göre yönlendirir.</p>
+            <pre><code>$not = 75;
+if ($not >= 85) {
+  echo "Pekiyi";
+} elseif ($not >= 70) {
+  echo "İyi";
+} else {
+  echo "Geçer";
+}</code></pre>
+        </div>
+        
+        <div class="slide">
+            <h2>🔁 Döngüler: for & foreach</h2>
+            <p>Bir kod bloğunu tekrarlamak için kullanılır.</p>
+            <div class="concept-grid">
+              <div class="concept-card"><h3><code>for</code> Döngüsü</h3><pre><code>for ($i = 1; $i <= 3; $i++) {
+  echo "Sayı: $i &lt;br&gt;";
+}</code></pre></div>
+              <div class="concept-card"><h3><code>foreach</code> Döngüsü</h3><pre><code>$dersler = ["Java", "PHP"];
+foreach ($dersler as $ders) {
+  echo $ders . "&lt;br&gt;";
+}</code></pre></div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>📊 Diziler (Arrays)</h2>
+            <p>Birden fazla değeri tek bir değişkende saklamamızı sağlar.</p>
+            <div class="concept-grid">
+                <div class="concept-card"><h3>İndeksli Diziler</h3><pre><code>$arabalar = ["BMW", "Mercedes", "Audi"];
+echo $arabalar[0]; // Çıktı: BMW</code></pre></div>
+                <div class="concept-card"><h3>İlişkisel Diziler</h3><pre><code>$kisi = [
+  "ad" => "Sait",
+  "yas" => 30
+];
+echo $kisi["ad"]; // Çıktı: Sait</code></pre></div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🔧 Sık Kullanılan Dizi Fonksiyonları</h2>
+            <pre><code>$dizi = ["elma", "armut"];
+
+// Eleman sayısını verir
+count($dizi); // 2
+
+// Diziye eleman ekler
+array_push($dizi, "çilek");
+
+// Dizinin son elemanını çıkarır
+array_pop($dizi);
+
+// Diziyi sıralar
+sort($dizi);
+
+// Diziyi bir metne dönüştürür
+$metin = implode(", ", $dizi); // "elma, armut"
+
+// Metni diziye dönüştürür
+$yeniDizi = explode(", ", $metin);</code></pre>
+        </div>
+
+        <div class="slide">
+            <h2>🧩 Fonksiyonlar</h2>
+            <p>Tekrar tekrar kullanabileceğimiz kod bloklarıdır. "Bir kere yaz, her yerde kullan."</p>
+            <pre><code>// Fonksiyon tanımı
+function selamla($isim = "Misafir") {
+  return "Merhaba, " . $isim . "!";
+}
+
+// Fonksiyonu çağırma
+echo selamla("Sait"); // Merhaba, Sait!
+echo selamla();      // Merhaba, Misafir!</code></pre>
+        </div>
+
+        <div class="slide">
+            <h2>📨 Form Verilerini İşleme: GET & POST</h2>
+            <p>PHP, HTML formlarından gelen verileri <code>$_GET</code> ve <code>$_POST</code> süper global dizileriyle yakalar.</p>
+            <pre><code>// form.html
+&lt;form action="islem.php" method="post"&gt;
+  &lt;input type="text" name="kullanici_adi"&gt;
+  &lt;button type="submit"&gt;Gönder&lt;/button&gt;
+&lt;/form&gt;
+
+// islem.php
+if (!empty($_POST["kullanici_adi"])) {
+    echo "Hoş geldin, " . htmlspecialchars($_POST["kullanici_adi"]);
+}</code></pre>
+            <p><strong>Önemli:</strong> Güvenlik için kullanıcıdan gelen veriyi ekrana basarken daima <code>htmlspecialchars()</code> kullan!</p>
+        </div>
+
+        <div class="slide">
+            <h2>🍪 Cookie ve Session Yönetimi</h2>
+            <p>Kullanıcı bilgilerini ve durumunu (örneğin giriş yapıp yapmadığını) takip etmek için kullanılır.</p>
+            <div class="concept-grid">
+                <div class="concept-card"><h3>Cookie (Çerez)</h3><p>Kullanıcının tarayıcısında saklanır. "Beni Hatırla" gibi özellikler için idealdir.</p><pre><code>// 1 saat geçerli bir cookie oluşturur
+setcookie("kullanici", "Sait", time() + 3600);
+// Cookie'yi okuma
+echo $_COOKIE["kullanici"];</code></pre></div>
+                <div class="concept-card"><h3>Session (Oturum)</h3><p>Sunucuda saklanır. Güvenli veriler (kullanıcı ID'si gibi) için kullanılır. Daha güvenlidir.</p><pre><code>session_start(); // Her zaman en başta olmalı!
+// Session'a veri atama
+$_SESSION["user_id"] = 123;
+// Session'dan veri okuma
+echo $_SESSION["user_id"];</code></pre></div>
+            </div>
+        </div>
+        
+        <div class="slide">
+            <h2>📁 Dosya İşlemleri: Okuma ve Yazma</h2>
+            <p>PHP ile sunucudaki dosyaları okuyabilir ve dosyalara veri yazabilirsiniz.</p>
+            <pre><code>$dosya = 'notlar.txt';
+$icerik = "Bu dosya PHP tarafından oluşturuldu.\n";
+
+// Dosyaya yazma (var olanın üzerine yazar)
+file_put_contents($dosya, $icerik);
+
+// Dosyaya ekleme yapma
+file_put_contents($dosya, "Yeni bir satır.\n", FILE_APPEND);
+
+// Dosyayı okuma
+$okunanIcerik = file_get_contents($dosya);
+echo nl2br($okunanIcerik); // Satır sonlarını <br> yapar</code></pre>
+        </div>
+        
+        <div class="slide">
+            <h2>📅 Tarih ve Zaman Fonksiyonları</h2>
+            <p>Tarih ve zamanı formatlamak ve işlemek için kullanılır.</p>
+            <pre><code>// Şu anki tarihi ve saati gösterir
+echo date('d-m-Y H:i:s'); // Örn: 29-08-2025 14:22:38
+
+// Zaman damgası (timestamp) oluşturma
+$yarin = mktime(0, 0, 0, date("m"), date("d")+1, date("Y"));
+echo date('d-m-Y', $yarin);
+
+// Daha modern yaklaşım: DateTime objesi
+$date = new DateTime();
+$date->modify('+1 day');
+echo $date->format('d-m-Y');</code></pre>
+        </div>
+        
+        <div class="slide">
+            <h2>🧮 Matematik Fonksiyonları</h2>
+            <p>Sık kullanılan matematiksel işlemler için hazır fonksiyonlar.</p>
+            <pre><code>// Rastgele sayı üretir
+echo rand(1, 100);
+
+// Sayıyı yuvarlar
+echo round(4.7); // 5
+echo round(4.3); // 4
+
+// En büyük ve en küçük değeri bulur
+echo max(5, 9, 2, 22); // 22
+echo min(5, 9, 2, 22); // 2
+
+// Mutlak değer
+echo abs(-15); // 15</code></pre>
+        </div>
+        
+        <div class="slide">
+            <h2>🚗 OOP Giriş</h2>
+            <p>OOP, kodu nesneler (objects) ve sınıflar (classes) etrafında düzenleyen bir programlama yaklaşımıdır.</p>
+            <div class="analogy-box"><div class="analogy-icon">🏠</div><p><strong>Analoji:</strong> Bir <strong>Sınıf (Class)</strong>, bir evin mimari planıdır. Bir <strong>Nesne (Object)</strong> ise bu plana göre inşa edilmiş gerçek bir evdir.</p></div>
+            <pre><code>class Araba {
+  public $renk; // özellik (property)
+  
+  public function __construct($renk) {
+    $this->renk = $renk;
+  }
+
+  public function calistir() { // metot (method)
+    return "Araba çalıştı!";
+  }
+}
+
+$bmw = new Araba("Siyah"); // Nesne oluşturma
+echo $bmw->renk; // "Siyah"</code></pre>
+        </div>
+        
+        <div class="slide">
+            <h2>🏛️ OOP Temel Kavramları</h2>
+            <div class="concept-grid">
+                <div class="concept-card"><h3>Kapsülleme (Encapsulation)</h3><p>Verileri ve metotları bir sınıf içinde birleştirip dış erişimi kısıtlamak (<code>public</code>, <code>private</code>, <code>protected</code>).</p></div>
+                <div class="concept-card"><h3>Kalıtım (Inheritance)</h3><p>Bir sınıfın başka bir sınıftan özellik ve metotları miras alması (<code>extends</code>).</p></div>
+                <div class="concept-card"><h3>Çok Biçimlilik (Polymorphism)</h3><p>Farklı sınıfların aynı isimdeki metotları farklı şekillerde uygulaması.</p></div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>➕ include ve require</h2>
+            <p>Kodunuzu daha modüler hale getirmek için bir PHP dosyasına başka bir PHP dosyasını dahil etmenizi sağlar.</p>
+            <div class="concept-grid">
+                <div class="concept-card"><h3><code>include</code></h3><p>Dosya bulunamazsa bir uyarı (warning) verir ve kod çalışmaya devam eder.</p><pre><code>// header.php
+&lt;h1&gt;Siteme Hoş Geldiniz&lt;/h1&gt;
+
+// index.php
+include 'header.php';
+echo "Ana sayfa içeriği.";</code></pre></div>
+                <div class="concept-card"><h3><code>require</code></h3><p>Dosya bulunamazsa ölümcül bir hata (fatal error) verir ve kod durur. Genellikle kritik dosyalar (veritabanı bağlantısı gibi) için kullanılır.</p><pre><code>// db_config.php - veritabanı ayarları
+require 'db_config.php';
+// ... veritabanı işlemleri</code></pre></div>
+            </div>
+            <p><code>include_once</code> ve <code>require_once</code> versiyonları, bir dosyanın sadece bir kez dahil edilmesini garantiler.</p>
+        </div>
+
+        <div class="slide">
+            <h2>🗄️ Veritabanı Bağlantısı: PDO</h2>
+            <p>Modern PHP'de veritabanı işlemleri için <strong>PDO (PHP Data Objects)</strong> kullanılır. Güvenli ve esnektir.</p>
+            <pre><code>try {
+  $conn = new PDO("mysql:host=localhost;dbname=test", "root", "");
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  // SQL Injection'a karşı güvenli yöntem
+  $stmt = $conn->prepare("SELECT * FROM users WHERE id = :id");
+  $stmt->execute(['id' => 123]);
+  $user = $stmt->fetch();
+
+} catch(PDOException $e) {
+  echo "Bağlantı hatası: " . $e->getMessage();
+}</code></pre>
+        </div>
+        
+        <div class="slide">
+            <h2>📦 Composer - Bağımlılık Yöneticisi</h2>
+            <p>Java'daki Maven veya Node.js'teki NPM gibidir. Projenizin ihtiyaç duyduğu kütüphaneleri (paketleri) yönetir.</p>
+            <div class="analogy-box"><div class="analogy-icon">🛒</div><p><strong>Analoji:</strong> Bir yemek tarifi (projeniz) için gerekli malzemelerin (kütüphaneler) listesini (<code>composer.json</code>) hazırlarsınız. <code>composer install</code> komutuyla tüm malzemeleri sizin için alır ve mutfağınıza (<code>vendor</code> klasörü) getirir.</p></div>
+        </div>
+
+        <div class="slide">
+            <h2>✨ Modern PHP: Namespaces & Autoloading</h2>
+            <p>Büyük projelerde kod organizasyonu için kritik öneme sahiptir.</p>
+            <div class="concept-grid">
+              <div class="concept-card"><h3>İsim Alanları (Namespaces)</h3><p>Aynı isme sahip sınıfların çakışmasını önler. Bir nevi sanal klasör yapısıdır.</p><pre><code>namespace App\Controllers;
+class UserController { }</code></pre></div>
+              <div class="concept-card"><h3>Otomatik Yükleme (Autoloading)</h3><p>Composer sayesinde sınıflar ihtiyaç duyulduğunda otomatik olarak yüklenir. <code>require</code> kalabalığı biter.</p><pre><code>use App\Controllers\UserController;
+$controller = new UserController();</code></pre></div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🏗️ Neden Framework Kullanmalıyız?</h2>
+            <p>Framework'ler, hazır bir yapı, kütüphaneler ve en iyi pratikleri sunar. Tekerleği yeniden icat etmemizi önler.</p>
+            <div class="concept-grid">
+              <div class="concept-card"><h3>Laravel</h3><p>Hızlı geliştirme, zarif sözdizimi ve başlangıç dostu olmasıyla bilinir.</p></div>
+              <div class="concept-card"><h3>Symfony</h3><p>Büyük ve kurumsal projeler için idealdir. Modüler yapısı ile çok esnektir.</p></div>
+            </div>
+            <p>Bir "Fachinformatiker für Anwendungsentwicklung" olarak, en az bir PHP framework'ünü iyi derecede öğrenmen kariyerin için çok önemlidir.</p>
+        </div>
+
+        <div class="slide">
+            <h2>🎓 Özet ve Sonraki Adımlar</h2>
+            <h3>Öğrendiklerimiz:</h3>
+            <ul style="text-align: center; list-style-position: inside; font-size: 1em;">
+                <li>Temel sözdizimi, değişkenler ve kontrolü, döngüler</li>
+                <li>Dizi, tarih, dosya ve matematik fonksiyonları</li>
+                <li>Form, Cookie ve Session yönetimi</li>
+                <li>OOP, PDO, Composer ve Framework kavramları</li>
+            </ul>
+            <div class="analogy-box" style="margin-top: 30px;"><div class="analogy-icon">🚀</div><p><strong>Şimdi Sıra Sende!</strong> Öğrenmenin en iyi yolu pratik yapmaktır. Kendine küçük bir proje hedefi koy. Örneğin: Basit bir blog, bir yapılacaklar listesi veya bir iletişim formu. Bu, öğrendiklerini pekiştirmenin en iyi yoludur. Başarılar dilerim!</p></div>
+        </div>
+    </div>
+    <div class="controls">
+        <button id="prev-btn" class="btn">Önceki</button>
+        <button id="next-btn" class="btn">Sonraki</button>
+    </div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const homeLink = document.querySelector('.home-link');
+        const currentSlideSpan = document.getElementById('current-slide');
+        const totalSlidesSpan = document.getElementById('total-slides');
+        
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        totalSlidesSpan.textContent = totalSlides;
+
+        function showSlide(slideIndex) {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === slideIndex) {
+                    slide.classList.add('active');
+                }
+            });
+            currentSlideSpan.textContent = slideIndex + 1;
+            homeLink.style.display = slideIndex === 0 ? 'none' : 'block';
+            prevBtn.style.display = slideIndex === 0 ? 'none' : 'inline-block';
+            nextBtn.style.display = slideIndex === totalSlides - 1 ? 'none' : 'inline-block';
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+        
+        homeLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            currentSlide = 0;
+            showSlide(currentSlide);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) {
+                nextBtn.click();
+            } else if (e.key === 'ArrowLeft' && currentSlide > 0) {
+                prevBtn.click();
+            }
+        });
+
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

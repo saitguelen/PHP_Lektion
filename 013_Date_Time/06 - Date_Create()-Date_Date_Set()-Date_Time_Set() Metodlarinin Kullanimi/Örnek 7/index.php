@@ -18,7 +18,7 @@
 	$Tarih		=	date_create("1980-12-08"); // Yıl-Ay-Gün
 	
 	date_date_set($Tarih, 1978, 07, 05); // Tarihin Atanacağı Degisken Adı, Yıl, Ay, Gün
-	date_time_set($Tarih, 13, 55, 34); // Saatin Atanacağı Degisken Adı, Saat, Dakika, Saniye
+	date_time_set($Tarih, 23, 45, 34); // Saatin Atanacağı Degisken Adı, Saat, Dakika, Saniye
 	
 	echo "<pre>";
 	print_r($Tarih);
