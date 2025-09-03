@@ -15,7 +15,7 @@
 	empty()		:	Belirtilecek olan değişkenin veya dizi içerisinde belirtilecek olan anahtarın daha önceden tanımlanmamış olduğunu sınamak için kullanılır. İşlem sonucu daima boolean (mantıksal) veri türünde döner.
 	*/
 	
-	define("ISIM", "Volkan Alakent");
+	define("ISIM", "Sait Gülen");
 	
 	$Kontrol	=	defined("ISIM");
 	

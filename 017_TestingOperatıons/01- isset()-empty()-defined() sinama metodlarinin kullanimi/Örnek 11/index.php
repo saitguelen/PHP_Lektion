@@ -8,6 +8,13 @@
 </head>
 
 <body>
+	<p>
+		<pre>
+defined()	:  Sabit deger tanimlar
+isset()		:  <b>deger var mi</b> diye sorar dogru ise ilk if bloku calisir degilse else calisir
+empty()		:  <b>deger yok mu</b> diye sorar, yoksa sonuc dogru olur ve if bloku calisir, deger varsa else bloku calisir.
+		</pre>
+	</p>
 	<?php
 	/*
 	defined()	:	Belirtilecek olan sabitin varlığını sınamak için kullanılır. İşlem sonucu daima boolean (mantıksal) veri türünde döner.

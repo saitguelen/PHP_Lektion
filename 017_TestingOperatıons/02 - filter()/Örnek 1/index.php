@@ -25,7 +25,7 @@
 		FILTER_FLAG_QUERY_REQUIRED	:	Belirtilecek olan URL (Uniform Resource Locator) (nizami kaynak bulucu) adresinin query (sorgu) değerinin olup olmadığını sınamak için kullanılır. İşlem sonucu başarılı olursa değeri geriye döndürür. İşlem sonucu başarısız olursa herhangi bir değer döndürmez.
 	*/
 	
-	$Deger		=	"Volkan Alakent 1980 Doğumludur.";
+	$Deger		=	"Sait Gülen 1987 Doğumludur.";
 	
 	if(filter_var($Deger, FILTER_VALIDATE_BOOLEAN)){
 		echo "Sınanan içerik boolean veri türündedir.";

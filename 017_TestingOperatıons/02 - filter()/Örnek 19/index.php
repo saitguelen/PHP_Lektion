@@ -25,7 +25,7 @@
 		FILTER_FLAG_QUERY_REQUIRED	:	Belirtilecek olan URL (Uniform Resource Locator) (nizami kaynak bulucu) adresinin query (sorgu) değerinin olup olmadığını sınamak için kullanılır. İşlem sonucu başarılı olursa değeri geriye döndürür. İşlem sonucu başarısız olursa herhangi bir değer döndürmez.
 	*/
 	
-	$Deger		=	"https://extraegitim.com";
+	$Deger		=	"https://www.extraegitim.com";
 	
 	if(filter_var($Deger, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED)){
 		echo "Sınanan içerik URL adresidir.";

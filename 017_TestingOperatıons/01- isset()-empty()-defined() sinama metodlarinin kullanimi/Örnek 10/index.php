@@ -20,7 +20,7 @@
 	$Kontrol	=	empty($Isim);
 	
 	if($Kontrol==true){
-		echo 'Isim adında değişken bulunmamaktadır.';
+		echo 'Isim adında değişken bulunmamaktadır.'; //yani burada yok mu diye soruyoruz, isim adinda br degisken yok mu? diyoruz.true gelirse evet yok diyip bu satiri yazacak
 	}else{
 		echo 'Isim adında değişken bulunmaktadır.';
 	}
