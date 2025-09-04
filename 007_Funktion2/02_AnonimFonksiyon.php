@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Anonim Fonksiyon</h1>
-    <p>Normalde fonksiyon tanimlarken adini ve icine de islevini yazip en sonda da o fonfsoynu ismi ile cagiriyorduk.</p>
+    <p>Normalde fonksiyon tanimlarken adini ve icine de islevini yazip en sonda da o fonksiyonu ismi ile cagiriyorduk.</p>
     <p>Anonim fonksiyon isimsiz fonksiyon demek, bizde fonksiyon calistirmak icin ismi ile cagirmamiz gerek e isim yoksa fonksiyonu nasil cagiricaz?</p>
     <p>Iste burada özel bir yapi devreye griyor</p>
     <p>

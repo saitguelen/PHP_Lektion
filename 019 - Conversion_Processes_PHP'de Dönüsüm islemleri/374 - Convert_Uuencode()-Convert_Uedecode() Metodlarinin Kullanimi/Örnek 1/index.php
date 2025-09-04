@@ -14,7 +14,7 @@
 	convert_uudecode()	:	Belirtilecek olan ve uuencode (Unix to Unix Encoding) (unix'ten unix'e kodlayıcı) algoritması kullanılarak kodlanmış olan içeriği geri çözerek, çözdüğü değeri geriye döndürür.
 	*/
 	
-	$Deger		=	"Volkan Alakent - Extra Eğitim";
+	$Deger		=	"Sait Gülen - Extra Eğitim";
 	echo $Deger . "<br />";
 	$Kodla		=	convert_uuencode($Deger);
 	echo $Kodla;

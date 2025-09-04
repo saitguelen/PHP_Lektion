@@ -14,7 +14,7 @@
 	base64_decode()		:	Belirtilecek olan ve base64 (8 Bit'lik verilerin 64 Bit'lik verilere çevrilmesi) algoritması kullanılarak kodlanmış olan içeriği geri çözerek, çözdüğü değeri geriye döndürür.
 	*/
 	
-	$Icerik		=	"RXh0cmEgRcSfaXRpbSAtIFZvbGthbiBBbGFrZW50";
+	$Icerik		=	"RXh0cmEgRcSfaXRpbSAtIFNhaXQgR8O8bGVu";
 	echo $Icerik . "<br />";
 	$Donustur	=	base64_decode($Icerik);
 	echo $Donustur;

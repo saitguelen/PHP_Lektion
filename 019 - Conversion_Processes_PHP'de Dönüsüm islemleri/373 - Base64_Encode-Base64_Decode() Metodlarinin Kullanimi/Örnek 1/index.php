@@ -14,7 +14,7 @@
 	base64_decode()		:	Belirtilecek olan ve base64 (8 Bit'lik verilerin 64 Bit'lik verilere çevrilmesi) algoritması kullanılarak kodlanmış olan içeriği geri çözerek, çözdüğü değeri geriye döndürür.
 	*/
 	
-	$Icerik		=	"Extra Eğitim - Volkan Alakent";
+	$Icerik		=	"Extra Eğitim - Sait Gülen";
 	echo $Icerik . "<br />";
 	$Donustur	=	base64_encode($Icerik);
 	echo $Donustur;

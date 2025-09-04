@@ -65,7 +65,7 @@
 	$Deger	=	12;
 	
 	function YaziYaz(){
-		echo "Extra Eğitim - Volkan Alakent"; 
+		echo "Extra Eğitim - Sait Gülen"; 
 	}
 	
 	YaziYaz();
