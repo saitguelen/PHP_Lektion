@@ -15,23 +15,35 @@
 	hash_hmac_file()	:	Belirtilecek olan dosyanın HMAC (Hash-based Message Authentication) (karma tabanlı ileti kimlik doğrulama kodu) yöntemi ile hash özetini üreterek, ürettiği değeri geriye döndürür.
 	*/
 	
-	$Icerik		=	"Extra Eğitim - Volkan Alakent";
+	$Icerik		=	"Extra Eğitim - Sait Gülen";
 	$Anahtar	=	"GizliBirDeger";
 	
 	
 	echo "Orjinal içerik : " . $Icerik . "<br />";
 	
 	$UretBir	=	hash_hmac("md5", $Icerik, $Anahtar);
-	echo "md5 algoritması kullanılarak üretilmiş hash : " . $UretBir . "<br />";
+	echo "md5 algoritması kullanılarak üretilmiş hash : " . $UretBir . "<br />". "<br />";
 	
 	$UretIki	=	hash_hmac("sha1", $Icerik, $Anahtar);
-	echo "sha1 algoritması kullanılarak üretilmiş hash : " . $UretIki . "<br />";
+	echo "sha1 algoritması kullanılarak üretilmiş hash : " . $UretIki . "<br />". "<br />";
 	
 	$UretUc		=	hash_hmac("snefru256", $Icerik, $Anahtar);
-	echo "snefru256 algoritması kullanılarak üretilmiş hash : " . $UretUc . "<br />";
+	echo "snefru256 algoritması kullanılarak üretilmiş hash : " . $UretUc . "<br />". "<br />";
 	
 	$UretDort	=	hash_hmac("ripemd320", $Icerik, $Anahtar);
-	echo "ripemd320 algoritması kullanılarak üretilmiş hash : " . $UretDort . "<br />";
+	echo "ripemd320 algoritması kullanılarak üretilmiş hash : " . $UretDort . "<br />". "<br />";
+
+	$UretAlti	=	hash_hmac("gost", $Icerik, $Anahtar);
+	echo "gost algoritması kullanılarak üretilmiş hash : " . $UretAlti . "<br />". "<br />";
+
+	$UretYedi	=	hash_hmac("haval224,4", $Icerik, $Anahtar);
+	echo "haval224,4algoritması kullanılarak üretilmiş hash : " . $UretYedi . "<br />". "<br />";
+
+	$UretSekiz	=	hash_hmac("whirlpool", $Icerik, $Anahtar);
+	echo "whirlpool algoritması kullanılarak üretilmiş hash : " . $UretSekiz . "<br />". "<br />";
+
+	$UretDokuz	=	hash_hmac_file("sha3-384", "Oku.txt", $Anahtar);//Dosyada yapabiliriz...
+	echo "sha3-384 algoritması kullanılarak üretilmiş hash Oku Dosyasi: " . $UretDokuz . "<br />". "<br />";
 	
 	$UretBes	=	hash_hmac("sha3-512", $Icerik, $Anahtar);
 	echo "sha3-512 algoritması kullanılarak üretilmiş hash : " . $UretBes;

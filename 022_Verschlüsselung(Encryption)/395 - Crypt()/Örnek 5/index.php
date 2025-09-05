@@ -14,8 +14,8 @@
 	*/
 	
 	$Deger		=	"Extra Eğitim";
-	$Olustur	=	crypt($Deger, '$1$Alakent_$'); // 12 karakterlik salt (tuz) kullanılmış MD5 şifrelemi.
-	echo $Olustur;
+	$Olustur	=	crypt($Deger, '$1$Sgulen_$'); // 12 karakterlik salt (tuz) kullanılmış MD5 şifrelemi.
+	echo $Olustur;													// $1$ ile baslamali
 	
 	?>
 </body>

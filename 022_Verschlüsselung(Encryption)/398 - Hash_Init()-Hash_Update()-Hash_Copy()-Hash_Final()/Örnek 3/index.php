@@ -18,7 +18,7 @@
 	
 	$Deger1		=	"Extra Eğitim";
 	echo "Orjinal İçerik 1 : " . $Deger1 . "<br />";
-	$Deger2		=	"Volkan Alakent";
+	$Deger2		=	"Sait Gülen";
 	echo "Orjinal İçerik 2 : " . $Deger2 . "<br />";
 	
 	$Sifreleme	=	hash_init("md5");

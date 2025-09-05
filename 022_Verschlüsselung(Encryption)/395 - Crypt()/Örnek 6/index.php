@@ -15,13 +15,13 @@
 	
 	$Deger		=	"Extra Eğitim";
 	
-	$OlusturBir	=	crypt($Deger, "Va"); // 2 karakterlik salt (tuz) kullanılmış DES şifrelemi.
+	$OlusturBir	=	crypt($Deger, "Sa"); // 2 karakterlik salt (tuz) kullanılmış DES şifrelemi.büyükharf ile baslamali
 	echo $OlusturBir . "<br />";
 	
-	$OlusturIki	=	crypt($Deger, "_Valakent"); // 9 karakterlik salt (tuz) kullanılmış DES şifrelemi.
+	$OlusturIki	=	crypt($Deger, "_SgulenNe"); // 9 karakterlik salt (tuz) kullanılmış DES şifrelemi._ ile baslamali
 	echo $OlusturIki . "<br />";
 	
-	$OlusturUc	=	crypt($Deger, '$1$Alakent_$'); // 12 karakterlik salt (tuz) kullanılmış MD5 şifrelemi.
+	$OlusturUc	=	crypt($Deger, '$1$Sgulen_$'); // 12 karakterlik salt (tuz) kullanılmış MD5 şifrelemi.$1$ ile baslamali 
 	echo $OlusturUc . "<br />";
 	
 	?>

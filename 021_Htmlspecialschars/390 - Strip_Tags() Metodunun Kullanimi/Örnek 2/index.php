@@ -13,7 +13,7 @@
 	strip_tags()	:	Belirtilecek olan içerikte bulunabilecek olan tüm HTML kodlarını temizleyerek, temizlenmiş olan değeri geriye döndürür.
 	*/
 	
-	$Deger		=	"<h1>Extra Eğitim</h1><div>Volkan Alakent</div><div>A'dan Z'ye PHP Görsel Eğitim Seti</div>";
+	$Deger		=	"<h1>Extra Eğitim</h1><div style=color:red;>Sait Gülen</div><div>A'dan Z'ye PHP Görsel Eğitim Seti</div>";
 	echo $Deger . "<br /><br />";
 	
 	

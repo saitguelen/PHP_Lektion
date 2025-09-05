@@ -14,7 +14,7 @@
 	*/
 	
 	$Deger		=	"Extra Eğitim";
-	$Olustur	=	@crypt($Deger);
+	$Olustur	=	@crypt($Deger); //@ isareti hata kodu göstermez kapatir
 	echo $Olustur;
 	
 	?>

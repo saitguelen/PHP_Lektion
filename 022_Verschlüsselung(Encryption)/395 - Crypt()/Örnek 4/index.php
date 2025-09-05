@@ -14,8 +14,8 @@
 	*/
 	
 	$Deger		=	"Extra Eğitim";
-	$Olustur	=	crypt($Deger, "_Valakent"); // 9 karakterlik salt (tuz) kullanılmış DES şifrelemi.
-	echo $Olustur;
+	$Olustur	=	crypt($Deger, "_SGulenNe"); // 9 karakterlik salt (tuz) kullanılmış DES şifrelemi.Toplamda 9 karakter olmali
+	echo $Olustur;												// mutlaka alt cizgili (_) ile baslamali
 	
 	?>
 </body>

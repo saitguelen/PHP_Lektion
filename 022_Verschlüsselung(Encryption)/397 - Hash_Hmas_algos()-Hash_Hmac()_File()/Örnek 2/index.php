@@ -15,7 +15,7 @@
 	hash_hmac_file()	:	Belirtilecek olan dosyanın HMAC (Hash-based Message Authentication) (karma tabanlı ileti kimlik doğrulama kodu) yöntemi ile hash özetini üreterek, ürettiği değeri geriye döndürür.
 	*/
 	
-	$Icerik		=	"Extra Eğitim - Volkan Alakent";
+	$Icerik		=	"Extra Eğitim - Sait Gülen";
 	echo "Orjinal içerik : " . $Icerik . "<br />";
 	
 	$Uret		=	hash_hmac("md5", $Icerik, "GizliAnahtar");

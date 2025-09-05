@@ -18,13 +18,13 @@
 	
 	$Deger1		=	"Extra Eğitim";
 	echo "Orjinal İçerik 1 : " . $Deger1 . "<br />";
-	$Deger2		=	"Volkan Alakent";
+	$Deger2		=	"Sait Gülen";
 	echo "Orjinal İçerik 2 : " . $Deger2 . "<br />";
 	
 	$Sifreleme	=	hash_init("md5");
 	
 	hash_update($Sifreleme, $Deger1); // İlk update edildiğinde içerik : Extra Eğitim
-	hash_update($Sifreleme, $Deger2); // ek update edildiğinde içerik : Extra EğitimVolkan Alakent
+	hash_update($Sifreleme, $Deger2); // ek update edildiğinde içerik : Extra EğitimSait Gülen
 	
 	$Sonuc		=	hash_final($Sifreleme);
 	

@@ -16,7 +16,7 @@
 	hash_final()	:	Daha önceden hash özeti üretme işlemi başlatılarak içeriğide dahil edilmiş bir işlemin hash özetini üreterek, ürettiği değeri geriye döndürür.
 	*/
 	
-	$Deger		=	"Extra Eğitim - Volkan Alakent";
+	$Deger		=	"Extra Eğitim - Sait Gülen";
 	echo "Orjinal İçerik : " . $Deger . "<br />";
 	
 	$Sifreleme	=	hash_init("md5");

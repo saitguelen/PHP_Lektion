@@ -13,7 +13,7 @@
 	str_rot13()		:	Belirtilecek olan içeriğin ROT13 kodlaması değerini bularak, bulduğu değeri geriye döndürür. Ayrıca ROT13 kodlaması kullanılarak kodlanmış olan içeriği geri çözerek, çözdüğü değeri geriye döndürür.
 	*/
 	
-	$Deger		=	"Extra Eğitim & Volkan Alakent & A'dan Z'ye PHP Görsel Eğitim Seti & 2019";
+	$Deger		=	"Extra Eğitim & Sait Gülen & A'dan Z'ye PHP Görsel Eğitim Seti & 2019";
 	echo $Deger . "<br />";
 	
 	$Olustur	=	str_rot13($Deger);

@@ -13,7 +13,7 @@
 	crc32()		:	Belirtilecek olan içeriğin crc32 temsilini hesaplayıp bularak, bulduğu değeri geriye döndürür.
 	*/
 	
-	$Sifre		=	"Volkan Alakent";
+	$Sifre		=	"Sait Gülen";
 	$Olustur	=	crc32($Sifre);
 	echo $Olustur;
 	
