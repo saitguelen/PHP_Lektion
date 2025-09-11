@@ -26,7 +26,7 @@
         <?php foreach($ogrenciler as $ogrenci): ?>
         <tr>
             <td><?= $ogrenci['id'] ?></td>
-            <td><?= $ogrenci['name'] ?></td>
+            <td><a href ="controller.php?id=<?=$ogrenci['id'] ?>"><?= $ogrenci['name'] ?></a></td>
             <td><?= $ogrenci['age'] ?></td>
             <td><?= $ogrenci['class'] ?></td>
         </tr>

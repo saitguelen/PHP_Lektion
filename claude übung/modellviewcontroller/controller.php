@@ -5,9 +5,19 @@ include 'Student(model).php';
 // Student class'ından nesne oluştur
 $student = new Student();
 
-// Model'den veri al
-$ogrenciler = $student->getAllStudents();
-
-// View'i çağır ve veriyi gönder
-include 'student_list(View).php';
+// URL'de bir 'id' parametresi var mı?
+if (isset($_GET['id'])) {
+    // --- ÖĞRENCİ DETAY SAYFASI MANTIĞI ---
+    $id = $_GET['id'];
+    // id'ye göre tek bir öğrenci bilgisini al
+    $ogrenci = $student->getStudentById($id);
+    // Öğrenci detayını gösterecek View'i çağır
+    include 'student_detail(view).php';
+} else {
+    // --- ÖĞRENCİ LİSTESİ SAYFASI MANTIĞI ---
+    // Model'den tüm öğrencilerin verisini al
+    $ogrenciler = $student->getAllStudents();
+    // Öğrenci listesini gösterecek View'i çağır
+    include 'student_list(View).php';
+}
 ?>

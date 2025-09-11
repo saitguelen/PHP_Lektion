@@ -27,7 +27,7 @@
 		die();
 	}
 	
-	mysqli_autocommit($VeritabaniBaglantisi, FALSE);
+	mysqli_autocommit($VeritabaniBaglantisi, FALSE);  //gecici islem yaptirmak icin aciyoruz.False ile gecici alanda tutariz commit ile geciciden cikartip kalici hale getiririz.
 	
 	$SorguBir		=	mysqli_query($VeritabaniBaglantisi, "UPDATE hesaplar SET hesapbakiyesi=hesapbakiyesi-3000 WHERE id=1");
 	$SorguIki		=	mysqli_query($VeritabaniBaglantisi, "UPDATE hesaplar SET hesapbakiyesi=hesapbakiyesi+3000 WHERE id=3");
@@ -36,7 +36,7 @@
 		mysqli_commit($VeritabaniBaglantisi);
 		echo "İşlem Tamamlandı";
 	}else{
-		mysqli_rollback($VeritabaniBaglantisi);
+		mysqli_rollback($VeritabaniBaglantisi);//gecici islem basarisiz olursa buraya eski hline getirir.
 		echo "Sorgu Hatası";
 	}
 	

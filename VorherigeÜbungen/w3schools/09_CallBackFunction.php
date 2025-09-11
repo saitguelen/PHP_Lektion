@@ -24,7 +24,7 @@ Mevcut herhangi bir fonksiyon geri çağırma fonksiyonu olarak kullanılabilir.
 işlevin adını içeren bir dizeyi başka bir işlevin argümanı olarak geçirin:
 Örnek:
 Bir dizideki her dizenin uzunluğunu hesaplamak için PHP'nin array_map() işlevine bir geriçağırım iletin:</pre>
-<pre ><div style="display: block; background-color: yellow; border:dotted;">
+    <pre><div style="display: block; background-color: yellow; border:dotted;">
      function my_callback($item)
     {
         return strtoupper($item);
@@ -35,7 +35,7 @@ Bir dizideki her dizenin uzunluğunu hesaplamak için PHP'nin array_map() işlev
     echo "<pre>";
     print_r($upper);
     echo "</div></pre>";
-</pre>
+    </pre>
     </p>
     <?php
     function my_callback($item)
@@ -44,10 +44,21 @@ Bir dizideki her dizenin uzunluğunu hesaplamak için PHP'nin array_map() işlev
     }
 
     $strings = ["apple", "orange", "banana", "coconut"];
-    $upper = array_map("my_callback", $strings);
+    $upper = array_map("my_callback", $strings); //array deki bütün degiskenleri büyük harf ile yazar
     echo "<pre>";
     print_r($upper);
     echo "</pre>";
+
+    function my_callback2($utem)
+    {
+        return strlen($utem); //verilen ifadedeki degerlerin uzunlugunu döndürür.
+    }
+    $uzun = array_map("my_callback2", $strings);
+    echo "Arraydeki karakter uzunlugu herbur degerin: <br />";
+    echo "<pre>";
+    print_r($uzun);
+    echo "</pre>";
+
 
     ?>
 
