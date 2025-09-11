@@ -22,7 +22,7 @@
 		die();
 	}
 	
-	$Sil	=	mysqli_query($VeritabaniBaglantisi, "DELETE FROM uyeler WHERE id=5");
+	$Sil	=	mysqli_query($VeritabaniBaglantisi, "DELETE FROM uyeler WHERE id=11");
 		if($Sil){
 			echo "Kayıt Silindi";
 		}else{

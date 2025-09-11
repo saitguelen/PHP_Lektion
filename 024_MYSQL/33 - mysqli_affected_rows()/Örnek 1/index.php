@@ -22,7 +22,7 @@
 		die();
 	}
 	
-	$Sorgu		=	mysqli_query($VeritabaniBaglantisi, "SELECT * FROM uyeler WHERE yas=40");
+	$Sorgu		=	mysqli_query($VeritabaniBaglantisi, "SELECT * FROM uyeler WHERE yas=33");
 		if($Sorgu){
 			echo "Kayıtlara Erişiliyor.<br />";
 			echo "İşlemde Etkilenen Kayıt Sayısı : " . mysqli_affected_rows($VeritabaniBaglantisi);

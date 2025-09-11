@@ -24,14 +24,14 @@
 	
 	$GelenIDDegeri			=	$_GET["id"];
 	$GelenadisoyadiDegeri	=	$_POST["adisoyadi"];
-	$GelenemailadresiDegeri	=	$_POST["emailadresi"];
+	$GelenemailadresiDegeri	=	$_POST["e_mailadresi"];
 	$GelensifreDegeri		=	$_POST["sifre"];
 	$GelentelefonDegeri		=	$_POST["telefon"];
 	$GelenyasDegeri			=	$_POST["yas"];
 	$GelencinsiyetDegeri	=	$_POST["cinsiyet"];
 	$GelensehirDegeri		=	$_POST["sehir"];
 	
-	$Guncelle	=	mysqli_query($VeritabaniBaglantisi, "UPDATE uyeler SET adisoyadi='$GelenadisoyadiDegeri', emailadresi='$GelenemailadresiDegeri', sifre='$GelensifreDegeri', telefon='$GelentelefonDegeri', yas='$GelenyasDegeri', cinsiyet='$GelencinsiyetDegeri', sehir='$GelensehirDegeri' WHERE id=" . $GelenIDDegeri);
+	$Guncelle	=	mysqli_query($VeritabaniBaglantisi, "UPDATE uyeler SET adisoyadi='$GelenadisoyadiDegeri', e_mailadresi='$GelenemailadresiDegeri', sifre='$GelensifreDegeri', telefon='$GelentelefonDegeri', yas='$GelenyasDegeri', cinsiyet='$GelencinsiyetDegeri', sehir='$GelensehirDegeri' WHERE id=" . $GelenIDDegeri);
 		if($Guncelle){
 			echo "Kayıt Güncellendi<br />";
 			echo "<a href='index.php'>Ana Sayfaya Geri Dön</a>";

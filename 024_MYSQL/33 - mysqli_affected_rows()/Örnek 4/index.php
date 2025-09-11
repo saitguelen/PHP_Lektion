@@ -22,7 +22,7 @@
 		die();
 	}
 	
-	$Sorgu		=	mysqli_query($VeritabaniBaglantisi, "UPDATE uyeler SET emailadresi=REPLACE(emailadresi, 'extraegitim', 'volkanalakent') WHERE id>2 AND id<5");
+	$Sorgu		=	mysqli_query($VeritabaniBaglantisi, "UPDATE uyeler SET e_mailadresi=REPLACE(e_mailadresi, 'gmail', 'smail') WHERE id>2 AND id<5");
 		if($Sorgu){
 			echo "Değiştirme İşlemleri Tamamlandı.<br />";
 			echo "İşlemde Etkilenen Kayıt Sayısı : " . mysqli_affected_rows($VeritabaniBaglantisi);

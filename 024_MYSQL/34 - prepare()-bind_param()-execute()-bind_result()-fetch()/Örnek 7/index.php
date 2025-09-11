@@ -29,27 +29,41 @@
 		echo "Hata Açıklaması : " . $VeritabaniBaglantisi->connect_error;
 		die();
 	}
+
+	$AdSoyad ="Akif Gln";
+	$Email = "akif@hotmail.com";
+	$Sifre = "2345";
+	$Telefon = "741852963";
+	$Yas= 45;
+	$Cinsiyet = "Erkek";
+	$Sehir = "Zonguldak";
 	
-	$AdSoyad		=	'Volkan Alakent';
-	$Email			=	'info@extraegitim.com';
-	$Sifre			=	'08121980';
-	$Telefon		=	'05352255144';
-	$Yas			=	38;
-	$Cinsiyet		=	'Erkek';
-	$Sehir			=	'İstanbul';
-	
-	$Ekle		=	$VeritabaniBaglantisi->prepare("INSERT INTO uyeler (adisoyadi, emailadresi, sifre, telefon, yas, cinsiyet, sehir) values (?, ?, ?, ?, ?, ?, ?)");
+
+	//Simdi bind_param ile veri ekleyelim daha güvenli olmasi acisindan;
+
+	$Ekle = $VeritabaniBaglantisi->prepare("INSERT INTO uyeler (adisoyadi, e_mailadresi, sifre, telefon, yas, cinsiyet, sehir) VALUES (?,?,?,?,?,?,?)");
+
+	//execute etmeden bind_param kullaniyoruz
+
+	if($Ekle){
+		$Ekle->bind_param("ssssiss",$AdSoyad,$Email,$Sifre,$Telefon,$Yas,$Cinsiyet,$Sehir);//gelecek degisken cinslerini yaziyoruz
+		//simdi programi calistiralim
+		$Ekle->execute();
 		if($Ekle){
-			$Ekle->bind_param("ssssiss", $AdSoyad, $Email, $Sifre, $Telefon, $Yas, $Cinsiyet, $Sehir);
-			$Ekle->execute();
-				if($Ekle){
-					echo "Kayıt Eklendi";
-				}else{
-					echo "Sorgu Hatası";
-				}
+			echo "Kayit eklendi";
 		}else{
-			echo "Sorgu Hatası";
+			echo "Sorgu hatasi";
 		}
+	}else {
+		echo "Sorgu hatasi";
+
+	}
+	
+
+	//prepare ile sorgu olusturduk
+	//bind_param ile güvenli veri gönderdik
+	//execute ile calistirdik
+	//bind_result ve fetch  ile de istersek sonuclari görebiliriz
 	
 	$VeritabaniBaglantisi->close();
 	

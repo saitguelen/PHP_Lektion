@@ -22,7 +22,7 @@
 		die();
 	}
 	
-	$Sorgu		=	$VeritabaniBaglantisi->query("UPDATE uyeler SET adisoyadi='Değişti', sifre='XXXX' WHERE id>=2 AND id<=5");
+	$Sorgu		=	$VeritabaniBaglantisi->query("UPDATE uyeler SET adisoyadi='Nesibe glnn', sifre='XXXX' WHERE id>=2 AND id<=5");
 		if($Sorgu){
 			echo "Güncelleme İşlemleri Tamamlandı.<br />";
 			echo "İşlemde Etkilenen Kayıt Sayısı : " . $VeritabaniBaglantisi->affected_rows;

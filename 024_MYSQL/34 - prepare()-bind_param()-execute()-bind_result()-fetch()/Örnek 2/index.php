@@ -30,7 +30,7 @@
 		die();
 	}
 	
-	$Sorgu		=	$VeritabaniBaglantisi->prepare("SELECT adisoyadi, emailadresi, yas FROM uyeler");
+	$Sorgu		=	$VeritabaniBaglantisi->prepare("SELECT adisoyadi, e_mailadresi, yas FROM uyeler");
 		if($Sorgu){
 			$Sorgu->execute();
 			$Sorgu->bind_result($KayitIsimSoyisim, $KayitEmaili, $KayitYasi);

@@ -22,7 +22,7 @@
 		die();
 	}
 	
-	$Sorgu		=	mysqli_query($VeritabaniBaglantisi, "INSERT INTO uyeler (adisoyadi, emailadresi, sifre, telefon, yas, cinsiyet, sehir) values ('Banu Alakent', 'banu@extraegitim.com', '123', '05320000000', '36', 'Kadın', 'Uşak'), ('Memduh Alakent', 'memduh@extraegitim.com', '8888', '02120000000', '56', 'Erkek', 'Denizli'), ('Mustafa Alakent', 'mustafa@extraegitim.com', '321', '03120000000', '43', 'Erkek', 'Çankırı')");
+	$Sorgu		=	mysqli_query($VeritabaniBaglantisi, "INSERT INTO uyeler (adisoyadi, e_mailadresi, sifre, telefon, yas, cinsiyet, sehir) values ('Banu Alakent', 'banu@extraegitim.com', '123', '05320000000', '36', 'Kadın', 'Uşak'), ('Memduh Alakent', 'memduh@extraegitim.com', '8888', '02120000000', '56', 'Erkek', 'Denizli'), ('Mustafa Alakent', 'mustafa@extraegitim.com', '321', '03120000000', '43', 'Erkek', 'Çankırı')");
 		if($Sorgu){
 			echo "Ekleme İşlemleri Tamamlandı.<br />";
 			echo "İşlemde Etkilenen Kayıt Sayısı : " . mysqli_affected_rows($VeritabaniBaglantisi);

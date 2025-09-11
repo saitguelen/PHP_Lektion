@@ -32,12 +32,13 @@
 	
 	$Sorgu		=	$VeritabaniBaglantisi->prepare("SELECT * FROM uyeler WHERE id>?");
 		if($Sorgu){
-			$IdKosulu	=	5;
-			$Sorgu->bind_param("i", $IdKosulu);
+			$IdKosulu	=	15;
+			echo "ID'si 15'den büyük degerler: <br /><br /><br />";
+			$Sorgu->bind_param("i", $IdKosulu);//yukarida soru isareti yerine gelecek degeri bind_param ile atariz, i ile integer, degisken ile hangi id verdigimizi yaziyoruz
 			$Sorgu->execute();
-			$Sorgu->bind_result($KayitIdsi, $KayitIsimSoyisim, $KayitEmaili, $KayitSifresi, $KayitTelefonNumarasi, $KayitYasi, $KayitCinsiyeti, $KayitSehri, $KayitTarihi);
+			$Sorgu->bind_result($KayitIdsi, $KayitIsimSoyisim, $KayitEmaili, $KayitSifresi, $KayitTelefonNumarasi, $KayitYasi, $KayitCinsiyeti, $KayitSehri);
 			while($Sorgu->fetch()){
-				echo $KayitIdsi . " | " . $KayitIsimSoyisim . " | " . $KayitEmaili . " | " . $KayitSifresi . " | " . $KayitTelefonNumarasi . " | " . $KayitYasi . " | " . $KayitCinsiyeti . " | " . $KayitSehri . " | " . $KayitTarihi . "<br />";
+				echo $KayitIdsi . " | " . $KayitIsimSoyisim . " | " . $KayitEmaili . " | " . $KayitSifresi . " | " . $KayitTelefonNumarasi . " | " . $KayitYasi . " | " . $KayitCinsiyeti . " | " . $KayitSehri . " | "  . "<br />";
 			}
 		}else{
 			echo "Sorgu Hatası";

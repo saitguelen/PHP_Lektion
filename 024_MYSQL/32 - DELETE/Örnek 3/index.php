@@ -27,7 +27,7 @@
 			$KayitSayisi		=	mysqli_num_rows($Sorgu);
 				if($KayitSayisi>0){
 					while($Kayitlar=mysqli_fetch_assoc($Sorgu)){
-						echo $Kayitlar["id"] . " | " . $Kayitlar["adisoyadi"] . " | " . $Kayitlar["emailadresi"] . " | " . $Kayitlar["sifre"] . " | " . $Kayitlar["telefon"] . " | " . $Kayitlar["yas"] . " | " . $Kayitlar["cinsiyet"] . " | " . $Kayitlar["sehir"] . " | " . $Kayitlar["kayittarihi"] . " | <a href='sonuc.php?id=" . $Kayitlar["id"] ."'>SİL</a><br />";
+						echo $Kayitlar["id"] . " | " . $Kayitlar["adisoyadi"] . " | " . $Kayitlar["e_mailadresi"] . " | " . $Kayitlar["sifre"] . " | " . $Kayitlar["telefon"] . " | " . $Kayitlar["yas"] . " | " . $Kayitlar["cinsiyet"] . " | " . $Kayitlar["sehir"] . " | " . " | <a href='sonuc.php?id=" . $Kayitlar["id"] ."'>SİL</a><br />";
 					}
 				}else{
 					echo "Kayıt Yok";
@@ -35,6 +35,11 @@
 		}else{
 			echo "Sorgu Hatası";
 		}
+
+		echo "<br />";
+		echo "<br />";
+		echo "yeni veri eklemek icin: " ." <a href='update.php' > Yeni üye ekle </a>". " sayfasina tiklayin". "<br />";
+		echo "<hr />";
 	
 	mysqli_close($VeritabaniBaglantisi);
 	

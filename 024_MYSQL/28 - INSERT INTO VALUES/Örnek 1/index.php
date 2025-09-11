@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Language" content="tr">
 <meta charset="utf-8">
 <title>Extra Eğitim</title>
-</head>
+</hed>
 
 <body>
 	<?php

@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="tr-TR">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="Content-Language" content="tr">
-<meta charset="utf-8">
-<title>Extra Eğitim</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Language" content="tr">
+	<meta charset="utf-8">
+	<title>Extra Eğitim</title>
 </head>
 
 <body>
@@ -20,29 +21,30 @@
 	bind_result()	:	MySQL sunucusundaki database içerisinde bulunan herhangi tablonun veri okuma işlemi için prepare() metodu kullanılarak hazırlanmış ve execute() metodu kullanılarak çalıştırılmış olan query'nin (sorgunun) sonuçlarını almak için kullanılır.
 	fetch()			:	MySQL sunucusundaki database içerisinde bulunan herhangi tablonun veri okuma işlemi için prepare() metodu kullanılarak hazırlanmış, execute() metodu kullanılarak çalıştırılmış ve bind_result() metodu kullanılarak sonuçları alınmış olan query'nin (sorgunun) verilerini okumak için kullanılır.
 	*/
-	
+
 	$VeritabaniBaglantisi	=	new mysqli("localhost", "root", "", "extraegitim");
 	$VeritabaniBaglantisi->set_charset("UTF8");
-	
-	if($VeritabaniBaglantisi->connect_errno){
+
+	if ($VeritabaniBaglantisi->connect_errno) {
 		echo "Bağlantı Hatası<br />";
 		echo "Hata Açıklaması : " . $VeritabaniBaglantisi->connect_error;
 		die();
 	}
-	
+
 	$Sorgu		=	$VeritabaniBaglantisi->prepare("SELECT * FROM uyeler");
-		if($Sorgu){
-			$Sorgu->execute();
-			$Sorgu->bind_result($KayitIdsi, $KayitIsimSoyisim, $KayitEmaili, $KayitSifresi, $KayitTelefonNumarasi, $KayitYasi, $KayitCinsiyeti, $KayitSehri, $KayitTarihi);
-			while($Sorgu->fetch()){
-				echo $KayitIdsi . " | " . $KayitIsimSoyisim . " | " . $KayitEmaili . " | " . $KayitSifresi . " | " . $KayitTelefonNumarasi . " | " . $KayitYasi . " | " . $KayitCinsiyeti . " | " . $KayitSehri . " | " . $KayitTarihi . "<br />";
-			}
-		}else{
-			echo "Sorgu Hatası";
+	if ($Sorgu) {
+		$Sorgu->execute();
+		$Sorgu->bind_result($KayitIdsi, $KayitIsimSoyisim, $KayitEmaili, $KayitSifresi, $KayitTelefonNumarasi, $KayitYasi, $KayitCinsiyeti, $KayitSehri, $KayitTarihi);
+		while ($Sorgu->fetch()) {
+			echo $KayitIdsi . " | " . $KayitIsimSoyisim . " | " . $KayitEmaili . " | " . $KayitSifresi . " | " . $KayitTelefonNumarasi . " | " . $KayitYasi . " | " . $KayitCinsiyeti . " | " . $KayitSehri . " | " . $KayitTarihi . "<br />";
 		}
-	
+	} else {
+		echo "Sorgu Hatası";
+	}
+
 	$VeritabaniBaglantisi->close();
-	
+
 	?>
 </body>
+
 </html>

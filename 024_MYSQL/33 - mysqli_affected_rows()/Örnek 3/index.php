@@ -22,7 +22,7 @@
 		die();
 	}
 	
-	$Sorgu		=	mysqli_query($VeritabaniBaglantisi, "UPDATE uyeler SET adisoyadi='Değişti', sifre='XXXX' WHERE id>=2 AND id<=5");
+	$Sorgu		=	mysqli_query($VeritabaniBaglantisi, "UPDATE uyeler SET adisoyadi='Nesibe Gln', sifre='XXXX' WHERE id>=2 AND id<=5");
 		if($Sorgu){
 			echo "Güncelleme İşlemleri Tamamlandı.<br />";
 			echo "İşlemde Etkilenen Kayıt Sayısı : " . mysqli_affected_rows($VeritabaniBaglantisi);

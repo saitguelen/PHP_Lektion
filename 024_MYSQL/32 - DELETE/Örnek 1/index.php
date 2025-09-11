@@ -22,7 +22,7 @@
 		die();
 	}
 	
-	$Sil	=	mysqli_query($VeritabaniBaglantisi, "DELETE FROM uyeler");
+	$Sil	=	mysqli_query($VeritabaniBaglantisi, "DELETE FROM customers");
 		// HERHANGİ BİR KOŞUL BELİRTİLMEZ İSE İLGİLİ TABLODAKİ TÜM KAYITLAR SİLİNİR.
 		if($Sil){
 			echo "Kayıtlar Silindi";

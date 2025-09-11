@@ -42,7 +42,7 @@
 	
 	<form action="sonuc.php?id=<?php echo $GelenIDDegeri; ?>" method="post">
 		Ad Soyad : <input type="text" name="adisoyadi" value="<?php echo $Kayit["adisoyadi"]; ?>"><br />
-		E-Mail Adresi : <input type="email" name="emailadresi" value="<?php echo $Kayit["emailadresi"]; ?>"><br />
+		E-Mail Adresi : <input type="email" name="e_mailadresi" value="<?php echo $Kayit["e_mailadresi"]; ?>"><br />
 		Şifre : <input type="password" name="sifre" value="<?php echo $Kayit["sifre"]; ?>"><br />
 		Telefon : <input type="text" name="telefon" value="<?php echo $Kayit["telefon"]; ?>"><br />
 		Yaş : <select name="yas">

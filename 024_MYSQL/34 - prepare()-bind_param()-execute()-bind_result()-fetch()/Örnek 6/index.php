@@ -30,7 +30,7 @@
 		die();
 	}
 	
-	$Ekle		=	$VeritabaniBaglantisi->prepare("INSERT INTO uyeler (adisoyadi, emailadresi, sifre, telefon, yas, cinsiyet, sehir) values ('Volkan Alakent', 'info@extraegitim.com', '08121980', '05352255144', '38', 'Erkek', 'İstanbul')");
+	$Ekle		=	$VeritabaniBaglantisi->prepare("INSERT INTO uyeler (adisoyadi, e_mailadresi, sifre, telefon, yas, cinsiyet, sehir) values ('Volkan Alakent', 'info@extraegitim.com', '08121980', '05352255144', '38', 'Erkek', 'İstanbul')");
 		if($Ekle){
 			$Ekle->execute();
 				if($Ekle){

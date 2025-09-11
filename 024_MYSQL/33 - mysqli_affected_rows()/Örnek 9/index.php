@@ -22,7 +22,7 @@
 		die();
 	}
 	
-	$Sorgu		=	$VeritabaniBaglantisi->query("UPDATE uyeler SET emailadresi=REPLACE(emailadresi, 'extraegitim', 'volkanalakent') WHERE id>2 AND id<5");
+	$Sorgu		=	$VeritabaniBaglantisi->query("UPDATE uyeler SET e_mailadresi=REPLACE(e_mailadresi, 'extraegitim', 'volkanalakent') WHERE id>2 AND id<5");
 		if($Sorgu){
 			echo "Değiştirme İşlemleri Tamamlandı.<br />";
 			echo "İşlemde Etkilenen Kayıt Sayısı : " .$VeritabaniBaglantisi->affected_rows;

@@ -23,7 +23,7 @@
 	}
 	
 	$Guncelle	=	mysqli_query($VeritabaniBaglantisi, "UPDATE uyeler SET adisoyadi='A1', emailadresi='A2', sifre='A3', telefon='A4', yas='99', cinsiyet='A5', sehir='A6'");
-	// DİKKAT BU SORGUDA TABLODAKİ TÜM KAYITLAR GÜNCELLENECEKTİR.
+	// DİKKAT BU SORGUDA TABLODAKİ TÜM KAYITLAR GÜNCELLENECEKTİR.EGER BIR WHERE ILE KOSUL BELIRTMEZSEK BÜTÜN TABLOYU DEGISIR
 		if($Guncelle){
 			echo "Kayıtlar Güncellendi";
 		}else{
