@@ -30,7 +30,7 @@
 		die();
 	}
 	
-	$Guncelle		=	$VeritabaniBaglantisi->prepare("UPDATE uyeler SET adisoyadi='Değişen Ad Soyad', emailadresi='deneme@extraegitim.com', sehir='Deneme Şehri' WHERE id=3");
+	$Guncelle		=	$VeritabaniBaglantisi->prepare("UPDATE uyeler SET adisoyadi='Jakob Ali', e_mailadresi='deneme@extraegitim.com', sehir='Eskisehir' WHERE id=12");
 		if($Guncelle){
 			$Guncelle->execute();
 				if($Guncelle){
