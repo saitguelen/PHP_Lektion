@@ -23,7 +23,7 @@
 		die();
 	}
 	
-	$Sorgu		=	$VeritabaniBaglantisi->exec("DROP DATABASE ornek");
+	$Sorgu		=	$VeritabaniBaglantisi->exec("DROP DATABASE deneme");
 		if($Sorgu !== false){
 			echo "Database Silindi.";
 		}else{

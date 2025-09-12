@@ -19,11 +19,11 @@
 		echo "Veritabanı Bağlantısı Kuruldu<br />";
 	}catch(PDOException $HataMesaji){
 		echo "Vetitabanı Bağlantı Hatası<br />";
-		echo "Hata Açıklaması : " . $VeritabaniBaglantisi->getMessage();
+		echo "Hata Açıklaması : " . $HataMesaji->getMessage();
 		die();
 	}
 	
-	$Sorgu	=	$VeritabaniBaglantisi->exec("CREATE DATABASE deneme");
+	$Sorgu	=	$VeritabaniBaglantisi->exec("CREATE DATABASE deneme");//exec() kullandigimizda denklikde olusturmaliyiz
 		if($Sorgu !== false){
 			echo "Database Oluşturuldu.";
 		}else{

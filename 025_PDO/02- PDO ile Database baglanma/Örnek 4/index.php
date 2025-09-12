@@ -18,7 +18,7 @@
 	try{
 		$VeritabaniBaglantisi		=	new PDO("mysql:host=localhost;dbname=extraegitim;charset=UTF8", "root", "");
 		echo "Veritabanına Bağlantı Kuruldu";
-	}catch(PDOException $HataMesaji){
+	}catch(PDOException $HataMesaji){ //try da bir hata yakalanirsa burada yakalanir ve $HataMesaji icine saklanir
 		echo "Veritabanı Bağlantı Hatası<br />";
 		echo "Hata Açıklaması : " . $HataMesaji->getMessage();
 		die();

@@ -18,7 +18,7 @@
 		echo "Bağlatı Kuruldu<br />";
 	}catch(PDOException $HataBilgisi){
 		echo "Bağlantı Hatası<br />";
-		echo "Hata Açıklaması : " . $HataBilgisi->grtMessage();
+		echo "Hata Açıklaması : " . $HataBilgisi->getMessage();
 		die();
 	}
 	

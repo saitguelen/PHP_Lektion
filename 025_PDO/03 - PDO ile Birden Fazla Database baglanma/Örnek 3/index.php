@@ -20,7 +20,7 @@
 	}
 	
 	$SorguBir	=	$VeritabaniBaglantisiBir->query("SELECT * FROM extraegitim.uyeler");
-	$SorguIki	=	$VeritabaniBaglantisiIki->query("SELECT * FROM deneme.ornek");
+	$SorguIki	=	$VeritabaniBaglantisiIki->query("SELECT * FROM bookstore.baby_names");
 	
 	$VeritabaniBaglantisiBir	=	null;
 	$VeritabaniBaglantisiIki	=	null;

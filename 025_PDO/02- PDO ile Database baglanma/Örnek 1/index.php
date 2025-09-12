@@ -15,6 +15,7 @@
 	getMessage()	:	MySQL sunucusuna yeni bir bağlantı açma işlemi sırasında olası bir hata ile karşılaşılması durumunda hata açıklama değerini bularak, bulduğu değeri geriye döndürür.
 	*/
 	
+	
 	$VeritabaniHostAdresi		=	"localhost";
 	$VeritabaniKullaniciAdi		=	"root";
 	$VeritabaniSifresi			=	"";
@@ -27,7 +28,6 @@
 	echo "</pre>";
 	
 	$VeritabaniBaglantisi		=	null;
-	
 	?>
 </body>
 </html>

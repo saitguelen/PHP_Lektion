@@ -23,12 +23,12 @@
 		echo "Veritabanına Bağlantı Kuruldu<br />";
 	}catch(PDOException $Hata){
 		echo "Veritabanı Bağlantı Hatası<br />";
-		echo "Hata Açıklaması : " . $VeritabaniBaglantisi->getMessage();
+		echo "Hata Açıklaması : " . $Hata->getMessage();
 		die();
 	}
 	
 	$Sorgu	=	$VeritabaniBaglantisi->exec("SELECT * FROM uyeler"); // exec() Metodu SELECT İşlemlerinde Kullanılmamalıdır. SELECT işlemlerinde query() metodu tercih edilmelidir.
-	
+	//exec() islemden etkilenen kayit sayisini belirtir..
 	echo "İşlemde Etkilenen Kayıt Sayısı : " . $Sorgu;
 	
 	$VeritabaniBaglantisi	=	null;

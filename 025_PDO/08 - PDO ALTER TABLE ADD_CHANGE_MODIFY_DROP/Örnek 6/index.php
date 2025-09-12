@@ -28,7 +28,7 @@
 		die();
 	}
 	
-	$Sorgu	=	$VeritabaniBaglantisi->query("ALTER TABLE uyeler ADD dogumtarihi smallint(4) NOT NULL AFTER telefon");
+	$Sorgu	=	$VeritabaniBaglantisi->query("ALTER TABLE uyeler ADD dogumtarihi smallint(4) NOT NULL AFTER telefon");//Telefondan sonrasina dogumtarihine ekler
 		if($Sorgu){
 			echo "Sütun eklendi";
 		}else{

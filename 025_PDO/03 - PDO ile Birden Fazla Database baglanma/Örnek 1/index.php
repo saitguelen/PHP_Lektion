@@ -10,7 +10,7 @@
 <body>
 	<?php
 	try{
-		$VeritabaniBaglantisiBir	=	new PDO("mysql:host=localhost;dbname=extraegitim;charset=UTF8", "root", "");
+		$VeritabaniBaglantisiBir	=	new PDO("mysql:host=localhost;dbname=extraegitim;charset=UTF8","root","");
 		echo "1. Veritabanına Bağlantı Kuruldu<br />";
 	}catch(PDOException $HataMesajiBir){
 		echo "1. Veritabanı Bağlantı Hatası<br />";
@@ -21,15 +21,16 @@
 	$VeritabaniBaglantisiBir	=	null;
 	
 	try{
-		$VeritabaniBaglantisiIki	=	new PDO("mysql:host=localhost;dbname=deneme;charset=UTF8", "root", "");
-		echo "2. Veritabanına Bağlantı Kuruldu<br />";
+		$VeritabaniBaglantisiIki = new PDO ("mysql:host=localhost;dbname=extraegitim;charset=UTF8","root","");
+		echo "Baglanti 2, veritabanina baglandi. <br  />";
+
 	}catch(PDOException $HataMesajiIki){
-		echo "2. Veritabanı Bağlantı Hatası<br />";
-		echo "2. Hata Açıklaması : " . $HataMesajiIki->getMessage();
+		echo "1. Veritabanı Bağlantı Hatası<br />";
+		echo "1. Hata Açıklaması : " . $HataMesajiIki->getMessage();
 		die();
+
 	}
-	
-	$VeritabaniBaglantisiIki	=	null;
+	$VeritabaniBaglantisiIki = null;
 	
 	?>
 </body>

@@ -13,18 +13,23 @@
 	WHERE 	:	MySQL sunucusundaki database içerisinde bulunan herhangi bir tablonun işlem esnasında tüm verilerini işlemek yerine sadece koşula bağlı verilerin işlemek istenildiğini belirtmek için kullanılır.
 	*/
 	
+
 	try{
-		$VeritabaniBaglantisi	=	new PDO("mysql:host=localhost;dbname=extraegitim;charset=UTF8", "root", "");
-	}catch(PDOException $HataDegeri){
-		echo "Bağlantı Hatası<br />";
-		echo "Hata Açıklaması : " . $HataDegeri->getMessage();
+		$VeritabaniBaglantisi = new PDO("mysql:host=localhost;dbname=bookstore;charset=UTF8","root","");
+		echo "Data baglantisi saglandi-- <br />";
+
+	}catch(PDOException $HataMesaji){
+		echo "Baglanti Hatasi oldu...<br />";
+		echo "Hata Degeri: ". $HataMesaji->getMessage(). "<br />";
 		die();
+
+
 	}
 	
-	$Sorgu		=	$VeritabaniBaglantisi->query("SELECT * FROM kisiler WHERE yas=40", PDO::FETCH_ASSOC);
+	$Sorgu		=	$VeritabaniBaglantisi->query("SELECT * FROM baby_names WHERE count >=5000 ORDER BY count DESC LIMIT 45", PDO::FETCH_ASSOC);
 		if($Sorgu){
 			foreach($Sorgu as $Satirlar){
-				echo $Satirlar["id"] . " | " . $Satirlar["isim"] . " | " . $Satirlar["yas"] . " | " . $Satirlar["beceriler"] . " | " . $Satirlar["beceriseviyeleri"] . "<br />";
+				echo $Satirlar["id"] . " | " . $Satirlar["name"] . " | " . $Satirlar["gender"] . " | " . $Satirlar["count"] . " | "  . "<br />";
 			}
 		}else{
 			echo "Sorgu Hatası";

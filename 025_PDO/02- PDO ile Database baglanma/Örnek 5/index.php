@@ -17,7 +17,7 @@
 	
 	try{
 		$VeritabaniBaglantisi		=	new PDO("mysql:host=localhost;dbname=extraegitim", "root", "");
-		$VeritabaniBaglantisi->exec("SET CHARACTER SET UTF8");
+		$VeritabaniBaglantisi->exec("SET CHARACTER SET UTF8"); //karakter setini belli ederiz
 		echo "Veritabanına Bağlantı Kuruldu";
 	}catch(PDOException $HataMesaji){
 		echo "Veritabanı Bağlantı Hatası<br />";

@@ -20,23 +20,27 @@
 	*/
 	
 	try{
-		$VeritabaniBaglantisi	=	new PDO("mysql:host=localhost;dbname=extraegitim;charset=UTF8", "root", "");
-		echo "Bağlantı Sağlandı<br />";
+		$Database = new PDO("mysql:host=localhost;dbname=extraegitim;charset UTF8","root","");
+		echo "Database baglantisi saglandi.. <br />";
+
 	}catch(PDOException $HataDegeri){
-		echo "Bağlantı Hatası<br />";
-		echo "Hata Açıklaması : " . $HataDegeri->getMessage();
+		echo "Baglanti hatasi oldu!<br />";
+		echo "Hata Degeri: ". $HataDegeri->getMessage()."<br />";
 		die();
+
+
 	}
-	
-	$Sorgu	=	$VeritabaniBaglantisi->query("ALTER TABLE uyeler ADD dogumtarihi smallint(4) NOT NULL");
-		if($Sorgu){
-			echo "Sütun eklendi";
-		}else{
-			echo "Sorgu Hatası";
-		}
-	
-	$VeritabaniBaglantisi	=	null;
-	
+	$Sorgu = $Database->query("ALTER TABLE uyeler
+	ADD dogumtarihi smallint(5) NOT NULL ,
+	ADD sitemizineredenduydunuz varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL");
+	if($Sorgu){
+		echo "Tabloya yeni degerler eklendi!<br />";
+
+	}else{
+		echo "Sorgu Hatasi!!<br />";
+
+	}
+	$Database = null;
 	?>
 </body>
 </html>

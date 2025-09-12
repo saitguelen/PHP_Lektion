@@ -22,7 +22,7 @@
 		die();
 	}
 	
-	$Sorgu		=	$VeritabaniBaglantisi->query("RENAME TABLE test.volkan TO deneme.volkan");
+	$Sorgu		=	$VeritabaniBaglantisi->query("RENAME TABLE test.test TO deneme.ornek");//test icindeki ornektest tablosu deneme databse'ine ornek adinda tasindi
 		if($Sorgu){
 			echo "Tablo Taşındı.";
 		}else{

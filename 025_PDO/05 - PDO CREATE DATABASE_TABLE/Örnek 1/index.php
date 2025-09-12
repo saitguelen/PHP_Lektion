@@ -19,7 +19,7 @@
 		echo "Veritabanı Bağlantısı Kuruldu<br />";
 	}catch(PDOException $HataMesaji){
 		echo "Vetitabanı Bağlantı Hatası<br />";
-		echo "Hata Açıklaması : " . $VeritabaniBaglantisi->getMessage();
+		echo "Hata Açıklaması : " . $HataMesaji->getMessage();
 		die();
 	}
 	

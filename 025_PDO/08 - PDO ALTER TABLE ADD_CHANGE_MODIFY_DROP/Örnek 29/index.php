@@ -28,7 +28,7 @@
 		die();
 	}
 	
-	$Sorgu	=	$VeritabaniBaglantisi->exec("ALTER TABLE uyeler DROP deneme");
+	$Sorgu	=	$VeritabaniBaglantisi->exec("ALTER TABLE uyeler DROP dogumtarihi");
 		if($Sorgu !== false){
 			echo "Sütun silindi";
 		}else{

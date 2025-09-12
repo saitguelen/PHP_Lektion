@@ -28,9 +28,9 @@
 		die();
 	}
 	
-	$Sorgu		=	$VeritabaniBaglantisi->query("SELECT * FROM kisiler");
+	$Sorgu		=	$VeritabaniBaglantisi->query("SELECT * FROM kisiler" );
 		if($Sorgu){
-			foreach($Sorgu as $Satirlar){
+			foreach($Sorgu as $Satirlar){//$Sorgu 'da bütün veriler depolaniyor bunu ekranda yazdırmak için döngü ile tek tek çekiyoruz
 				echo "<pre>";
 				print_r($Satirlar);
 				echo "</pre>";

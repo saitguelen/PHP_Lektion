@@ -29,7 +29,7 @@
 	}
 	
 	$Sorgu	=	$VeritabaniBaglantisi->query("ALTER TABLE uyeler
-		DROP dogdugunuzay,
+		DROP dogumtarihi,
 		DROP sitemizineredenduydunuz
 	");
 		if($Sorgu){

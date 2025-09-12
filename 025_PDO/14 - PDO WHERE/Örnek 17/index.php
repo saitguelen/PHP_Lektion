@@ -14,17 +14,17 @@
 	*/
 	
 	try{
-		$VeritabaniBaglantisi	=	new PDO("mysql:host=localhost;dbname=extraegitim;charset=UTF8", "root", "");
+		$VeritabaniBaglantisi	=	new PDO("mysql:host=localhost;dbname=bookstore;charset=UTF8", "root", "");
 	}catch(PDOException $HataDegeri){
 		echo "Bağlantı Hatası<br />";
 		echo "Hata Açıklaması : " . $HataDegeri->getMessage();
 		die();
 	}
 	
-	$Sorgu		=	$VeritabaniBaglantisi->query("SELECT * FROM kisiler WHERE FIND_IN_SET('10', beceriseviyeleri)", PDO::FETCH_ASSOC);
+	$Sorgu		=	$VeritabaniBaglantisi->query("SELECT * FROM baby_names WHERE FIND_IN_SET('5000','count')", PDO::FETCH_ASSOC);
 		if($Sorgu){
 			foreach($Sorgu as $Satirlar){
-				echo $Satirlar["id"] . " | " . $Satirlar["isim"] . " | " . $Satirlar["yas"] . " | " . $Satirlar["beceriler"] . " | " . $Satirlar["beceriseviyeleri"] . "<br />";
+				echo $Satirlar["id"] . " | " . $Satirlar["name"] . " | " . $Satirlar["year"] . " | " . $Satirlar["gender"] . " | "  . "<br />";
 			}
 		}else{
 			echo "Sorgu Hatası";

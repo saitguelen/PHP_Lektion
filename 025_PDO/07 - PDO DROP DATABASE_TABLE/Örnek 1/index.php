@@ -13,25 +13,28 @@
 	DROP DATABASE	:	MySQL sunucusu içerisinde bulunan herhangi bir database'i silmek için kullanılır.
 	DROP TABLE		:	MySQL sunucusundaki database içerisinde bulunan herhangi bir tabloyu silmek için kullanılır.
 	*/
-	
 	try{
-		$VeritabaniBaglantisi	=	new PDO("mysql:host=localhost;charset=UTF8", "root", "");
-		echo "Veritabanı Bağlantısı Kuruldu<br />";
+
+		$Database  = new PDO("mysql:host=localhost;charset UTF8", "root","");
+		echo "Veri baglantisi kuruldu<br />";
+
 	}catch(PDOException $HataDegeri){
-		echo "Bağlantı Hatası<br />";
-		echo "Hata Açıklaması : " . $HataDegeri->getMessage();
-		die();
+		echo "Hata Olustu..<br />";
+		echo "Hata Degeri: ". $HataDegeri->getMessage(). "<br /> ";
+
+
 	}
-	
-	$Sorgu		=	$VeritabaniBaglantisi->query("DROP DATABASE test");
-		if($Sorgu){
-			echo "Database Silindi.";
-		}else{
-			echo "Sorgu Hatası";
-		}
-	
-	$VeritabaniBaglantisi	=	null;
-	
+
+	$Sorgu = $Database->query("DROP DATABASE test");
+	if($Sorgu){
+
+		echo "Database silindi..<br />";
+
+	}else{
+		echo "Sorgu Hatasi..<br />";
+
+	}
+	$Database =null;
 	?>
 </body>
 </html>

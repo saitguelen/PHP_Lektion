@@ -22,7 +22,7 @@
 		die();
 	}
 	
-	$Sorgu	=	$VeritabaniBaglantisi->query("SELECT * FROM kisiler ORDER BY yas DESC, isim ASC LIMIT 5, 2", PDO::FETCH_ASSOC);
+	$Sorgu	=	$VeritabaniBaglantisi->query("SELECT * FROM kisiler ORDER BY yas DESC, isim ASC LIMIT 2, 3", PDO::FETCH_ASSOC);
 		if($Sorgu){
 			foreach($Sorgu as $Satirlar){
 				echo $Satirlar["id"] . " | " . $Satirlar["isim"] . " | " . $Satirlar["yas"] . " | " . $Satirlar["beceriler"] . " | " . $Satirlar["beceriseviyeleri"] . "<br /><br />";

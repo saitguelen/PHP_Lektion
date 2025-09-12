@@ -15,7 +15,7 @@
 	*/
 	
 	try{
-		$VeritabaniBaglantisi	=	new PDO("mysql:host=localhost;dbname=extraegitim;charset=UTF8", "root", "");
+		$VeritabaniBaglantisi	=	new PDO("mysql:host=localhost;dbname=bookstore;charset=UTF8", "root", "");
 		echo "Bağlantı Kuruldu.<br />";
 	}catch(PDOException $HataDegeri){
 		echo "Bağlantı Hatası.<br />";

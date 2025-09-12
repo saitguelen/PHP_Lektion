@@ -14,28 +14,35 @@
 	SHOW COLUMNS	:	MySQL sunucusundaki database içerisinde bulunan herhangi bir tablonun tüm sütunlarının listesini bulmak için kullanılır.
 	*/
 	
+
 	try{
-		$VeritabaniBaglantisi	=	new PDO("mysql:host=localhost;dbname=extraegitim;charset=UTF8", "root", "");
-		echo "Bağlantı Kuruldu.<br />";
+		$Database = new PDO("mysql:host=localhost;dbname=extraegitim;charset=UTF8","root","");
+		echo "Baglanti kuruldu.<br>";
+
 	}catch(PDOException $HataDegeri){
-		echo "Bağlantı Hatası.<br />";
-		echo "Hata Açıklaması : " . $HataDegeri->getMessage();
+		echo "Baglanti hatasi.. <br/>";
+		echo "Hata Degeri:  ". $HataDegeri->getMessage(). "<br />";
 		die();
+
 	}
-	
-	$Sorgu		=	$VeritabaniBaglantisi->query("SHOW TABLES");
-		if($Sorgu){
+
+	$Sorgu = $Database->query("SHOW TABLES");
+		if($Sorgu) {
 			foreach($Sorgu as $Tablolar){
 				echo "<pre>";
 				print_r($Tablolar);
 				echo "</pre>";
 			}
+
 		}else{
-			echo "Sorgu Hatası.";
+			echo "Sorgu Hatasi...<br>";
 		}
 	
-	$VeritabaniBaglantisi	=	null;
-	
+
+
+
+
+	$Database = null;
 	?>
 </body>
 </html>

@@ -23,7 +23,7 @@
 		die();
 	}
 	
-	$Sorgu		=	$VeritabaniBaglantisi->exec("DROP TABLE ornek");
+	$Sorgu		=	$VeritabaniBaglantisi->exec("DROP TABLE ornekyedek");
 		if($Sorgu !== false){
 			echo "Tablo Silindi.";
 		}else{

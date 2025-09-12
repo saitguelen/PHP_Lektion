@@ -14,23 +14,25 @@
 	*/
 	
 	try{
-		$VeritabaniBaglantisi	=	new PDO("mysql:host=localhost;dbname=test;charset=UTF8", "root", "");
-		echo "Veritabanı Bağlantısı Kuruldu<br />";
+		$Database = new PDO("mysql:host=localhost;dbname=test;charset=UTF8","root","");
+		echo "Veribaglantisi saglandi<br />";
+
 	}catch(PDOException $HataDegeri){
-		echo "Bağlantı Hatası<br />";
-		echo "Hata Açıklaması : " . $HataDegeri->getMessage();
+		echo "Baglanti hatasi<br />";
+		echo "Hata Aciklamasi: ". $HataDegeri->getMessage();
 		die();
+
 	}
-	
-	$Sorgu		=	$VeritabaniBaglantisi->query("RENAME TABLE ornek TO volkan");
+	$Sorgu = $Database->query("RENAME TABLE ornek TO ornektest");
 		if($Sorgu){
-			echo "Tablo Adı Değiştirildi.";
+			echo "Tablo adi degistirildi.<br />";
+
 		}else{
-			echo "Sorgu Hatası.";
+
+			echo "Sorgu Hatasi olustu.<br />";
+
 		}
-	
-	$VeritabaniBaglantisi	=	null;
-	
+	$Database = null;
 	?>
 </body>
 </html>

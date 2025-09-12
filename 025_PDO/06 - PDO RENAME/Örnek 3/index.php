@@ -22,7 +22,7 @@
 		die();
 	}
 	
-	$Sorgu		=	$VeritabaniBaglantisi->query("RENAME TABLE deneme.test TO test.ornek");
+	$Sorgu		=	$VeritabaniBaglantisi->query("RENAME TABLE deneme.ornek TO test.ornek");
 		if($Sorgu){
 			echo "Tablo Taşındı ve adı değiştirildi.";
 		}else{

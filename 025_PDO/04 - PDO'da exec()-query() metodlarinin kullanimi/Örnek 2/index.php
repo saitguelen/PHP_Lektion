@@ -23,11 +23,11 @@
 		echo "Veritabanına Bağlantı Kuruldu<br />";
 	}catch(PDOException $Hata){
 		echo "Veritabanı Bağlantı Hatası<br />";
-		echo "Hata Açıklaması : " . $VeritabaniBaglantisi->getMessage();
+		echo "Hata Açıklaması : " . $Hata->getMessage();
 		die();
 	}
 	
-	$Sorgu	=	$VeritabaniBaglantisi->query("SELECT * FROM uyeler", PDO::FETCH_ASSOC);
+	$Sorgu	=	$VeritabaniBaglantisi->query("SELECT * FROM uyeler", PDO::FETCH_ASSOC);//Tablo icindeki verileri almak icin bunu kullanmak zorundayiz.
 	
 	echo "<pre>";
 	print_r($Sorgu);
