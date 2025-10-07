@@ -39,7 +39,7 @@
 		if($Sorgu){
 			$KayitSayisi	=	$Sorgu->rowCount();
 				if($KayitSayisi>0){
-					$Kayit 	=	$Sorgu->fetch(PDO::FETCH_BOTH);
+					$Kayit 	=	$Sorgu->fetch(PDO::FETCH_BOTH);//Kayitlari asagidaki gibi anahtar numaralari ile de getirebiliriz.
 					echo $Kayit[0] . " | " . $Kayit[1] . " | " . $Kayit[2] . " | " . $Kayit[3] . " | " . $Kayit[4] . " | " . $Kayit[5] . " | " . $Kayit[6] . " | " . $Kayit[7] . " | " . $Kayit[8];
 				}else{
 					echo "Kayıt Yok";

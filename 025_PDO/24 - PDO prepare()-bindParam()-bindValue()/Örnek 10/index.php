@@ -34,7 +34,7 @@
 		die();
 	}
 	
-	$Sorgu		=	$VeritabaniBaglantisi->prepare("SELECT * FROM uyeler");
+	$Sorgu		=	$VeritabaniBaglantisi->prepare("SELECT * FROM uyeler");//Simdi buraya array(PDO::FETCH_BOTH yada FETCH_ASSOC yazmiyoruz asagida fetch icine yaziyoruz)
 	$Sorgu->execute();
 		if($Sorgu){
 			$KayitSayisi	=	$Sorgu->rowCount();

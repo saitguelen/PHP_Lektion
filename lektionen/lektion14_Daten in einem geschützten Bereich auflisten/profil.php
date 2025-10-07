@@ -1,6 +1,6 @@
 <?php
 // session_start() ist bereits in header.php.
-include 'header.php';
+include_once 'header.php';
 
 // Ist der Benutzer eingeloggt? Wir prüfen, ob der Schlüssel 'benutzer' in der Session existiert.
 if (isset($_SESSION['benutzer'])) {

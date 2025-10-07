@@ -34,7 +34,7 @@
 		die();
 	}
 	
-	$Sorgu		=	$VeritabaniBaglantisi->prepare("SELECT * FROM uyeler");
+	$Sorgu		=	$VeritabaniBaglantisi->prepare("SELECT * FROM uyeler");//program calismiyor hazirlaniyor, dolayisiyla calistirmak icin execute kullanmaliyiz
 	$Sorgu->execute();
 		if($Sorgu){
 			$KayitSayisi	=	$Sorgu->rowCount();

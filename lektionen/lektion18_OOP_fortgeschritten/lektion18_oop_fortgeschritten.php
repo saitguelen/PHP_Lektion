@@ -28,7 +28,6 @@ class Mitarbeiter {
 class Manager extends Mitarbeiter {
     // Eine Eigenschaft, die nur für Manager spezifisch ist
     private $anzahl_unterstellte;
-
     // Der eigene Konstruktor des Managers
     public function __construct($name, $abteilung, $anzahl) {
         // Zuerst rufen wir den Konstruktor der Elternklasse auf, um die Grundeigenschaften zu setzen.

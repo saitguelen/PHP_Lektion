@@ -28,7 +28,7 @@
 			
 			if($KayitSayisi>0){
 				foreach($Sorgu as $Satirlar){
-					echo $Satirlar->id . " | " . $Satirlar->adisoyadi . " | " . $Satirlar->e_mailadresi . " | " . $Satirlar->sifre . " | " . $Satirlar->telefon . " | " . $Satirlar->yas . " | " . $Satirlar->cinsiyet . " | " . $Satirlar->sehir . " | " .  "<br />";
+					echo $Satirlar->id . " | " . $Satirlar->adisoyadi . " | " . $Satirlar->emailadresi . " | " . $Satirlar->sifre . " | " . $Satirlar->telefon . " | " . $Satirlar->yas . " | " . $Satirlar->cinsiyet . " | " . $Satirlar->sehir . " | " .  "<br />";
 				}
 			}else{
 				echo "Kayıt Yok";
